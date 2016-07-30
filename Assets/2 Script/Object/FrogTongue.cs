@@ -7,11 +7,11 @@ public class FrogTongue : MonoBehaviour
 {
 
     //private Transform tr;
-    // private Transform child_tr;
-    private Transform Tongue_tr;
+    private Transform child_tr;
+   // private Transform Tongue_tr;
 
     public bool bSwallow;   // 뻗는 상태인지, 삼키는 상태인지
-    public bool bMove;      // 모기가 사거리 안에 들어온 상태 
+    public int iMoveState;      // 모기가 사거리 안에 들어온 상태 , 0 : 사거리 안에 안들어옴, 1 : 사거리내에 있으나 모기가 움직이지 않는상황
     public bool isMove;     // 혀를 움직이고 있는 상태
     public bool bIdle;
 
@@ -23,16 +23,19 @@ public class FrogTongue : MonoBehaviour
 
     private Vector3 vDir;
 
-    public void SetMoveState(bool _bMove)
+    public void SetMoveState(int _iMoveState)
     {
-        bMove = _bMove;
+        iMoveState = _iMoveState;
     }
     public void SetDir(Vector3 _vDir)
     {
         if (!isMove)       // 혀를 집어넣은 상태에서만 각도변경 가능 
         {
             isMove = true;
-            vDir = _vDir;
+
+
+            if(iMoveState == 1)
+                vDir = _vDir;
 
         }
     }
@@ -40,15 +43,15 @@ public class FrogTongue : MonoBehaviour
     void Awake()
     {
         //tr = GetComponent<Transform>();
-        // child_tr = GetComponentInChildren<Transform>();
-        Tongue_tr = transform.parent.FindChild("Tongue");
+         child_tr = GetComponentInChildren<Transform>();
+        //Tongue_tr = transform.parent.FindChild("Tongue");
          fLength = 30f;
         bSwallow = false;
-        bMove = false;
+        iMoveState = 0;
         isMove = false;
         vDir = Vector3.zero;
         bIdle = true;
-        fSpeed = 20f;// 2.5f;
+        fSpeed = 30f;// 2.5f;
     }
 
     void Start()
@@ -70,11 +73,22 @@ public class FrogTongue : MonoBehaviour
     private void MoveTongue()
     {
         // print("bMove : " + bMove + ", isMove : " + isMove);
-        if (vDir != Vector3.zero)
-            Tongue_tr.rotation = Quaternion.LookRotation(vDir);
-            //child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
 
-        if (bMove && isMove)
+        if (iMoveState == 0)
+            return;
+        if( iMoveState == 1)
+              child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
+        if( iMoveState == 2 )
+            child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
+
+        //if (vDir != Vector3.zero)
+        //  child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
+        //Tongue_tr.rotation = Quaternion.LookRotation(vDir);
+
+
+
+
+        if ((iMoveState!=0) && isMove)    //수정필요
         {
             //print("혓바닥이 움직일거야 ");
             if (bSwallow)
@@ -87,7 +101,7 @@ public class FrogTongue : MonoBehaviour
 
             if (x <= 0f)
             {
-                bMove = false;
+                iMoveState = 0;
                 bSwallow = false;
                 bIdle = true;
                 StartCoroutine("ChangeMoveState");
@@ -95,8 +109,8 @@ public class FrogTongue : MonoBehaviour
 
 
         }
-        //child_tr.localScale = new Vector3(0.2f, 0.2f, x);
-        Tongue_tr.localScale = new Vector3(0.2f, 0.2f, x);
+        child_tr.localScale = new Vector3(0.2f, 0.2f, x);
+        //Tongue_tr.localScale = new Vector3(0.2f, 0.2f, x);
 
     }
 

@@ -44,9 +44,9 @@ public class FrogCtrl : MonoBehaviour
         isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 40f);
         if (isInSight)
         {
-            Time.timeScale = 0f;
+           // Time.timeScale = 0f;
 
-            vTongueDir = (_Player.transform.position + _Player.transform.forward) - _Tongue.transform.position;    // 방향벡터 구하기
+            vTongueDir = (_Player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
 
             vTongueDir.Normalize();               // 정규화
 
@@ -60,7 +60,7 @@ public class FrogCtrl : MonoBehaviour
         if (isInSight)
         {
 
-            _Tongue.SendMessage("SetMoveState", true, SendMessageOptions.DontRequireReceiver);
+            _Tongue.SendMessage("SetMoveState", 1/*true*/, SendMessageOptions.DontRequireReceiver);
             _Tongue.SendMessage("SetDir", vTongueDir, SendMessageOptions.DontRequireReceiver);
         }
         /*
@@ -75,7 +75,7 @@ public class FrogCtrl : MonoBehaviour
     }
 
 
-
+    /*
     private bool Check_Sight()
     {
         // Debug.Log("_Player.position : " + _Player.transform.position.x.ToString() + ", " + _Player.transform.position.y.ToString() + ", " + _Player.transform.position.z.ToString());
@@ -119,5 +119,5 @@ public class FrogCtrl : MonoBehaviour
         return false;
 
     }
-
+*/
 }

@@ -30,7 +30,7 @@ public class CameraEffect : MonoBehaviour
         //print("maxBlurSize = " + dof.maxBlurSize);
         if (PlayerCtrl.Instance.fSpeed > 8f)
         {
-            print("스피드 8이상");
+            //print("스피드 8이상");
             fx_speedLight.gameObject.SetActive(true);
             //transform.GetComponent<DepthTextureMode>();
             //dof.enabled = true;

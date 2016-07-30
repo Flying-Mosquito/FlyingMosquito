@@ -99,7 +99,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         // rigidBody.velocity = Vector3.zero;  // 이것도 해제해야 할 거야 
         // print("STATE : " + state); // 플레이어 상태확인 
         //print("Stamina : " + fStamina);
-        print("ownSpeed :" + fOwnSpeed +"speed: " + fSpeed);
+        //print("ownSpeed :" + fOwnSpeed +"speed: " + fSpeed);
         /*
                  print("┌──────────────────────────────────────────┐");
         
@@ -345,7 +345,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
         if (Boost())
         {
-            print("boost true");
+            //print("boost true");
             state = Constants.ST_BOOST;
             fx_boost.SetActive(true);
         }
