@@ -6,62 +6,45 @@ public class FrogCtrl : MonoBehaviour
 {
     Animator anim;
 
-    public PlayerCtrl _Player;
-
-    //private GameObject _Cube;
-    private GameObject _Tongue;
-    private Transform _TongueTr;
-    //private float x;
-
     private Transform tr;
+    private Transform _TongueTr;
+    private PlayerCtrl _Player;
+    private GameObject _Tongue;
+
     private RaycastHit hit;
-    private float fLength;
-
-    //private bool bCheck;
-    private bool isInSight;
-    //private bool bSwallow;
+    private float fLength;      // 혀길이
+    private bool isInSight;     // 원뿔형 시야에 들어왔는지 확인
     private Vector3 vTongueDir;
-
-
 
 
     // Use this for initialization
     void Awake()
     {
-        _Player = GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
+        _Player = PlayerCtrl.Instance;//GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
         tr = GetComponent<Transform>();
 
-        //temp
-        //_Cube = GameObject.Find("Cube");
         _TongueTr = tr.transform.FindChild("Tongue");   // 자식으로 가진 Tongue의 Transform을 가져오기 위해 사용 
         _Tongue = _TongueTr.gameObject;                 //
                                                         //_Tongue = GameObject.Find("Tongue");
                                                         // x = 0f;
         fLength = 6f;
-        //bCheck = false;
         isInSight = false;
-        // bSwallow = false;
         vTongueDir = Vector3.zero;
-        // fPlayerOwnSpeed = _Player.fOwnSpeed; // 플레이어 초기화 이후에 실행되어야 한다 - 혹시나 해서 Start로 뺌
 
         anim = GetComponent<Animator>();
         anim.Play("idle");
-        ////
-
-    }
-    void Start()
-    {
 
     }
 
     // Update is called once per frame
     void Update()
-    {    //xecution Order를 변경했기 때문에 Player 이후에 호출됨
+    {    //excution Order를 변경했기 때문에 Player 이후에 호출됨
          // isInSight = Check_Sight();
 
         isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 40f);
         if (isInSight)
         {
+            Time.timeScale = 0f;
 
             vTongueDir = (_Player.transform.position + _Player.transform.forward) - _Tongue.transform.position;    // 방향벡터 구하기
 

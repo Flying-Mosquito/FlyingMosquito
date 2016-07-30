@@ -7,7 +7,8 @@ public class FrogTongue : MonoBehaviour
 {
 
     //private Transform tr;
-    private Transform child_tr;
+    // private Transform child_tr;
+    private Transform Tongue_tr;
 
     public bool bSwallow;   // 뻗는 상태인지, 삼키는 상태인지
     public bool bMove;      // 모기가 사거리 안에 들어온 상태 
@@ -39,14 +40,15 @@ public class FrogTongue : MonoBehaviour
     void Awake()
     {
         //tr = GetComponent<Transform>();
-        child_tr = GetComponentInChildren<Transform>();
-        fLength = 30f;
+        // child_tr = GetComponentInChildren<Transform>();
+        Tongue_tr = transform.parent.FindChild("Tongue");
+         fLength = 30f;
         bSwallow = false;
         bMove = false;
         isMove = false;
         vDir = Vector3.zero;
         bIdle = true;
-        fSpeed = 2.5f;
+        fSpeed = 20f;// 2.5f;
     }
 
     void Start()
@@ -69,15 +71,16 @@ public class FrogTongue : MonoBehaviour
     {
         // print("bMove : " + bMove + ", isMove : " + isMove);
         if (vDir != Vector3.zero)
-            child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
+            Tongue_tr.rotation = Quaternion.LookRotation(vDir);
+            //child_tr.rotation = Quaternion.LookRotation(vDir);  // 혀 메쉬를 방향벡터의 방향으로 회전 
 
         if (bMove && isMove)
         {
             //print("혓바닥이 움직일거야 ");
             if (bSwallow)
-                x -= fSpeed;
+                x -= fSpeed * Time.fixedDeltaTime;
             if (!bSwallow)
-                x += fSpeed;
+                x += fSpeed * Time.fixedDeltaTime;
 
             if (x >= fLength)   // 길이가 최대길이보다 커지면 삼켜야함
                 bSwallow = true;
@@ -92,7 +95,8 @@ public class FrogTongue : MonoBehaviour
 
 
         }
-        child_tr.localScale = new Vector3(0.2f, 0.2f, x);
+        //child_tr.localScale = new Vector3(0.2f, 0.2f, x);
+        Tongue_tr.localScale = new Vector3(0.2f, 0.2f, x);
 
     }
 
