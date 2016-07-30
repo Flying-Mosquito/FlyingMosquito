@@ -70,7 +70,7 @@ public class Login : MonoBehaviour {
 
         if (GUI.Button(new Rect(520 - control*2, 360 - control, 120, 25), "Log in"))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(12);
 
         }
        
