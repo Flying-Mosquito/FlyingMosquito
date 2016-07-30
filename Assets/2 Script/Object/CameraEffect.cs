@@ -30,6 +30,7 @@ public class CameraEffect : MonoBehaviour
         //print("maxBlurSize = " + dof.maxBlurSize);
         if (PlayerCtrl.Instance.fSpeed > 8f)
         {
+            print("스피드 8이상");
             fx_speedLight.gameObject.SetActive(true);
             //transform.GetComponent<DepthTextureMode>();
             //dof.enabled = true;
@@ -39,6 +40,7 @@ public class CameraEffect : MonoBehaviour
         }
         else if (PlayerCtrl.Instance.state == Constants.ST_STUN)
         {
+         //   print("스턴");
             fx_speedLight.gameObject.SetActive(false);
             dof.enabled = true;
             dof.maxBlurSize = 10f;
@@ -46,6 +48,7 @@ public class CameraEffect : MonoBehaviour
         
         else
         {
+           // print("히");
             fx_speedLight.gameObject.SetActive(false);
             dof.enabled = false;
 

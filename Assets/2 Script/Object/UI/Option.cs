@@ -25,7 +25,9 @@ public class Option : MonoBehaviour {
 
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
        PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
-        PlayerCtrl.Instance.SetStateIdle(true);
+        //   PlayerCtrl.Instance.SetStateIdle(true);
+        PlayerCtrl.Instance.SetIsInStage(false);
+
         Timer.Instance.totaltime = 60;
         Timer.Instance.isEnable = true;
     }

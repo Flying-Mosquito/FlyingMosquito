@@ -29,6 +29,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public float fSpeed { get; private set; }       // 플레이어 최종 속도값
     private float fSpeedVal = 2f;                    // 플레이어 속도 증가값 
     private float fBoostMinus = 20f;                  // 부스터 사용 후에 속도감소 변화값 
+    private float fBoostPlus = 10f;                     // 부스터 사용 시 속도증가 값
     private float fBoostSpeed;    // 기본속도에 더해지는 가속도값   private
     private float MAXBOOST;// { get; private set; }     // Boost 사용시의 최대 가속도값   private
     private float OWNMAXSPEED = 6f;                       // 일반속도 최대값        private
@@ -59,7 +60,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
         vDir = Vector3.zero;
         state = Constants.ST_IDLE;//ST_CLING;
-        variable = Constants.BV_bBoost | Constants.BV_Stick | Constants.BV_IsCanSlow | Constants.BV_bStaminaRecovery;
+        variable = Constants.BV_bBoost  | Constants.BV_IsCanSlow | Constants.BV_bStaminaRecovery;
 
 
         fStamina = 200f;
@@ -98,10 +99,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         // rigidBody.velocity = Vector3.zero;  // 이것도 해제해야 할 거야 
         // print("STATE : " + state); // 플레이어 상태확인 
         //print("Stamina : " + fStamina);
-
-
-        //         print("┌──────────────────────────────────────────┐");
+        print("ownSpeed :" + fOwnSpeed +"speed: " + fSpeed);
         /*
+                 print("┌──────────────────────────────────────────┐");
+        
                 if ((variable & Constants.BV_IsBoost) > 0)
                     print("│ isBoost");
                 if ((variable & Constants.BV_bBoost) > 0)
@@ -116,7 +117,16 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     print("│ BV_ClickRaindrop");
                 if ((variable & Constants.BV_bCollisionOthers) > 0)
                     print("│ BV_bCollisionOthers");
-                    */
+        if ((variable & Constants.BV_IsMove) > 0)
+            print("| BV_IsMove");
+        else
+            print("| BV_IDLE");
+
+            if ((variable & Constants.BV_IsInStage) > 0)
+                     print("│ isInStage");
+                else
+                     print("Not Stage");
+                     */
         //print("state : " + state);
 
         /*
@@ -314,14 +324,28 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     private void Action()   // 플레이어 모델이 직접 움직이지는 않으나, 속도변경 같은 코드가 들어감. State의 상태는 여기서만 바뀌게 된다.
     {
-        if (state == Constants.ST_IDLE) // Idle 이면 시작전 
+        if ( (variable & Constants.BV_IsInStage ) == 0 )//state == Constants.ST_IDLE) // Idle 이면 시작전 
             return;
 
-        state = Constants.ST_FLYING;
+        if ((variable & Constants.BV_IsMove) > 0)
+        {
+            state = Constants.ST_FLYING;
+        //    print(" state = flying");
+        }
+        else
+        {
+            state = Constants.ST_IDLE;
+            fOwnSpeed = 0f;
+            fSpeed = 0f;
+           // fSpeed = 0f;
+         //   print("state= idle");
+        }
+            
 
 
         if (Boost())
         {
+            print("boost true");
             state = Constants.ST_BOOST;
             fx_boost.SetActive(true);
         }
@@ -376,23 +400,23 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     private bool Boost()
     {
-        if (state == Constants.ST_IDLE)
-            return false;
+       // if (state == Constants.ST_IDLE)
+         //   return false;
 
         if (((variable & Constants.BV_bCollisionOthers) == 0) && ((variable & Constants.BV_IsBoost) > 0) && ((variable & Constants.BV_bBoost) > 0) && (fStamina > 0))//(bCheckBoost)) 
-        { // 충돌하지 않았고, (_bool 이 true 일때 - 마우스가 클릭상태일때 이면서 , )현재 스테가 스테미나 감소량보다 크고, Boost가 가능할 때 
+        { // 충돌하지 않았고, 현재 스테가 스테미나 감소량보다 크고, Boost가 사용가능하고 Boost를 사용하는중이면
 
             if ((variable & Constants.BV_ClickRaindrop) == 0)
                 fStamina -= (fStaminaMinus * Time.deltaTime);
 
             // 가속도 조절
             if (fOwnSpeed < OWNMAXSPEED)
-                fOwnSpeed += (fBoostMinus * 0.5f * Time.deltaTime);
+                fOwnSpeed += (fBoostPlus* Time.deltaTime);
             else
             {
                 fOwnSpeed = OWNMAXSPEED;
 
-                fBoostSpeed += (fBoostMinus * 0.5f * Time.deltaTime);
+                fBoostSpeed += (fBoostPlus* Time.deltaTime);
                 if (fBoostSpeed > MAXBOOST)
                     fBoostSpeed = MAXBOOST;
             }
@@ -410,15 +434,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         else  // Boost가 아닌 일반이동
         {
             if ((variable & Constants.BV_bStaminaRecovery) > 0)  // 스테미나가 회복되기 위한 조건 
-                fStamina += 0.1f;
+                fStamina += 0.1f;     //수정
 
             if ((variable & Constants.BV_IsCling) > 0)  ///////////// Cling 상태라면, 속도를 낮춘다 
             {
-                if (fSpeed > 0)
-                {
-                    fSpeed -= fBoostMinus * Time.deltaTime;
-                }
-                else
+                //if (fSpeed > 0)
+               // {
+                //    fSpeed -= fBoostMinus * Time.deltaTime;
+               // }
+               // else
                 {
                     fSpeed = 0f;
                     fOwnSpeed = 0f;
@@ -455,13 +479,13 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     private void Move()     // 실제 플레이어 객체가 움직이는 코드가 들어있다   ㅅㅂ!!!!!!!!!!!!! 여기수정 여깃 ㅜㅈㅇㄹ ㅓㄴ이ㅏ런ㅇ;런아ㅣ;런아ㅣ;런ㅇ 
     {
-        if ((state == Constants.ST_IDLE) || (variable & Constants.BV_Stick) > 0) // 상태가 IDLE이거나 , 어딘가에 달라붙은 경우라면 움직이지 못함 
+        if (/*(state == Constants.ST_IDLE) ||*/ (variable & Constants.BV_Stick) > 0) // 상태가 IDLE이거나 , 어딘가에 달라붙은 경우라면 움직이지 못함 
         {
-            //print("1번");
+         //   print("1번");
         }
         else if ((state == Constants.ST_STUN)) // 플레이어가 스턴상태이면 중력을 받는 것 처럼 떨어뜨림
         {
-            //  print("2번");
+          //   print("2번");
             // rigidBody.MovePosition(tr.position + (-Vector3.up * Time.deltaTime));
             rigidBody.velocity = (-Vector3.up * 5f * Time.deltaTime);// tr.position + (-Vector3.up * Time.deltaTime);
 
@@ -471,7 +495,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         {   // inRainZone = true, nstate != Cling, ==> 3번하고 중복
             if (/*(Constants.ST_CLING != state) && (Constants.ST_BLOOD != state) && */((variable & Constants.BV_ClickRaindrop) > 0) && ((variable & Constants.BV_bCling) > 0))//true == isInRainzone && 
             {
-                //   print("3번");
+                 //  print("3번");
                 // rigidBody.MovePosition(tr.position + (vDir * fSpeed * Time.deltaTime)); //이녀석
                 rigidBody.velocity = vDir * fSpeed;
                 //   print("vDir : " + vDir);
@@ -483,9 +507,12 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 //  state = Constants.ST_MOVE;
                 tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.World);
                 tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
+
+
+                // state로 해도 될걸-수정
                 if ((variable & Constants.BV_IsMove) > 0)
                 {
-                    //   print("4번");
+                      // print("4번");
                     // 회전 
 
 
@@ -502,7 +529,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else // 붙어 있을 시 아무 동작도 하지 않도록 함 
         {
-            // print("5번");
+           // print("6번");
             // tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.Self);
             // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
         }
@@ -561,11 +588,28 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         transform.position = _pos;
         transform.rotation = _rot;
     }
+    public void SetIsInStage(bool _bStage)
+    {
+        if (_bStage)
+            variable |= Constants.BV_IsInStage;
+        else
+            variable &= ~(Constants.BV_IsInStage);
+    }
+    public void SetStateStick(bool _bStick)
+    {
+        if (_bStick)
+            variable |= Constants.BV_Stick;//isStick = true;
+        else
+            variable &= ~(Constants.BV_Stick);
+    }
+
+    /*
     public void SetStateIdle(bool _bool)
     {
 
         if (_bool)
         {
+            // 수정해야
             state = Constants.ST_IDLE;
             variable |= Constants.BV_Stick;//isStick = true;
             rigidBody.velocity = Vector3.zero;
@@ -576,6 +620,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             variable &= ~(Constants.BV_Stick);//isStick = false;
         }
     }
+    */
     public void ChangeTimeScale()       // 수정 - bcling?
     {                                                           // 이부분을 플레이어 상태와 비교해야 하나??
         if (((variable & Constants.BV_IsCanSlow) > 0) && ((variable & Constants.BV_bCling) == 0))//true == isCanSlow && false == bCling)
@@ -798,7 +843,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
 
         variable &= ~(Constants.BV_IsMove);
-
+        rigidBody.velocity = Vector3.zero;
+  
     }
 
     public void boostdown()

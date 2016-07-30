@@ -121,7 +121,7 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
                  player.boostup();
                  player.FlyBtDown();
              }
-        print("무브 :  " + tr.position);
+     //   print("무브 :  " + tr.position);
     }
 
     public override void OnTouchEnd(Vector2 _pos)
@@ -132,7 +132,7 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
 
          player.FlyBtUp();
          player.boostup();
-        print("엔드 :  " + tr.position);
+     //   print("엔드 :  " + tr.position);
     }
     
      private Vector3 CalculatePositionBetweenStartPositionAndBoostPosition(float _fX) // 마우스의 x값을 넣어서 y값을 정해주는 함수 

@@ -11,7 +11,7 @@ public class PlayerPoint : MonoBehaviour
     void Awake()
     {
         CameraCtrl.Instance.GetComponent<CameraEffect>().SetParentCamp();
-        PlayerCtrl.Instance.SetStateIdle(true);
+     //   PlayerCtrl.Instance.SetStateIdle(true);
         PlayerCtrl.Instance.SetTransform(transform.position, transform.rotation);
     }
 
@@ -33,7 +33,8 @@ public class PlayerPoint : MonoBehaviour
                 PlayerCtrl.Instance.SetHP(75);
                 PlayerCtrl.Instance.iBlood = 0;
                 PlayerCtrl.Instance.fStamina = 200;
-                PlayerCtrl.Instance.SetStateIdle(false);
+                //PlayerCtrl.Instance.SetStateIdle(false);
+               PlayerCtrl.Instance.SetIsInStage(true);
                 gameObject.SetActive(false);    //비활성화 
             }
             else
@@ -41,7 +42,8 @@ public class PlayerPoint : MonoBehaviour
                 GameObject _obj = null;
                 if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))
                 {
-                    PlayerCtrl.Instance.SetStateIdle(false);
+                    //   PlayerCtrl.Instance.SetStateIdle(false);
+                    PlayerCtrl.Instance.SetIsInStage(true);
                     gameObject.SetActive(false);
                 }
             }

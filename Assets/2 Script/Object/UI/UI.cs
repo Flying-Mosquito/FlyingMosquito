@@ -15,13 +15,9 @@ public class UI : Singleton<UI>
     // Update is called once per frame
     void Update()
     {
-        if (PlayerCtrl.Instance.state != Constants.ST_IDLE)
+        if ((PlayerCtrl.Instance.variable & Constants.BV_IsInStage) > 0)
             timer.gameObject.SetActive(true);
-        if (PlayerCtrl.Instance.state == Constants.ST_IDLE)
-        {
-
+        else// if (PlayerCtrl.Instance.state == Constants.ST_IDLE)
             timer.gameObject.SetActive(false);
-
-        }
     }
 }
