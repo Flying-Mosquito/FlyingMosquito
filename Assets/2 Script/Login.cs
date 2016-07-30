@@ -55,7 +55,7 @@ public class Login : MonoBehaviour {
 
         if (GUI.Button(new Rect(520 - control*2, 360 - control, 120, 25), "Log in"))
         {
-        Application.LoadLevel(13);
+        Application.LoadLevel(12);
 
         }
         GUI.Label(new Rect(300 - control*2, 200 - control, 220, 25), "Email");
