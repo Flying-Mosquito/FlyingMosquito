@@ -27,8 +27,7 @@ public class Single : MonoBehaviour
         SceneManager.LoadScene(1);
 
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
-        PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
-        PlayerCtrl.Instance.SetIsInStage(true);
+     
 
         if (Timer.Instance != null)
         {

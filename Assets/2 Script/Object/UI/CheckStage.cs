@@ -37,15 +37,11 @@ public class CheckStage : MonoBehaviour {
         for (int i = 0; i < 9; i++)
         {
 
-            if (Arr[i]==2)
+            if (Arr[i-1]==1&&Arr[i]==1)
             {
-                Stage1.Find("1-1").gameObject.SetActive(true);
-
+             
             }
-            if (clear == true)
-            {
-
-            }
+            
         }
        
      
