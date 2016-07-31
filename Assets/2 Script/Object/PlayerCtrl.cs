@@ -18,6 +18,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     private GameObject Player_dest;
     private RainDrop dest_script;
     private GameObject fx_boost;
+    public Vector3 prePosition;
 
     // 플레이어 상태와 변수상태가 들어가 있는 변수 
     public ulong state { get; private set; }
@@ -32,7 +33,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     private float fBoostPlus = 10f;                     // 부스터 사용 시 속도증가 값
     private float fBoostSpeed;    // 기본속도에 더해지는 가속도값   private
     private float MAXBOOST;// { get; private set; }     // Boost 사용시의 최대 가속도값   private
-    private float OWNMAXSPEED = 6f;                       // 일반속도 최대값        private
+    public float OWNMAXSPEED = 6f;                       // 일반속도 최대값        private
     private float fOwnSpeed;//    { get; private set; }    // 일반속도 값                   private
     private float fRotSpeed;// { get; private set; }                    //private
                             // public  float fOwnRotSpeed  { get; private set; }     //private 
@@ -78,9 +79,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     void FixedUpdate()
     {
+        prePosition = tr.position;
         Move();
         variable &= ~(Constants.BV_bCollisionOthers);
-
+        
 
     }
     void Update()
@@ -93,7 +95,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
-
+        print("position : " + tr.position);
 
         // 플레이어 몸체 회전효과
         // rigidBody.velocity = Vector3.zero;  // 이것도 해제해야 할 거야 

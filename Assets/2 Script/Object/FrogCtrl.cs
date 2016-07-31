@@ -7,9 +7,10 @@ public class FrogCtrl : MonoBehaviour
     Animator anim;
 
     private Transform tr;
-    private Transform _TongueTr;
+    //private Transform _TongueTr;
     private PlayerCtrl _Player;
-    private GameObject _Tongue;
+    //private GameObject _Tongue;
+    private FrogTongue _Tongue;
 
     private RaycastHit hit;
     private float fLength;      // 혀길이
@@ -23,8 +24,10 @@ public class FrogCtrl : MonoBehaviour
         _Player = PlayerCtrl.Instance;//GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
         tr = GetComponent<Transform>();
 
-        _TongueTr = tr.transform.FindChild("Tongue");   // 자식으로 가진 Tongue의 Transform을 가져오기 위해 사용 
-        _Tongue = _TongueTr.gameObject;                 //
+        //  _TongueTr = tr.transform.FindChild("Tongue");   // 자식으로 가진 Tongue의 Transform을 가져오기 위해 사용 
+        _Tongue = tr.transform.FindChild("Tongue").GetComponent<FrogTongue>();
+
+        //_Tongue = _TongueTr.gameObject;                 //
                                                         //_Tongue = GameObject.Find("Tongue");
                                                         // x = 0f;
         fLength = 6f;
@@ -36,37 +39,43 @@ public class FrogCtrl : MonoBehaviour
 
     }
 
+ 
     // Update is called once per frame
     void Update()
     {    //excution Order를 변경했기 때문에 Player 이후에 호출됨
          // isInSight = Check_Sight();
 
-        isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 40f);
+        isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 80f);
         if (isInSight)
         {
-           // Time.timeScale = 0f;
+            // Time.timeScale = 0f;
+            int iPlayerMove;
 
-            vTongueDir = (_Player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
+            if (PlayerCtrl.Instance.state != Constants.ST_FLYING)
+            {
+                iPlayerMove = 1;
+                vTongueDir = (_Player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
+                print("가야할방향 : " + vTongueDir);
+            }
+            else
+            {
+                iPlayerMove = 2;
+                vTongueDir = (_Player.transform.position + _Player.transform.forward * 1.5f/*(_Player.transform.position - _Player.prePosition)*/) - (_Tongue.transform.position);    // 방향벡터 구하기
+                print("_Player.transform.position -_Player.prePosition  ..  : " + (_Player.transform.position - _Player.prePosition));
+
+            }
 
             vTongueDir.Normalize();               // 정규화
 
+            Vector3 vTemp = (_Player.transform.position - tr.position);
+            vTemp.Normalize();
+
+
+
+            _Tongue.SetMoveState(iPlayerMove);
+            _Tongue.SetDir(vTongueDir);
         }
 
-        // Debug.DrawRay(tr.position, tr.forward * 200f, Color.blue);
-        Vector3 vTemp = (_Player.transform.position - tr.position);
-        vTemp.Normalize();
-        //Debug.DrawRay(tr.position, vTemp * fLength, Color.yellow);
-
-        if (isInSight)
-        {
-
-            _Tongue.SendMessage("SetMoveState", 1/*true*/, SendMessageOptions.DontRequireReceiver);
-            _Tongue.SendMessage("SetDir", vTongueDir, SendMessageOptions.DontRequireReceiver);
-        }
-        /*
-                Debug.Log("(Update) - x : " + vTongueDir.x.ToString() +
-                 "y : " + vTongueDir.y.ToString() +
-                 "z : " + vTongueDir.z.ToString());*/
     }
 
     void LateUpdate()

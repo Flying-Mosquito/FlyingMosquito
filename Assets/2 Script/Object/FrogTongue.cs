@@ -11,7 +11,7 @@ public class FrogTongue : MonoBehaviour
    // private Transform Tongue_tr;
 
     public bool bSwallow;   // 뻗는 상태인지, 삼키는 상태인지
-    public int iMoveState;      // 모기가 사거리 안에 들어온 상태 , 0 : 사거리 안에 안들어옴, 1 : 사거리내에 있으나 모기가 움직이지 않는상황
+    public int iMoveState;      // 모기가 사거리 안에 들어온 상태 , 0 : 모기x  1: 사거리내에 있으나 모기가 움직이지 않는상황 , 2 : 사거리 안에 있고모기 움직임
     public bool isMove;     // 혀를 움직이고 있는 상태
     public bool bIdle;
 
@@ -34,7 +34,6 @@ public class FrogTongue : MonoBehaviour
             isMove = true;
 
 
-            if(iMoveState == 1)
                 vDir = _vDir;
 
         }
@@ -51,7 +50,7 @@ public class FrogTongue : MonoBehaviour
         isMove = false;
         vDir = Vector3.zero;
         bIdle = true;
-        fSpeed = 30f;// 2.5f;
+        fSpeed = 100f;// 2.5f;
     }
 
     void Start()
