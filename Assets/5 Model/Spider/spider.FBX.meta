@@ -125,6 +125,7 @@ ModelImporter:
     7400000: Take 001
     7400002: walk
     7400004: attack
+    7400006: idle
     9500000: //RootNode
     13700000: spider
   materials:
@@ -459,6 +460,159 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 200
       lastFrame: 250
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bip001
+        weight: 1
+      - path: Bip001/Bip001 Footsteps
+        weight: 1
+      - path: Bip001/Bip001 Pelvis
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010/Bip001  L 012
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010/Bip001  L 012/Bip001  L
+          013
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010(mirrored)/Bip001  L
+          012(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 010(mirrored)/Bip001  L
+          012(mirrored)/Bip001  L 013(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020/Bip001  L 022
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020/Bip001  L 022/Bip001  L
+          023
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020(mirrored)/Bip001  L
+          022(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 020(mirrored)/Bip001  L
+          022(mirrored)/Bip001  L 023(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030/Bip001  L 032
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030/Bip001  L 032/Bip001  L
+          033
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030(mirrored)/Bip001  L
+          032(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001  L 030(mirrored)/Bip001  L
+          032(mirrored)/Bip001  L 033(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone001
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone001(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone003
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone003/Bone004
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone003(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Neck/Bip001 Head/Bone003(mirrored)/Bone004(mirrored)
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Xtra01
+        weight: 1
+      - path: Bip001/Bip001 Pelvis/Bip001 Xtra01/Bip001 Xtra0102
+        weight: 1
+      - path: Bip001/NGon001
+        weight: 1
+      - path: Bip001/NGon001/Circle002
+        weight: 1
+      - path: Bip001/NGon001/Circle002/Point001
+        weight: 1
+      - path: Bip001/NGon001/IK Chain001
+        weight: 1
+      - path: Bip001/NGon002
+        weight: 1
+      - path: Bip001/NGon002/Circle003
+        weight: 1
+      - path: Bip001/NGon002/Circle003/Point002
+        weight: 1
+      - path: Bip001/NGon002/IK Chain002
+        weight: 1
+      - path: Bip001/NGon003
+        weight: 1
+      - path: Bip001/NGon003/Circle004
+        weight: 1
+      - path: Bip001/NGon003/Circle004/Point003
+        weight: 1
+      - path: Bip001/NGon003/IK Chain003
+        weight: 1
+      - path: Bip001/NGon004
+        weight: 1
+      - path: Bip001/NGon004/Circle005
+        weight: 1
+      - path: Bip001/NGon004/Circle005/Point006
+        weight: 1
+      - path: Bip001/NGon004/IK Chain004
+        weight: 1
+      - path: Bip001/NGon005
+        weight: 1
+      - path: Bip001/NGon005/Circle006
+        weight: 1
+      - path: Bip001/NGon005/Circle006/Point005
+        weight: 1
+      - path: Bip001/NGon005/IK Chain005
+        weight: 1
+      - path: Bip001/NGon006
+        weight: 1
+      - path: Bip001/NGon006/Circle007
+        weight: 1
+      - path: Bip001/NGon006/Circle007/Point004
+        weight: 1
+      - path: Bip001/NGon006/IK Chain006
+        weight: 1
+      - path: spider
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 0
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
