@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyAnimaion : MonoBehaviour
 {
     public Animator anim;
+    public EnemyAI EnemyAI;
     // Use this for initialization
     void Awake()
     {
@@ -19,7 +20,7 @@ public class EnemyAnimaion : MonoBehaviour
     {
 
 
-        switch (EnemyAI.Instance.state)
+        switch (EnemyAI.state)
         {
             case EnemyAI.State.PATROL:
                 {

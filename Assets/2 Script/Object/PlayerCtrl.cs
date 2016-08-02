@@ -358,10 +358,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         {
             print("blood");
             state = Constants.ST_BLOOD;
-            iBlood += 1;
+   
 
 
-            EnemyAI.Instance.angrygauge += 1;        // 이거뭐야;
+    
 
         }
         else if ((variable & Constants.BV_IsCling) > 0)

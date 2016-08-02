@@ -4,7 +4,7 @@ using System;
 
 
 
-public class EnemyAI : Singleton<EnemyAI>
+public class EnemyAI : MonoBehaviour
 {
 
     public Transform target;
