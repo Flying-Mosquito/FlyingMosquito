@@ -95,7 +95,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
-        print("position : " + tr.position);
+
 
         // 플레이어 몸체 회전효과
         // rigidBody.velocity = Vector3.zero;  // 이것도 해제해야 할 거야 

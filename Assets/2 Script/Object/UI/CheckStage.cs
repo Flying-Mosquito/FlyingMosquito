@@ -16,34 +16,39 @@ public class CheckStage : MonoBehaviour {
     public Transform Stage9;
     private int iStage = 9;
     public List<Transform> Stage = new List<Transform>();
-    public bool clear;
-    private int MAXINDEX = 3;  
-    private int[] Arr = { };
    
-    
+
+    private int MAXINDEX = 3;
+    private int[] Arr = new int[3] {0,1,2};
+
+
     // Use this for initialization
     void Start () {
 
         Arr = new int[iStage];
-        clear = true;
+        print("dddd");
         for(int i=0;i<9;i++)
         {
-            Arr[i] = 0;//0닫힘 1주황 2 초록
+            Arr[i] =0;//0닫힘 1주황 2 초록
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < 9; i++)
+        if (PlayerCtrl.Instance.iBlood > 190)
         {
-
-            if (Arr[i-1]==1&&Arr[i]==1)
-            {
-             
-            }
-            
+            Arr[0] = 1;
         }
-       
+            //1성공 2닫힘
+            if (Arr[0]==1&& Arr[1]==0)
+        {
+            Stage2.Find("2").gameObject.SetActive(true);
+        }
+            if(Arr[1] == 2)
+        {
+            Stage2.Find("2-1").gameObject.SetActive(true);
+        }
+     
      
 	}
 }

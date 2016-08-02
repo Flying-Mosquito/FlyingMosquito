@@ -13,7 +13,7 @@ public class Timer : Singleton<Timer>
    public bool isEnable = false;
   
 
-  
+
 
     // Use this for initialization
 
@@ -29,7 +29,7 @@ public class Timer : Singleton<Timer>
     }
     void Start()
     {
-
+      
         startTime = Time.time;
 
         startTimer();
@@ -58,7 +58,9 @@ public class Timer : Singleton<Timer>
         if (PlayerCtrl.Instance.iBlood > 190)
         {
             gameClear.gameObject.SetActive(true);
+            
             StopTimer();
+            
 
 
 
@@ -67,7 +69,6 @@ public class Timer : Singleton<Timer>
         else 
             gameClear.gameObject.SetActive(false);
        
-
 
         if (isEnable)
         {
