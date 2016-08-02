@@ -24,15 +24,19 @@ public class Option : MonoBehaviour {
         SceneManager.LoadScene(1);
 
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
-       PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
-        //   PlayerCtrl.Instance.SetStateIdle(true);
-        PlayerCtrl.Instance.SetIsInStage(false);
+       //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
+       // //   PlayerCtrl.Instance.SetStateIdle(true);
+       // PlayerCtrl.Instance.SetIsInStage(false);
 
-        Timer.Instance.totaltime = 60;
-        Timer.Instance.isEnable = true;
+       // Timer.Instance.totaltime = 60;
+       // Timer.Instance.isEnable = true;
     }
     public void backLobby()
     {
         SceneManager.LoadScene(12);
+    }
+    public void IntoRoom()
+    {
+        SceneManager.LoadScene(15);
     }
 }
