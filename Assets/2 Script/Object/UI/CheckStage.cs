@@ -16,6 +16,7 @@ public class CheckStage : MonoBehaviour {
     public Transform Stage9;
     private int iStage = 9;
     public List<Transform> Stage = new List<Transform>();
+    SelectStage SelectStage;
    
 
     private int MAXINDEX = 3;
@@ -35,9 +36,12 @@ public class CheckStage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (PlayerCtrl.Instance.iBlood > 190)
+        for (int i = 0; i < 9; i++)
         {
-            Arr[0] = 1;
+            if (PlayerCtrl.Instance.iBlood > 190 && SelectStage.stage[i])
+            {
+                Arr[i] = 1;
+            }
         }
             //1성공 2닫힘
             if (Arr[0]==1&& Arr[1]==0)

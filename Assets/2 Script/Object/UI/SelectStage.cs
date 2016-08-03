@@ -9,7 +9,7 @@ public class SelectStage : MonoBehaviour
     public Button back;
     // Use this for initialization
    
-    public bool stage1;
+    public bool[] stage= new bool[9]  ;
     public bool stage2;
     public bool stage3;
     public bool stage4;
@@ -30,11 +30,12 @@ public class SelectStage : MonoBehaviour
     public void Stage1()
     {
         SceneManager.LoadScene(3);
-        stage1 = true;
+        stage[0] = true;
         
     }
     public void Stage2()
     {
         SceneManager.LoadScene(8);
+        stage[1] = true;
     }
 }
