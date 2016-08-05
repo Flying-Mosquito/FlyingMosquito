@@ -174,8 +174,8 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                             print("raindrop클릭!!!!");
                             raindrop = hit.collider.gameObject;
                         }
-                        else
-                            print("헛클릭");
+                        //else
+                         //   print("헛클릭");
 
                     }
 

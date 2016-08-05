@@ -403,8 +403,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     fBoostSpeed = MAXBOOST;
             }
 
-            print("fOwnSpeed :" + fOwnSpeed);
-            print("fBoostSpeed :" + fBoostSpeed);
+
             fSpeed = fOwnSpeed + fBoostSpeed;
             if (fStamina < 0)               // 스테미나가 0 이하로 떨어지면 부스터를 사용할 수 없다 
             {
@@ -498,7 +497,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
                     // 움직임
                     movement.Set(tr.forward.x, tr.forward.y, tr.forward.z);
-                  //  print("fSpeed : " + fSpeed);
                     rigidBody.velocity = (movement * fSpeed);// * Time.deltaTime);
                 }
                 else
@@ -603,7 +601,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     public void SetParentNull()
     {
-        print("makePArentNull");
         tr.transform.parent = null;
         //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 수정?
         ClingObj.transform.parent = null;
@@ -755,7 +752,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else    // 벽이나 물방울에 붙지 않는 상태인데 일정속도 이상으로 부딪히면 충돌효과를 준다 
         {
-            print("벨로시티 제로");
             StartCoroutine("SetVelocityZero");  // 일정시간후 velocity를 0으로 만들어주는 함수고
             if (fSpeed > OWNMAXSPEED + 0.1f)    // 플레이어 속도가 빠르면 데미지를 줄거고, 부딪히는 물건이 또 데미지를 추가적으로 준다 
                 Damaged(30);                     // 여기에서 스턴효과도 함께 준다 

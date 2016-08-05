@@ -104,7 +104,6 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
          fStraightAngle = (endPosition.y - startPosition.y) / (endPosition.x - startPosition.x); // 직선의방정식 기울기 
 
          player.FlyBtDown();
-        print("비긴 :  " + tr.position);
     }
 
     public override void OnTouchMove(Vector2 _pos)
