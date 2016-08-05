@@ -14,7 +14,8 @@ static class Constants
     public const ulong ST_STUN = 0x20;
     public const ulong ST_DEATH = 0x40;
     public const ulong ST_BLOOD = 0x80;
-    public const ulong ST_TAKE = 0x90;
+    public const ulong ST_HOLD = 0x100;
+    public const ulong ST_TAKE = 0x200;
     //public const ulong ST_WALLCOLLISION = 0x10;
 
     //40 80 
@@ -34,5 +35,6 @@ static class Constants
     public const ulong BV_bBlood = 0x400;  
     public const ulong BV_IsMove = 0x800;
     public const ulong BV_IsInStage = 0x1000;
+
     //public const ulong BV_InRainzone = 0x20;  // 바깥에서 변경해 줘야 하는 함수여서 여기에 안적음 
 }
