@@ -35,7 +35,7 @@ public class CheckStage : MonoBehaviour {
         {
             if (PlayerCtrl.Instance.iBlood > 190&& PlayerCtrl.Instance.stage[i]==1)
             {
-                Arr[0] = 1;
+                Arr[i] = 1;
             }
         }
         //1성공 2닫힘

@@ -47,12 +47,16 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public int iBlood = 0; // 흡혈량 ( 미구현 )
     private bool isMovable; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
-
+    public int[] stage = new int[2] { 0, 1 };
 
     void Awake()
     {
         DontDestroyOnLoad(this);
-
+        stage = new int[9];
+        for (int i = 0; i < 9; i++)
+        {
+            stage[i] = 1;
+        }
         ClingObj = GameObject.Find("ClingObject");
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
@@ -93,7 +97,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
-
+        if (Application.loadedLevelName == "Stage1")
+        {
+            stage[0] = 0;
+        }
         /*
                  print("┌──────────────────────────────────────────┐");
         
