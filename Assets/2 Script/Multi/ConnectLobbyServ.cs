@@ -8,7 +8,7 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 {
 	private Socket mClientSocket;
 
-	public string ipAddress = "192.168.0.9";	// 서버 IP
+	public string ipAddress = "192.168.0.147";	// 서버 IP
 	public const int lPort = 2738;	        // 로비서버로 접속 포트
 
 	private int SendDataLength;	            // 전송 데이터 길이(byte)
@@ -18,8 +18,11 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 	private byte[] Receivebyte = new byte[1000];
 	private string ReceiveString;
     StringBuilder sb = new StringBuilder();
-    void Start()
+    
+    void Init()
     {
+        DontDestroyOnLoad(this);
+        print("serv");
         mClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);
         mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
@@ -36,30 +39,25 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
             Debug.Log("Socket connect error : " + SCE.ToString());
             return;
         }
-    }
-    void Awake()
-	{
-        DontDestroyOnLoad(this);
-       
 
 
-        try
-        {
-            // Send
-            SendDataLength = Encoding.Default.GetByteCount(sb.ToString());
-            Sendbyte = Encoding.Default.GetBytes(sb.ToString());
-            mClientSocket.Send(Sendbyte, Sendbyte.Length, 0);
+        //try
+        //{
+        //    // Send
+        //    SendDataLength = Encoding.Default.GetByteCount(sb.ToString());
+        //    Sendbyte = Encoding.Default.GetBytes(sb.ToString());
+        //    mClientSocket.Send(Sendbyte, Sendbyte.Length, 0);
 
-            // Receive
-            mClientSocket.Receive(Receivebyte);
-            ReceiveString = Encoding.Default.GetString(Receivebyte);
-            ReceiveDataLength = Encoding.Default.GetByteCount(ReceiveString.ToString());
-            Debug.Log("Receive Data: " + ReceiveString + "(" + ReceiveDataLength + ")");
-        }
-        catch (SocketException err)
-        {
-            Debug.Log("Socket Send or Receive error : " + err.ToString());
-        }
+        //    // Receive
+        //    mClientSocket.Receive(Receivebyte);
+        //    ReceiveString = Encoding.Default.GetString(Receivebyte);
+        //    ReceiveDataLength = Encoding.Default.GetByteCount(ReceiveString.ToString());
+        //    Debug.Log("Receive Data: " + ReceiveString + "(" + ReceiveDataLength + ")");
+        //}
+        //catch (SocketException err)
+        //{
+        //    Debug.Log("Socket Send or Receive error : " + err.ToString());
+        //}
 
         // 데이터
         // StringBuilder sb = new StringBuilder();     // 보낼 데이터
