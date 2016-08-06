@@ -14,8 +14,8 @@ public class CameraCtrl : Singleton<CameraCtrl>
     Vector3 vLerp;
 
     private List<ObjStruct> preRayHitObjList = new List<ObjStruct>();      //이전에 충돌한 gameObject를 가지고 있는 List
-                                                                             //private GameObject Camera;
-    //private List<string> preRayHitObj
+                                                                           //private GameObject Camera;
+                                                                           //private List<string> preRayHitObj
 
     public eMoveState moveState = eMoveState.COLLIDER;
 
@@ -60,23 +60,23 @@ public class CameraCtrl : Singleton<CameraCtrl>
             isLookFar = false;
             if (fTargetDist != fNormalDist)
                 fTargetDist = Mathf.Lerp(fTargetDist, fNormalDist, 0.3f);
-            
+
         }
-       
+
         transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
 
         transform.LookAt(targetTr.position);
-      //  print("rotate.y: " + transform.eulerAngles.y);
+        //  print("rotate.y: " + transform.eulerAngles.y);
 
-        if ( preYAngle - transform.eulerAngles.y  > 179f)
+        if (preYAngle - transform.eulerAngles.y > 179f)
         {
- 
-            float _y = transform.eulerAngles.y + 180f;
-            
-            transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
-          //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
 
-           // Time.timeScale = 0f;
+            float _y = transform.eulerAngles.y + 180f;
+
+            transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
+            //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
+
+            // Time.timeScale = 0f;
             preYAngle = _y;
 
         }
@@ -94,8 +94,8 @@ public class CameraCtrl : Singleton<CameraCtrl>
             {
                 if (isLookFar != true)
                 {
-                     Transform parentTr  = PlayerCtrl.Instance.GetParent();
-                    if ( (parentTr != null ) && parentTr.CompareTag("RAINDROP"))
+                    Transform parentTr = PlayerCtrl.Instance.GetParent();
+                    if ((parentTr != null) && parentTr.CompareTag("RAINDROP"))
                         StartCoroutine("DelayLerpPosition", 0f);
                     else
                         StartCoroutine("DelayLerpPosition", 1f);
@@ -107,7 +107,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
                         fTargetDist = Mathf.Lerp(fTargetDist, fFarDist, 0.3f);
                     transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + (targetTr.up * fTargetHeight);
                 }
-           
+
             }
             MakeObjTransparent();
         }
@@ -119,12 +119,12 @@ public class CameraCtrl : Singleton<CameraCtrl>
                 if (isLookFar != true)
                 {
                     StartCoroutine("DelayLerpPosition", 1.5f);
-           
+
                 }
                 else
                 {
-                   // 카메라 충돌 체크, 플레이어가 가려지는 일이 발생하지 않게 함
-                   
+                    // 카메라 충돌 체크, 플레이어가 가려지는 일이 발생하지 않게 함
+
                     Vector3 vDir = transform.position - targetTr.position;
                     vDir.Normalize();
 
@@ -134,7 +134,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
                     //이게 정상동작 코드
                     // transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fFarDist, "CAMERA");
-                    transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fTargetDist,"WALL");
+                    transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fTargetDist, "WALL");
 
                 }
             }
@@ -175,13 +175,13 @@ public class CameraCtrl : Singleton<CameraCtrl>
             {
                 ObjStruct objStruct = new ObjStruct();
                 Renderer renderer;
-              //  MeshRenderer tempRenderer;  // null 체크할 변수 
-               // SkinnedMeshRenderer tempSkinnedRenderer;   // null 체크할 변수 
+                //  MeshRenderer tempRenderer;  // null 체크할 변수 
+                // SkinnedMeshRenderer tempSkinnedRenderer;   // null 체크할 변수 
                 objStruct._obj = RayHit[i].collider.gameObject;
 
                 if (preRayHitObjList.Count != 0) // 이미 투명해진 물체가 있는 상황이라면 
                 {
-                    
+
                     for (int j = 0; j < preRayHitObjList.Count; ++j)
                     {
                         Shader tempShader;
@@ -194,7 +194,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
                                 objStruct._objShader = renderer.material.shader;
                             else
                                 break;
-                            
+
                         }
                         else
                         {
@@ -216,7 +216,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
                         objStruct._objShader = renderer.material.shader;
                         print("스킨드메쉬렌더러 : " + objStruct._obj.name);
                     }
-                   
+
                     else
                     {
                         print("브레이크");
@@ -257,7 +257,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
                 if (renderer.material.HasProperty("_Color"))
                 {
-                   // print("rayHitObjList[i].collider.gameObject.name : " + newRayHitObjList[i].name);
+                    // print("rayHitObjList[i].collider.gameObject.name : " + newRayHitObjList[i].name);
 
                     Color prevColor = renderer.material.GetColor("_Color");
                     //print("color : " + prevColor);
@@ -273,7 +273,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
         // preRayHitObjList와 newRayHitObjList를 비교하여, Ray가 닿지 않은 Obj라면 셰이더 상태를 원래대로 돌려 놓는다.
         for (int i = 0; i < preRayHitObjList.Count; ++i)
         {
-            if (!newRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); })._obj ) //preRayHitObjList[i]);
+            if (!newRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); })._obj) //preRayHitObjList[i]);
             {
                 // string nameShader = "Mobile/Unlit (Supports Lightmap)";
                 //string nameShader = "Standard";

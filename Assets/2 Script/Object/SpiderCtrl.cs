@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpiderCtrl : MonoBehaviour {
+public class SpiderCtrl : MonoBehaviour
+{
     public Animator Anim;
     public Transform tr;
 
@@ -9,18 +10,18 @@ public class SpiderCtrl : MonoBehaviour {
     public eState state;
 
     private float fDist;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         tr = GetComponent<Transform>();
         Anim = GetComponent<Animator>();
 
         state = eState.IDLE;
         fDist = 8f;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (Vector3.Distance(tr.position, PlayerCtrl.Instance.transform.position) < fDist)
             state = eState.ATTACK;
@@ -28,15 +29,15 @@ public class SpiderCtrl : MonoBehaviour {
             state = eState.IDLE;
 
         Animate();
-	}
+    }
 
     void Animate()
     {
-        switch(state)
+        switch (state)
         {
             case eState.IDLE:
                 {
-                    Anim.SetInteger("iState",0);
+                    Anim.SetInteger("iState", 0);
                     break;
                 }
             case eState.MOVE:
@@ -49,7 +50,7 @@ public class SpiderCtrl : MonoBehaviour {
                     Anim.SetInteger("iState", 2);
                     break;
                 }
-                
+
         }
     }
 }

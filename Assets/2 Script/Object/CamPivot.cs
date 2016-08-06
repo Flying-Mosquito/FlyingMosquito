@@ -123,7 +123,6 @@ public class CamPivot : MonoBehaviour
         }
         /*else //어딘가 붙을때의 카메라 효과 
         {
-
             if (isLookFar != true)
             {
                 StartCoroutine("DelayLerpPosition", 1f);

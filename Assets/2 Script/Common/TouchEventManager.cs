@@ -60,7 +60,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
             }
 
 
-            if(Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -175,7 +175,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                             raindrop = hit.collider.gameObject;
                         }
                         //else
-                         //   print("헛클릭");
+                        //   print("헛클릭");
 
                     }
 
