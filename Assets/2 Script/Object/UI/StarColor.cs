@@ -4,10 +4,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class StarColor : MonoBehaviour {
-    public Transform star;
-    public Image image;
-    public Image image2;
-    public Image image3;
+    public Transform[] star= new Transform[9];
+    public Image[] image  = new Image[9];
+    public Image[] image2 = new Image[9];
+    public Image[] image3 = new Image[9];
     public SelectStage select;
     // Use this for initialization
     void Start () {
@@ -18,9 +18,9 @@ public class StarColor : MonoBehaviour {
 	void Update () {
         if (PlayerCtrl.Instance.iBlood > 190)
         {
-           image.color = Color.green;
-            image2.color = Color.green;
-            image3.color = Color.green;
+           image[0].color = Color.green;
+            image2[0].color = Color.green;
+            image3[0].color = Color.green;
         }
     }
 }

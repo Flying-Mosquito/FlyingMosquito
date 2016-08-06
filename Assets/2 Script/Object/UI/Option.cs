@@ -33,7 +33,7 @@ public class Option : MonoBehaviour {
     }
     public void backLobby()
     {
-        SceneManager.LoadScene(12);
+        SceneManager.LoadScene(14);
     }
     public void IntoRoom()
     {

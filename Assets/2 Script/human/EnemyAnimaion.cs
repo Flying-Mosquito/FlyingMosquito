@@ -4,12 +4,13 @@ using System.Collections;
 public class EnemyAnimaion : MonoBehaviour
 {
     public Animator anim;
-    public EnemyAI EnemyAI;
+    EnemyAI enemyai;
+    public GameObject human;
     // Use this for initialization
     void Awake()
     {
         anim = GetComponent<Animator>();
-
+        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
     }
     /*
 	void Start () {
@@ -20,7 +21,7 @@ public class EnemyAnimaion : MonoBehaviour
     {
 
 
-        switch (EnemyAI.state)
+        switch (enemyai.state)
         {
             case EnemyAI.State.PATROL:
                 {

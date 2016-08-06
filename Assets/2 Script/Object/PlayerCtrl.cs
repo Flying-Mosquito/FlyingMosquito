@@ -46,12 +46,13 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
     public int iBlood = 0; // 흡혈량 ( 미구현 )
 
-
+   
 
     void Awake()
     {
         DontDestroyOnLoad(this);
 
+       
         ClingObj = GameObject.Find("ClingObject");
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
@@ -96,6 +97,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         Action();
         RotateAnimation();
 
+      
 
         // 플레이어 몸체 회전효과
         // rigidBody.velocity = Vector3.zero;  // 이것도 해제해야 할 거야 

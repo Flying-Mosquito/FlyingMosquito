@@ -4,17 +4,20 @@ using System.Collections;
 public class Spray : MonoBehaviour {
 
     public Transform OnSpray;
-    public EnemyAI EnemyAI;
+    public EnemyAI enemyai;
   
     // Use this for initialization
-  
+  void Start()
+    {
+        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
+    }
 
     // Update is called once per frame
     void Update () {
-	if(EnemyAI.angrygauge>70 && EnemyAI.angrygauge<90)
+	if(enemyai.angrygauge>70 && enemyai.angrygauge<90)
         {
             OnSpray.gameObject.SetActive(true);
-            EnemyAI.state = EnemyAI.State.CHASE;
+            enemyai.state = EnemyAI.State.CHASE;
         }
     else
         {
