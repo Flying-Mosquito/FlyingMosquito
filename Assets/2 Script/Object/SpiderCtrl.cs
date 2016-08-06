@@ -16,13 +16,12 @@ public class SpiderCtrl : MonoBehaviour {
         Anim = GetComponent<Animator>();
 
         state = eState.IDLE;
-        fDist = 40f;
+        fDist = 8f;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        print("fDist:" + (Vector3.Distance(tr.position, PlayerCtrl.Instance.transform.position)));
         if (Vector3.Distance(tr.position, PlayerCtrl.Instance.transform.position) < fDist)
             state = eState.ATTACK;
         else

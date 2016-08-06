@@ -9,6 +9,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     // LateUpdate쪽으로 바꿔줘야 하는데 .. 무엇을..?
     private Transform targetTr;
     private Transform rayTarget;
+    private float preYAngle;
     public bool isLookFar;
     Vector3 vLerp;
 
@@ -39,6 +40,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
         fFarDist = 18f;
         fTargetHeight = 0.2f;
         isLookFar = false;
+        preYAngle = transform.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -64,6 +66,23 @@ public class CameraCtrl : Singleton<CameraCtrl>
         transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
 
         transform.LookAt(targetTr.position);
+      //  print("rotate.y: " + transform.eulerAngles.y);
+
+        if ( preYAngle - transform.eulerAngles.y  > 179f)
+        {
+ 
+            float _y = transform.eulerAngles.y + 180f;
+            
+            transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
+          //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
+
+           // Time.timeScale = 0f;
+            preYAngle = _y;
+
+        }
+        else
+            preYAngle = transform.eulerAngles.y;
+
         // transform.Rotate(-20, 0, 0);
         // transform.rotation = targetTr.rotation;
 

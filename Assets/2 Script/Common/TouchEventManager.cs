@@ -59,6 +59,19 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
             }
 
+
+            if(Input.GetKey(KeyCode.Space))
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    PlayerCtrl.Instance.ClingBtDown();
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                PlayerCtrl.Instance.ClingBtUp();
+            }
+
         }
 #else
         int iTouchCount = Input.touchCount;
@@ -161,8 +174,8 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                             print("raindrop클릭!!!!");
                             raindrop = hit.collider.gameObject;
                         }
-                        else
-                            print("헛클릭");
+                        //else
+                         //   print("헛클릭");
 
                     }
 
