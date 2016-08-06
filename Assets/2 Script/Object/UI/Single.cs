@@ -24,7 +24,7 @@ public class Single : MonoBehaviour
     public void Click()
     {
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(13);
 
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
      

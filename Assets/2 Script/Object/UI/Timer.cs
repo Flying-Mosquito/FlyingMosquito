@@ -6,13 +6,14 @@ public class Timer : Singleton<Timer>
 {
 
     public Text timerText;
+    public Text ScoreText;
     public float startTime;
     public Transform gameover;
     public Transform gameClear;
     public float totaltime = 60;
    public bool isEnable = false;
-  
 
+    public float score;
 
 
     // Use this for initialization
@@ -60,9 +61,9 @@ public class Timer : Singleton<Timer>
             gameClear.gameObject.SetActive(true);
             
             StopTimer();
-            
 
-
+            score = (PlayerCtrl.Instance.iBlood * 2) + (Timer.Instance.totaltime * 2);
+            ScoreText.text = score.ToString();
 
         }
        

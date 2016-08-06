@@ -55,7 +55,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         stage = new int[9];
         for (int i = 0; i < 9; i++)
         {
-            stage[i] = 1;
+            stage[i] = 0;
         }
         ClingObj = GameObject.Find("ClingObject");
         tr = GetComponent<Transform>();
@@ -97,9 +97,14 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
+        
         if (Application.loadedLevelName == "Stage1")
         {
-            stage[0] = 0;
+            stage[0] = 1;
+        }
+        else if (Application.loadedLevelName == "Stage6")
+        {
+            stage[1] = 1;
         }
         /*
                  print("┌──────────────────────────────────────────┐");

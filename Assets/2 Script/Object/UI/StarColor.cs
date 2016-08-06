@@ -9,6 +9,7 @@ public class StarColor : MonoBehaviour {
     public Image[] image2 = new Image[9];
     public Image[] image3 = new Image[9];
     public SelectStage select;
+   
     // Use this for initialization
     void Start () {
 	
@@ -16,6 +17,7 @@ public class StarColor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+     
         if (PlayerCtrl.Instance.iBlood > 190)
         {
            image[0].color = Color.green;
