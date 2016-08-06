@@ -156,7 +156,6 @@ public class CamPivot : MonoBehaviour
         else                                            // 부스터 사용하지 않을 때의 회전값 설정 
             tr.localRotation = Quaternion.Slerp(tr.localRotation, FirstLocalRotation, 0.01f);
 
-
     }
 
     public void Shake_Camera() // 수정필요 

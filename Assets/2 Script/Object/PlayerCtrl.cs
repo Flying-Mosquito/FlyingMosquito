@@ -484,8 +484,12 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             {
 
                 //  state = Constants.ST_MOVE;
-                tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.World);
-                tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
+                // tr.localRotation.eulerAngles.Set(-fYAngle * Time.deltaTime * fRotSpeed, fXAngle * Time.deltaTime * fRotSpeed, 0f);
+                //tr.localRotation.eulerAngles.Set(0f, fXAngle * Time.deltaTime * fRotSpeed, 0f);
+                tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.World);   // 좌우
+              
+                tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);  // 위아래
+                //tr.localRotation.eulerAngles.Set(fYAngle * Time.deltaTime * fRotSpeed, 0f, 0f);
 
 
                 // state로 해도 될걸-수정
