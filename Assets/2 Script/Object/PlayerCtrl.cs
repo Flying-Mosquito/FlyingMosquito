@@ -106,32 +106,19 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
             if((variable & Constants.BV_bBlood) > 0)
             {
-                print("human");
-               
-
                 startTime += Time.deltaTime;
-                print(startTime);
+              //  print(startTime);
             }
             else
             {
-                print("wall");
-
-                /*tr.transform.parent = null;
-                //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 이거 꼭 필요한가
-                ClingObj.transform.parent = null;*/
-
-
 
                 variable &= ~(Constants.BV_bBlood);
             }
 
             if (startTime > 5)
             {
-
                 ClingBtUp();
                 startTime = 0;
-
-
             }
         }
         else if (Application.loadedLevelName == "Stage6")
@@ -376,13 +363,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
         if (((variable & Constants.BV_IsCling) > 0) && (variable & Constants.BV_bBlood) > 0) //isCling)  
         {
-            print("blood");
             state = Constants.ST_BLOOD;
-
-
-
-
-
         }
         else if ((variable & Constants.BV_IsCling) > 0)
         {
@@ -391,7 +372,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             else
             {
                 state = Constants.ST_CLING;
-                print("ismove해제");
+               // print("ismove해제");
                 variable &= ~(Constants.BV_IsMove);     // 붙은상태면 움직이지 않게 함 
             }
 
@@ -572,7 +553,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else // 붙어 있을 시 아무 동작도 하지 않도록 함 
         {
-            print("6번");
+         //   print("6번");
             // tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.Self);
             // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
         }
