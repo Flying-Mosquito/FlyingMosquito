@@ -31,6 +31,10 @@ public class Option : MonoBehaviour {
        // Timer.Instance.totaltime = 60;
        // Timer.Instance.isEnable = true;
     }
+    public void intoMulti()
+    {
+        SceneManager.LoadScene(14);
+    }
     public void backLobby()
     {
         SceneManager.LoadScene(14);

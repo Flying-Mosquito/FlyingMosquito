@@ -18,28 +18,36 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 	private byte[] Receivebyte = new byte[1000];
 	private string ReceiveString;
     StringBuilder sb = new StringBuilder();
+    public int Check=0 ;
     
-    void Init()
-    {
-        DontDestroyOnLoad(this);
-        print("serv");
-        mClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);
-        mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
+    void Start()
+	{
 
-        // 소켓 연결
-        try
-        {
-            IPAddress ipAddr = System.Net.IPAddress.Parse(ipAddress);
-            IPEndPoint ipEndPoint = new System.Net.IPEndPoint(ipAddr, lPort);
-            mClientSocket.Connect(ipEndPoint);
-        }
-        catch (SocketException SCE)
-        {
-            Debug.Log("Socket connect error : " + SCE.ToString());
-            return;
-        }
+        
+            DontDestroyOnLoad(this);
 
+
+            print("serv");
+            mClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);
+            mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
+            Check = 1;
+            // 소켓 연결
+            try
+            {
+                IPAddress ipAddr = System.Net.IPAddress.Parse(ipAddress);
+                IPEndPoint ipEndPoint = new System.Net.IPEndPoint(ipAddr, lPort);
+                mClientSocket.Connect(ipEndPoint);
+
+            }
+            catch (SocketException SCE)
+            {
+                Debug.Log("Socket connect error : " + SCE.ToString());
+                return;
+            }
+
+       
+       
 
         //try
         //{

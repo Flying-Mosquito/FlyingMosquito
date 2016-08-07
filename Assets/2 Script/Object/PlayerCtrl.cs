@@ -19,7 +19,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     private RainDrop dest_script;
     private GameObject fx_boost;
     public Vector3 prePosition;
-
+    public float startTime;
     // 플레이어 상태와 변수상태가 들어가 있는 변수 
     public ulong state { get; private set; }
     public ulong variable;
@@ -43,7 +43,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
 
     public GameObject ClingObj;
-
+    EnemyAI enemyai;
     public int iBlood = 0; // 흡혈량 ( 미구현 )
     private bool isMovable; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
@@ -57,6 +57,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         {
             stage[i] = 0;
         }
+        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
         ClingObj = GameObject.Find("ClingObject");
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
@@ -105,6 +106,36 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         else if (Application.loadedLevelName == "Stage6")
         {
             stage[1] = 1;
+        }
+
+        if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
+        {
+            print("human");
+            variable |= Constants.BV_bBlood;
+
+            startTime += Time.deltaTime;
+            print(startTime);
+        }
+        else
+        {
+            print("wall");
+
+            /*tr.transform.parent = null;
+            //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 이거 꼭 필요한가
+            ClingObj.transform.parent = null;*/
+
+
+
+            variable &= ~(Constants.BV_bBlood);
+        }
+
+        if (startTime > 5)
+        {
+
+            ClingBtUp();
+            startTime = 0;
+
+
         }
         /*
                  print("┌──────────────────────────────────────────┐");
