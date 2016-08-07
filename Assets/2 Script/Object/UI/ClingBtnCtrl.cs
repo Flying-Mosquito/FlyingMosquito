@@ -5,12 +5,13 @@ using UnityEngine.UI;
 public class ClingBtnCtrl : BaseButton//MonoBehaviour
 {
   //  public Text Text;
-    private Transform tr;
+   // private Transform tr;
    // private bool isMouseDown = false;
     private PlayerCtrl player;
     // Use this for initialization
-    void Start () {
-        tr = GetComponent<Transform>();
+    void Start ()
+    {
+        //tr = GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 	

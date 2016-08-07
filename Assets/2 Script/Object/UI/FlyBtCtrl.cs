@@ -15,7 +15,7 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     private float fStraightAngle;
 
     private PlayerCtrl player;
-    private bool isBoost = false;
+   // private bool isBoost = false;
     // public static 
     void Start()
     {

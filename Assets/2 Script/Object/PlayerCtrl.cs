@@ -529,10 +529,25 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 //  state = Constants.ST_MOVE;
                 // tr.localRotation.eulerAngles.Set(-fYAngle * Time.deltaTime * fRotSpeed, fXAngle * Time.deltaTime * fRotSpeed, 0f);
                 //tr.localRotation.eulerAngles.Set(0f, fXAngle * Time.deltaTime * fRotSpeed, 0f);
-                tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.World);   // 좌우
+                //  tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.World);   // 좌우
+                // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);  // 위아래
+                // => _fY, _fX 구해서 localRotation으로 코드 변경 
 
-                tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);  // 위아래
-                //tr.localRotation.eulerAngles.Set(fYAngle * Time.deltaTime * fRotSpeed, 0f, 0f);
+
+                float _fY = tr.eulerAngles.x + (-fYAngle * Time.deltaTime * fRotSpeed);
+                float _fX = tr.eulerAngles.y + (fXAngle * Time.deltaTime * fRotSpeed);
+
+                // print("fYAngle:" + fYAngle);
+                // print("tr.eulerAngles.x  : " + tr.eulerAngles.x);
+                if ((fYAngle >= 0) && (tr.eulerAngles.x >= 270f) && (_fY < 271f))
+                    _fY = 271f;
+
+                if ((fYAngle <= 0) && (tr.eulerAngles.x <= 76f) && (_fY > 75f))
+                    _fY = 75f;
+
+                tr.localRotation = Quaternion.Euler(_fY, _fX, 0f);
+
+
 
 
                 // state로 해도 될걸-수정
