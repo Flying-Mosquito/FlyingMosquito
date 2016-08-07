@@ -102,41 +102,43 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         if (Application.loadedLevelName == "Stage1")
         {
             stage[0] = 1;
+
+            //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
+            if((variable & Constants.BV_bBlood) > 0)
+            {
+                print("human");
+               
+
+                startTime += Time.deltaTime;
+                print(startTime);
+            }
+            else
+            {
+                print("wall");
+
+                /*tr.transform.parent = null;
+                //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 이거 꼭 필요한가
+                ClingObj.transform.parent = null;*/
+
+
+
+                variable &= ~(Constants.BV_bBlood);
+            }
+
+            if (startTime > 5)
+            {
+
+                ClingBtUp();
+                startTime = 0;
+
+
+            }
         }
         else if (Application.loadedLevelName == "Stage6")
         {
             stage[1] = 1;
         }
-
-        if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
-        {
-            print("human");
-            variable |= Constants.BV_bBlood;
-
-            startTime += Time.deltaTime;
-            print(startTime);
-        }
-        else
-        {
-            print("wall");
-
-            /*tr.transform.parent = null;
-            //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 이거 꼭 필요한가
-            ClingObj.transform.parent = null;*/
-
-
-
-            variable &= ~(Constants.BV_bBlood);
-        }
-
-        if (startTime > 5)
-        {
-
-            ClingBtUp();
-            startTime = 0;
-
-
-        }
+        
         /*
                  print("┌──────────────────────────────────────────┐");
         

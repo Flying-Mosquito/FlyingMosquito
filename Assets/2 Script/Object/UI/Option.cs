@@ -21,7 +21,7 @@ public class Option : MonoBehaviour {
     public void Click()
     {
        
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(13);
 
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
        //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
