@@ -19,15 +19,16 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 	private string ReceiveString;
     StringBuilder sb = new StringBuilder();
     public int Check=0 ;
-    
+    public Transform Serv;
+
     void Start()
 	{
 
-        
-            DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
 
 
-            print("serv");
+
+        print("serv");
             mClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);
             mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
