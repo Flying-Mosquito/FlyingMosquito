@@ -8,7 +8,7 @@ public class SelectStage : MonoBehaviour
     public Button exit;
     public Button back;
     // Use this for initialization
-   
+    public int[] stagenum=new int[9];
    
    
     public bool backBool;
@@ -28,14 +28,34 @@ public class SelectStage : MonoBehaviour
     {
 
         print(Application.loadedLevelName);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(stagenum[0]);
         
         
         
     }
     public void Stage2()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(stagenum[1]);
         
+    }
+    public void Stage3()
+    {
+        SceneManager.LoadScene(stagenum[2]);
+
+    }
+    public void Stage4()
+    {
+        SceneManager.LoadScene(stagenum[3]);
+
+    }
+    public void Stage5()
+    {
+        SceneManager.LoadScene(stagenum[4]);
+
+    }
+    public void Stage6()
+    {
+        SceneManager.LoadScene(stagenum[5]);
+
     }
 }

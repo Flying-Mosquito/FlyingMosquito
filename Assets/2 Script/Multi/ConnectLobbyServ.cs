@@ -8,7 +8,7 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 {
 	private Socket mClientSocket;
 
-	public string ipAddress = "192.168.0.147";	// 서버 IP
+	public string ipAddress = "192.168.1.105";	// 서버 IP
 	public const int lPort = 2738;	        // 로비서버로 접속 포트
 
 	private int SendDataLength;	            // 전송 데이터 길이(byte)
@@ -21,7 +21,7 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
     public int Check=0 ;
     public Transform Serv;
 
-    void Start()
+    void Awake()
 	{
 
         DontDestroyOnLoad(this);

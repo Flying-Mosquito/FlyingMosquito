@@ -98,33 +98,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
-        
-        if (Application.loadedLevelName == "Stage1")
-        {
-            stage[0] = 1;
-
-            //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
-            if((variable & Constants.BV_bBlood) > 0)
-            {
-                startTime += Time.deltaTime;
-              //  print(startTime);
-            }
-            else
-            {
-
-                variable &= ~(Constants.BV_bBlood);
-            }
-
-            if (startTime > 5)
-            {
-                ClingBtUp();
-                startTime = 0;
-            }
-        }
-        else if (Application.loadedLevelName == "Stage6")
-        {
-            stage[1] = 1;
-        }
+        CheckS();
+       
         
         /*
                  print("┌──────────────────────────────────────────┐");
@@ -169,6 +144,40 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     print("NULL");
                     */
     }
+    public void CheckS()
+    {
+        for (int i = 0; i < 9; i++) {
+            if (Application.loadedLevelName == "Stage"+i.ToString())
+            {
+                stage[i] = 1;
+                if (Application.loadedLevelName == "Stage3")
+                blooding();
+
+            }
+        }
+       
+    }
+    public void blooding()
+    {
+        //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
+        if ((variable & Constants.BV_bBlood) > 0)
+        {
+            startTime += Time.deltaTime;
+            //  print(startTime);
+        }
+        else
+        {
+
+            variable &= ~(Constants.BV_bBlood);
+        }
+
+        if (startTime > 5)
+        {
+            ClingBtUp();
+            startTime = 0;
+        }
+    
+}
     private void KeyInput()     // StateCheck 로 이름을 바꾸자..
     {
         if (state != Constants.ST_STUN)// && state != Constants.ST_CLING)
