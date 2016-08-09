@@ -20,16 +20,19 @@ public class Option : MonoBehaviour {
 	}
     public void Click()
     {
-       
+        PlayerCtrl.Instance.iBlood = 0;
+        Timer.Instance.gameover.gameObject.SetActive(false);
+        Timer.Instance.gameClear.gameObject.SetActive(false);
+
         SceneManager.LoadScene(13);
-
+        
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
-       //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
-       // //   PlayerCtrl.Instance.SetStateIdle(true);
-       // PlayerCtrl.Instance.SetIsInStage(false);
+        //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
+        // //   PlayerCtrl.Instance.SetStateIdle(true);
+        // PlayerCtrl.Instance.SetIsInStage(false);
 
-       // Timer.Instance.totaltime = 60;
-       // Timer.Instance.isEnable = true;
+        // Timer.Instance.totaltime = 60;
+        // Timer.Instance.isEnable = true;
     }
     public void intoMulti()
     {

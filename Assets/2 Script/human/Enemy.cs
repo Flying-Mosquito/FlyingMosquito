@@ -3,14 +3,15 @@ using System.Collections;
 
 
 
-public class Enemy : Singleton<Enemy>
+public class Enemy : MonoBehaviour
 {
+
     public int moveSpeed;
     public int rotationSpeed;
 
 
     // Use this for initialization
-    void Start()
+    void Update()
         {
       
         }

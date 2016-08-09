@@ -28,15 +28,16 @@ public class CheckStage : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < 9; i++)
+        
+        for (int i = 0; i < 5; i++)
         {
-            if (PlayerCtrl.Instance.iBlood > 190&& PlayerCtrl.Instance.stage[i]==1)
+            if (PlayerCtrl.Instance.stage[i]==1)
             {
                 Arr[i] = 1;
             }
         }
         //1성공 2닫힘
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 5; i++)
         {
             if ((Arr[i] == 0 && Arr[i+1] == 1) ||(Arr[i] == 1 && Arr[i + 1] == 1))
             {

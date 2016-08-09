@@ -18,11 +18,11 @@ public class StarColor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
      
-        if (PlayerCtrl.Instance.iBlood > 190)
-        {
-           image[0].color = Color.green;
-            image2[0].color = Color.green;
-            image3[0].color = Color.green;
-        }
+        //if (PlayerCtrl.Instance.iBlood > 190)
+        //{
+        //   image[0].color = Color.green;
+        //    image2[0].color = Color.green;
+        //    image3[0].color = Color.green;
+        //}
     }
 }

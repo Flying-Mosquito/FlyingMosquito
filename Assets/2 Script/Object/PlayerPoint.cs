@@ -30,12 +30,7 @@ public class PlayerPoint : MonoBehaviour
         {
             if (state == ePointState.eStage)
             {
-                PlayerCtrl.Instance.SetHP(75);
-                PlayerCtrl.Instance.iBlood = 0;
-                PlayerCtrl.Instance.fStamina = 200;
-                //PlayerCtrl.Instance.SetStateIdle(false);
-               PlayerCtrl.Instance.SetIsInStage(true);
-                gameObject.SetActive(false);    //비활성화 
+              
             }
             else
             {

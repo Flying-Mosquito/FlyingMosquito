@@ -8,7 +8,7 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
 {
 	private Socket mClientSocket;
 
-	public string ipAddress = "192.168.1.105";	// 서버 IP
+	public string ipAddress = "192.168.0.2";	// 서버 IP
 	public const int lPort = 2738;	        // 로비서버로 접속 포트
 
 	private int SendDataLength;	            // 전송 데이터 길이(byte)
@@ -75,15 +75,23 @@ public class ConnectLobbyServ : Singleton<ConnectLobbyServ>
         // 기본 구조, Send로 위 sb를 보내줌. Append 로 번호당 GUI 버튼에 붙이면 됨!
 
     }
- 
+ void Update()
+    {
+        if (Application.loadedLevelName == "MultiMain")
+            Serv.gameObject.SetActive(true);
+    }
 
     public void ComeinRoom()
     {
+        sb.Remove(0, sb.Length);
+
         sb.Append("1");
         CallServ();
     }
     public void MakeRoom()
     {
+        sb.Remove(0, sb.Length);
+
         sb.Append("2");
         CallServ();
     }
