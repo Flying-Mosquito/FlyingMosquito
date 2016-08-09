@@ -27,6 +27,7 @@ public class ChameleonCtrl : MonoBehaviour {
         {
             state = eState.IDLE;
             Anim.SetInteger("iState", 0);
+            print("EAT");
         }
 	}
 
