@@ -103,7 +103,9 @@ public class FrogTongue : MonoBehaviour
                 iMoveState = 0;
                 bSwallow = false;
                 bIdle = true;
+                x = 0.2f;
                 StartCoroutine("ChangeMoveState");
+                
             }
 
 

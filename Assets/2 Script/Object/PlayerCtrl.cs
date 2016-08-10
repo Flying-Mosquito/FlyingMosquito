@@ -45,7 +45,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public GameObject ClingObj;
     EnemyAI enemyai;
     public int iBlood = 0; // 흡혈량 ( 미구현 )
-    private bool isMovable; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
+    private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
     public int[] stage = new int[2] { 0, 1 };
 
@@ -83,7 +83,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         fBoostSpeed = 0f;
         MAXBOOST = 10f;
 
-        isMovable = false;
+        isHold = false;
     }
     void FixedUpdate()
     {
@@ -132,7 +132,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                      print("│ isInStage");
                 else
                      print("Not Stage");
-                     */
+          */           
         //print("state : " + state);
         //  print("isMovable = " + isMovable);
         //print("Update velocity : " + rigidBody.velocity);
@@ -376,7 +376,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else if ((variable & Constants.BV_IsCling) > 0)
         {
-            if (isMovable)
+            if (isHold)
                 state = Constants.ST_HOLD;
             else
             {
@@ -454,7 +454,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             if ((variable & Constants.BV_bStaminaRecovery) > 0)  // 스테미나가 회복되기 위한 조건 
                 fStamina += 0.1f;     //수정
 
-            if (((variable & Constants.BV_IsCling) > 0) && !isMovable)  ///////////// Cling 상태라면, 속도를 낮춘다 
+            if (((variable & Constants.BV_IsCling) > 0) && !isHold)  ///////////// Cling 상태라면, 속도를 낮춘다 
             {
 
                 fSpeed = 0f;
@@ -495,21 +495,22 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if (/*(state == Constants.ST_IDLE) ||*/ (variable & Constants.BV_Stick) > 0) // 상태가 IDLE이거나 , 어딘가에 달라붙은 경우라면 움직이지 못함 
         {
-            //   print("1번");
+             //  print("1번");
         }
         else if ((state == Constants.ST_STUN)) // 플레이어가 스턴상태이면 중력을 받는 것 처럼 떨어뜨림
         {
-            //  print("2번");
+          //    print("2번");
             // rigidBody.MovePosition(tr.position + (-Vector3.up * Time.deltaTime));
             rigidBody.velocity = (-Vector3.up * 5f * Time.deltaTime);// tr.position + (-Vector3.up * Time.deltaTime);
 
         }
 
-        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && isMovable == true)) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
+        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && isHold == true)) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
         {
+            Debug.DrawRay(tr.position, tr.forward * 200f, Color.blue);
             if (((variable & Constants.BV_ClickRaindrop) > 0) && ((variable & Constants.BV_bCling) > 0))//true == isInRainzone && 
             {
-                //   print("3번");
+               //   print("3번");
                 // rigidBody.MovePosition(tr.position + (vDir * fSpeed * Time.deltaTime)); //이녀석
                 rigidBody.velocity = vDir * fSpeed;
                 //   print("vDir : " + vDir);
@@ -538,6 +539,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     _fY = 75f;
 
                 tr.localRotation = Quaternion.Euler(_fY, _fX, 0f);
+        
+          
+                
 
 
 
@@ -545,24 +549,28 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 // state로 해도 될걸-수정
                 if ((variable & Constants.BV_IsMove) > 0)
                 {
-                    //      print("4번 - 전진!");
+                   // print("4번 - 전진! ");
+                //    print("speed : " +  fSpeed);
                     // 회전 
-
 
                     // 움직임
                     movement.Set(tr.forward.x, tr.forward.y, tr.forward.z);
                     rigidBody.velocity = (movement * fSpeed);// * Time.deltaTime);
+
+                    Debug.DrawRay(tr.position, movement * 200f, Color.red);
+                    // print("tr: " + tr.forward + "movement : " + movement + "Speed: " + fSpeed);
+
                 }
                 else
                 {
-                    //     print("5번");
+                       //  print("5번");
                     rigidBody.velocity = Vector3.zero;
                 }
             }
         }
         else // 붙어 있을 시 아무 동작도 하지 않도록 함 
         {
-         //   print("6번");
+            print("6번");
             // tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.Self);
             // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
         }
@@ -664,7 +672,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if (Player_Target != null)
         {
-            isMovable = false;
+            isHold = false;
             Player_Target.transform.parent = null;
             Player_Target.GetComponent<Collider>().enabled = true;
             Player_Target.GetComponent<Rigidbody>().isKinematic = false;
@@ -679,7 +687,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if (Player_Target != null)
         {
-            isMovable = true;
+            isHold = true;
             Player_Target.transform.parent = tr;
             Player_Target.GetComponent<Collider>().enabled = false;
             Player_Target.GetComponent<Rigidbody>().isKinematic = true;
@@ -770,9 +778,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     variable |= Constants.BV_IsCling;//isCling = true;
 
 
-                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
+                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE") && (isHold == false))
                     {
-
                         SetTargetToChild();
                     }
                     else
@@ -861,8 +868,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 {
                     variable |= Constants.BV_IsCling;//isCling = true;
 
-
-                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
+                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE") && (isHold == false))
                     {
 
                         SetTargetToChild();
@@ -885,6 +891,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if (state != Constants.ST_CLING)//((variable & Constants.BV_IsCling) == 0)
         {
+            print("플ㄹㄹ라이다운");
             variable |= Constants.BV_IsMove;
             // text.text = "FlyBtDown";
         }
@@ -939,12 +946,11 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
     public void ClingBtUp()
     {
-
         if ((variable & Constants.BV_bCling) > 0)//Constants.ST_CLING == state)
         {
             if (Constants.ST_CLING == state || Constants.ST_BLOOD == state || Constants.ST_HOLD == state)
             {
-                if (isMovable)
+                if (isHold)
                     SetChildNull();
                 else
                     SetParentNull();
