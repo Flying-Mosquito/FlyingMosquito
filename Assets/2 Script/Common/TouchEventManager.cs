@@ -71,7 +71,10 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                     PlayerCtrl.Instance.ClingBtUp();
                 }
 
-
+            if (Input.GetKeyDown(KeyCode.Semicolon))
+                PlayerCtrl.Instance.FlyBtDown();
+            if (Input.GetKeyUp(KeyCode.Semicolon))
+                PlayerCtrl.Instance.FlyBtUp();
             
 
         }

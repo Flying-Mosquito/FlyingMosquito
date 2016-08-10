@@ -132,7 +132,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                      print("│ isInStage");
                 else
                      print("Not Stage");
-          */           
+                    */
         //print("state : " + state);
         //  print("isMovable = " + isMovable);
         //print("Update velocity : " + rigidBody.velocity);
@@ -666,6 +666,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         tr.transform.parent = null;
         //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 수정?
         ClingObj.transform.parent = null;
+        //ClingObj.transform.localScale = Vector3.one;
 
     }
     public void SetChildNull()
@@ -680,6 +681,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     private void SetParent(Transform collTr)
     {
+        print("setParent");
         ClingObj.transform.parent = collTr;
         tr.transform.parent = ClingObj.transform;
     }
@@ -784,6 +786,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     }
                     else
                     {
+                        print("셋페런트1");
                         rigidBody.velocity = Vector3.zero;
                         SetParent(coll.transform);
                     }
@@ -868,14 +871,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 {
                     variable |= Constants.BV_IsCling;//isCling = true;
 
-                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE") && (isHold == false))
+                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
                     {
-
-                        SetTargetToChild();
+                        if (isHold == false)
+                            SetTargetToChild();
                     }
                     else
                     {
                         rigidBody.velocity = Vector3.zero;
+                        print("셋페런트2");
                         SetParent(coll.transform);
                     }
 
@@ -891,7 +895,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if (state != Constants.ST_CLING)//((variable & Constants.BV_IsCling) == 0)
         {
-            print("플ㄹㄹ라이다운");
             variable |= Constants.BV_IsMove;
             // text.text = "FlyBtDown";
         }

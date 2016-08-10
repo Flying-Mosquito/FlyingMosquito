@@ -30,7 +30,9 @@ public class PlayerPoint : MonoBehaviour
         {
             if (state == ePointState.eStage)
             {
-              
+                PlayerCtrl.Instance.SetIsInStage(true);
+                PlayerCtrl.Instance.SetHP(100);
+                gameObject.SetActive(false);
             }
             else
             {
