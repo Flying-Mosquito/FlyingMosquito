@@ -45,9 +45,9 @@ public class Timer : Singleton<Timer>
        
         if (PlayerCtrl.Instance.iHP <5|| totaltime < 1)
         {
-            gameover.gameObject.SetActive(true);
+            //gameover.gameObject.SetActive(true);
            
-            StopTimer();
+           // StopTimer();
            
         }
        

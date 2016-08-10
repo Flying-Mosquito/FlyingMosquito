@@ -227,7 +227,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 else if ((variable & Constants.BV_bCling) == 0)//false == bCling)//bClickRaindrop)   // 물방울이 클릭 되지 않은 상태면서 물방울에 붙은 상태가 아니라면 물방울을 클릭한 상태로 바꿔준다, // RAINDROP 레이어어를 가진 물체와 raycast // 상태변경 
                 {
 
-                    if (Player_Target == null)
+                    if (Player_Target == null)   // hold수정??  hold 상태에서는 어쩔것인가
                     {
 
                         Player_Target = TouchEventManager.Instance.raindrop; //CollisionManager.Instance.Get_MouseCollisionObj(100f, "RAINDROP");
@@ -570,7 +570,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else // 붙어 있을 시 아무 동작도 하지 않도록 함 
         {
-            print("6번");
+           // print("6번");
             // tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.Self);
             // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
         }
@@ -674,14 +674,14 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         if (Player_Target != null)
         {
             isHold = false;
-            Player_Target.transform.parent = null;
+            Player_Target.transform.parent = null;          // 플레이어타겟?!?!?!!! 조사조사
             Player_Target.GetComponent<Collider>().enabled = true;
             Player_Target.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
     private void SetParent(Transform collTr)
     {
-        print("setParent");
+//        print("setParent");
         ClingObj.transform.parent = collTr;
         tr.transform.parent = ClingObj.transform;
     }
@@ -879,7 +879,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     else
                     {
                         rigidBody.velocity = Vector3.zero;
-                        print("셋페런트2");
                         SetParent(coll.transform);
                     }
 
@@ -954,9 +953,15 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             if (Constants.ST_CLING == state || Constants.ST_BLOOD == state || Constants.ST_HOLD == state)
             {
                 if (isHold)
+                {
+                    print("홀드1");
                     SetChildNull();
+                }
                 else
+                {
+                    print("엘즈");
                     SetParentNull();
+                }
 
 
             }
@@ -970,6 +975,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             // state = Constants.ST_FLYING;
 
         }
+        
 
     }
 
