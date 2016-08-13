@@ -8,8 +8,8 @@ public class EnemyAI : MonoBehaviour
 {
 
     public Transform target;
-    public int moveSpeed;
-    public int rotationSpeed;
+    public float moveSpeed;
+    public float rotationSpeed;
 
     public float angrygauge = 0;
 
@@ -54,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
 
     {
+       
 
         if ((PlayerCtrl.Instance.state == Constants.ST_BLOOD))
         {
