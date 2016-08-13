@@ -15,7 +15,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     private Rigidbody rigidBody;
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
-    private GameObject Player_Target;
+    public GameObject Player_Target;
     private RainDrop dest_script;
     private GameObject fx_boost;
     public Vector3 prePosition;
@@ -45,7 +45,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public GameObject ClingObj;
     EnemyAI enemyai;
     public int iBlood = 0; // 흡혈량 ( 미구현 )
-    private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
+   // private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
     public int[] stage = new int[2] { 0, 1 };
 
@@ -83,7 +83,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         fBoostSpeed = 0f;
         MAXBOOST = 10f;
 
-        isHold = false;
+      //  isHold = false;
     }
     void FixedUpdate()
     {
@@ -99,8 +99,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         Action();
         RotateAnimation();
         CheckS();
-       
-        
+        //print("Update state:" + state);
+
         /*
                  print("┌──────────────────────────────────────────┐");
         
@@ -372,21 +372,31 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
         if (((variable & Constants.BV_IsCling) > 0) && (variable & Constants.BV_bBlood) > 0) //isCling)  
         {
+            print("블러드..");
             state = Constants.ST_BLOOD;
         }
         else if ((variable & Constants.BV_IsCling) > 0)
         {
-            if (isHold)
-                state = Constants.ST_HOLD;
-            else
+            print("들어왔고");
+           /* if ((variable & Constants.BV_IsHold) > 0)
             {
+                print("이즈홀드");
+                state = Constants.ST_HOLD;
+            }
+            else*/
+            {
+                print("클링");
                 state = Constants.ST_CLING;
-               // print("ismove해제");
+                // print("ismove해제");
                 variable &= ~(Constants.BV_IsMove);     // 붙은상태면 움직이지 않게 함 
             }
 
             //  if((variable & Constants.BV_IsCling) > 0)
 
+        }
+        else if((variable & Constants.BV_IsHold) > 0)
+        {
+            state = Constants.ST_HOLD;
         }
 
         if ((variable & Constants.BV_bStun) > 0)
@@ -454,7 +464,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             if ((variable & Constants.BV_bStaminaRecovery) > 0)  // 스테미나가 회복되기 위한 조건 
                 fStamina += 0.1f;     //수정
 
-            if (((variable & Constants.BV_IsCling) > 0) && !isHold)  ///////////// Cling 상태라면, 속도를 낮춘다 
+            if (((variable & Constants.BV_IsCling) > 0)/* && ((variable & Constants.BV_IsHold) ==0)*/)  ///////////// Cling 상태라면, 속도를 낮춘다 
             {
 
                 fSpeed = 0f;
@@ -505,9 +515,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
         }
 
-        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && isHold == true)) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
+        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && (variable & Constants.BV_IsHold) > 0) ) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
         {
-            Debug.DrawRay(tr.position, tr.forward * 200f, Color.blue);
+            Debug.DrawRay(tr.position, tr.forward * 1f, Color.blue);
             if (((variable & Constants.BV_ClickRaindrop) > 0) && ((variable & Constants.BV_bCling) > 0))//true == isInRainzone && 
             {
                //   print("3번");
@@ -669,8 +679,24 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         //ClingObj.transform.localScale = Vector3.one;
 
     }
-    public void SetChildNull()
+    public void Drop()
     {
+        if ((variable & Constants.BV_IsHold) > 0)
+        {
+            //isHold = false;
+            variable &= ~(Constants.BV_IsHold);
+            Collider[] colls = tr.GetComponentsInChildren<Collider>();
+            Rigidbody[] rBody = tr.GetComponentsInChildren<Rigidbody>();
+
+            // Player에게는 RigidBody하나, Collision하나 있으니 그것을 제외하고
+            colls[1].enabled = true;
+            rBody[1].isKinematic = false;
+            //tr.GetComponent<Collider>().enabled = true;
+            //tr.GetComponent<Rigidbody>().isKinematic = false;
+
+            tr.DetachChildren();// 흠...
+        }
+        /*
         if (Player_Target != null)
         {
             isHold = false;
@@ -678,6 +704,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             Player_Target.GetComponent<Collider>().enabled = true;
             Player_Target.GetComponent<Rigidbody>().isKinematic = false;
         }
+        */
     }
     private void SetParent(Transform collTr)
     {
@@ -685,14 +712,22 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         ClingObj.transform.parent = collTr;
         tr.transform.parent = ClingObj.transform;
     }
-    public void SetTargetToChild()
+    public void Equip(GameObject _item)  // 외부에서 불러주게 됨 
     {
-        if (Player_Target != null)
+        if (Player_Target == _item)
         {
-            isHold = true;
-            Player_Target.transform.parent = tr;
-            Player_Target.GetComponent<Collider>().enabled = false;
-            Player_Target.GetComponent<Rigidbody>().isKinematic = true;
+            print("Equip");
+            //isHold = true;
+            variable |= Constants.BV_IsHold;
+            //    Player_Target.transform.parent = tr; // 이건 아이템쪽에서 하게됨 
+            Collider[] colls = _item.GetComponentsInChildren<Collider>();
+
+            for(int i = 0; i <colls.Length; ++i)
+                colls[i].enabled = false;
+            
+            _item.GetComponent<Rigidbody>().isKinematic = true;
+           // Player_Target.GetComponent<Collider>().enabled = false;
+           // Player_Target.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
@@ -753,6 +788,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
             variable &= ~(Constants.BV_bCling);
             variable &= ~(Constants.BV_IsCling);
+            variable &= ~(Constants.BV_IsHold);
 
             Player_Target = null;       // 목표 물방울이 없어진다 
             dest_script = null;
@@ -777,18 +813,21 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 if (Player_Target.gameObject == coll.gameObject)    // 충돌한 물체가 목표물과 같다면 달라붙는다 -- 벽이 여기서 에러 
                 {
                     print("bvcling");
-                    variable |= Constants.BV_IsCling;//isCling = true;
+                    print("여기가 들어와야 할거야 렁러러러");
+                    
 
-
+                    /*
                     if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE") && (isHold == false))
                     {
-                        SetTargetToChild();
+                    //    Equip();
                     }
-                    else
+                    else*/
+                    if(coll.gameObject.layer != LayerMask.NameToLayer("MOVABLE") && (variable & Constants.BV_IsHold) == 0)
                     {
                         print("셋페런트1");
                         rigidBody.velocity = Vector3.zero;
                         SetParent(coll.transform);
+                        variable |= Constants.BV_IsCling;//isCling = true;
                     }
 
                     //text.text = "bv_iscling으로 바꿈";
@@ -860,34 +899,39 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
 
 
-        if ((variable & Constants.BV_bCling) > 0)//bCling)  // 붙으려고 하는 상태면 
-        {//'''''''''''''''''''''''''''''''''''''''''''''
-         // print("클링상태");
-            if (Player_Target != null)
-            {
-                //  print("목표물 있고");
-                // text.text = "스테이 - 데스트 존재 ";
-                if (Player_Target.gameObject == coll.gameObject)    // 충돌한 물체가 목표물과 같다면 달라붙는다 -- 벽이 여기서 에러 
-                {
-                    variable |= Constants.BV_IsCling;//isCling = true;
+        //if ((variable & Constants.BV_bCling) > 0)//bCling)  // 붙으려고 하는 상태면 
+        //{//'''''''''''''''''''''''''''''''''''''''''''''
+        //     print("클링상태");
+        //    if (Player_Target != null)
+        //    {
+        //        //  print("목표물 있고");
+        //        // text.text = "스테이 - 데스트 존재 ";
+        //        print("충돌은 함");
+        //      //  if (Player_Target.gameObject == coll.gameObject)    // 충돌한 물체가 목표물과 같다면 달라붙는다 -- 벽이 여기서 에러 
+        //        {
+        //            print("여기가 들어와야 할거야 렁러러러");
+        //            variable |= Constants.BV_IsCling;//isCling = true;
 
-                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
-                    {
-                        if (isHold == false)
-                            SetTargetToChild();
-                    }
-                    else
-                    {
-                        rigidBody.velocity = Vector3.zero;
-                        SetParent(coll.transform);
-                    }
+        //            /* if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
+        //             {
+        //                 if (isHold == false)
+        //                     Equip();
+        //             }
+        //             else
+        //             */
+        //            if (coll.gameObject.layer != LayerMask.NameToLayer("MOVABLE")
+        //                    && isHold == false) 
+        //            {
+        //                rigidBody.velocity = Vector3.zero;
+        //                SetParent(coll.transform);
+        //            }
 
-                    //     text.text = "IsCling 은 트루 ";
-                }
+        //            //     text.text = "IsCling 은 트루 ";
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
     }
 
     public void FlyBtDown()
@@ -931,13 +975,34 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public void ClingBtDown()
     {
         //variable &= ~(Constants.BV_IsMove);
+        if(Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
+        {
+            variable |= Constants.BV_bCling;
 
+            if (Player_Target.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
+            {
+                variable |= Constants.BV_IsHold;
+                variable &= ~(Constants.BV_IsCling);
+            }
+            else
+            {
+                variable |= Constants.BV_IsCling;
+                variable &= ~(Constants.BV_IsHold);
+            }
+
+            return;
+        }
+        
+        // 붙지 않은상태면 붙으려고  하는 상태인지 체크
         if ((Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 10f)))//CollisionManager.Instance.Get_MouseCollisionObj(100f)) != null)
         // if (CollisionManager.Instance.Check_RayHit(tr.position, tr.forward, "WALL", 3f))  // 벽에 붙을지 체크 
-        {
+        { 
             variable |= Constants.BV_bCling;//bCling = true;
                                             //  if((variable & Constants.BV_IsCling) > 0)
                                             //    variable &= ~(Constants.BV_IsMove);
+
+
+  
 
 
             //state = Constants.ST_CLING;//|= Constants.ST_CLING;
@@ -948,14 +1013,20 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
     public void ClingBtUp()
     {
+        print("버튼업");
         if ((variable & Constants.BV_bCling) > 0)//Constants.ST_CLING == state)
         {
+            print("1111111111111111");
+            print("state:" + state);
+
+
             if (Constants.ST_CLING == state || Constants.ST_BLOOD == state || Constants.ST_HOLD == state)
             {
-                if (isHold)
+                print("222222222222222222");
+                if ((variable & Constants.BV_IsHold) > 0)
                 {
                     print("홀드1");
-                    SetChildNull();
+                    Drop();
                 }
                 else
                 {
