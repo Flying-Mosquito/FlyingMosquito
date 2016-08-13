@@ -66,7 +66,7 @@ public class EnemyAI : MonoBehaviour
         if (angrygauge > 10 && angrygauge < 90)
         {
 
-            angrygauge -= 4 * Time.deltaTime;
+           // angrygauge -= 4 * Time.deltaTime;
 
             if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(target.transform.position.x, 0, 0)) < 5)
             {

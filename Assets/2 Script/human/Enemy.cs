@@ -13,8 +13,15 @@ public class Enemy : MonoBehaviour
     // Use this for initialization
     void Update()
         {
-      
+
+        if ((PlayerCtrl.Instance.state == Constants.ST_BLOOD))
+        {
+
+            PlayerCtrl.Instance.iBlood += 1;
+           
+
         }
+    }
     
       
     }
