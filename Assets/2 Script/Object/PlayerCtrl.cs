@@ -957,6 +957,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
       //  print("버튼당운");
         //variable &= ~(Constants.BV_IsMove);
+        //if(state != Constants.ST_HOLD)
         if(Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
         {
             variable |= Constants.BV_bCling;

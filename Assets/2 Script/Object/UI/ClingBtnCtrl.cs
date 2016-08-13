@@ -30,13 +30,14 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
         Text.text = "OnTouchStay";
     }
     */
+    /*
     public override void OnTouchMove(Vector2 _pos)
     {
         if(isMouseDown)
             player.ClingBtDown();
         //Text.text = "OnTouchMove";
     }
-
+    */
     public override void OnTouchEnd(Vector2 _pos)
     {
         isMouseDown = false;

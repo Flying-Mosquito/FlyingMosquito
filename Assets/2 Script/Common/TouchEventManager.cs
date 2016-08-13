@@ -44,15 +44,20 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         {
 
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
             {
                 PlayerCtrl.Instance.ClingBtDown();
             }
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.LeftBracket))
             {
                 print("keyUp");
                 PlayerCtrl.Instance.ClingBtUp();
             }
+
+            if (Input.GetKeyDown(KeyCode.RightBracket))
+                PlayerCtrl.Instance.FlyBtDown();
+            if (Input.GetKeyUp(KeyCode.RightBracket))
+                PlayerCtrl.Instance.FlyBtUp();
 
             if (Input.GetMouseButton(0))
             {
@@ -73,10 +78,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
 
 
-            if (Input.GetKeyDown(KeyCode.Semicolon))
-                PlayerCtrl.Instance.FlyBtDown();
-            if (Input.GetKeyUp(KeyCode.Semicolon))
-                PlayerCtrl.Instance.FlyBtUp();
+    
             
 
         }
