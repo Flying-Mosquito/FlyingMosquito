@@ -50,7 +50,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
             }
             if (Input.GetKeyUp(KeyCode.LeftBracket))
             {
-                print("keyUp");
                 PlayerCtrl.Instance.ClingBtUp();
             }
 

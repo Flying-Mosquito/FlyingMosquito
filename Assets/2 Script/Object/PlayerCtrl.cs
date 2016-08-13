@@ -354,7 +354,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         else if ((variable & Constants.BV_IsCling) > 0)
         {
-            print("들어왔고");
            /* if ((variable & Constants.BV_IsHold) > 0)
             {
                 print("이즈홀드");
@@ -362,7 +361,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             }
             else*/
             {
-                print("클링");
                 state = Constants.ST_CLING;
                 // print("ismove해제");
                 variable &= ~(Constants.BV_IsMove);     // 붙은상태면 움직이지 않게 함 
@@ -793,19 +791,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 //text.text = "playerDest는 널이 아님 ";
                 if (Player_Target.gameObject == coll.gameObject)    // 충돌한 물체가 목표물과 같다면 달라붙는다 -- 벽이 여기서 에러 
                 {
-                    print("bvcling");
-                    print("여기가 들어와야 할거야 렁러러러");
-                    
-
-                    /*
-                    if (coll.gameObject.layer == LayerMask.NameToLayer("MOVABLE") && (isHold == false))
-                    {
-                    //    Equip();
-                    }
-                    else*/
                     if(coll.gameObject.layer != LayerMask.NameToLayer("MOVABLE") && (variable & Constants.BV_IsHold) == 0)
                     {
-                        print("셋페런트1");
                         rigidBody.velocity = Vector3.zero;
                         SetParent(coll.transform);
                         variable |= Constants.BV_IsCling;//isCling = true;
@@ -815,7 +802,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 }
                 else    // 충돌한 물체가 목표물과 다르다면 붙으려고 하는 상태 해제됨
                 {
-                    print("벨로시티 제로");
                     StartCoroutine("SetVelocityZero");// 일정시간후 velocity를 0으로 만들어주는 함수고
                     if (fSpeed > OWNMAXSPEED)   // 플레이어가 붙으려고 하지 않으면 충돌 시 데미지를 줄거지.
                         Damaged(5);
@@ -996,24 +982,16 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
     public void ClingBtUp()
     {
-        print("버튼업");
         if ((variable & Constants.BV_bCling) > 0)//Constants.ST_CLING == state)
         {
-            print("1111111111111111");
-            print("state:" + state);
-
-
             if (Constants.ST_CLING == state || Constants.ST_BLOOD == state || Constants.ST_HOLD == state)
             {
-                print("222222222222222222");
                 if ((variable & Constants.BV_IsHold) > 0)
                 {
-                    print("홀드1");
                     Drop();
                 }
                 else
                 {
-                    print("엘즈");
                     SetParentNull();
                 }
 
