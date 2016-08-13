@@ -25,30 +25,33 @@ public class CheckStage : MonoBehaviour {
         print("dddd");
        
     }
-	
-	// Update is called once per frame
-	void Update () {
-        
-        for (int i = 0; i < 5; i++)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Timer.Instance != null)
         {
-            if (Timer.Instance.stage[i]==1)
+            for (int i = 0; i < 5; i++)
             {
-                Arr[i] = 1;
+                if (Timer.Instance.stage[i] == 1)
+                {
+                    Arr[i] = 1;
+                }
             }
-        }
-        //1성공 2닫힘
-        for (int i = 0; i < 5; i++)
-        {
-            if ((Arr[i] == 0 && Arr[i+1] == 1) ||(Arr[i] == 1 && Arr[i + 1] == 1))
+            //1성공 2닫힘
+            for (int i = 0; i < 5; i++)
             {
-               Stage[i+1].Find(""+(i+2).ToString()).gameObject.SetActive(true);
+                if ((Arr[i] == 0 && Arr[i + 1] == 1) || (Arr[i] == 1 && Arr[i + 1] == 1))
+                {
+                    Stage[i + 1].Find("" + (i + 2).ToString()).gameObject.SetActive(true);
+                }
             }
+            if (Arr[1] == 2)
+            {
+                Stage2.Find("2-1").gameObject.SetActive(true);
+            }
+
+
         }
-            if(Arr[1] == 2)
-        {
-            Stage2.Find("2-1").gameObject.SetActive(true);
-        }
-     
-     
-	}
+    }
 }

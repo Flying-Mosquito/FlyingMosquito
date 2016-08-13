@@ -43,6 +43,7 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {
         myTransform = transform;
+        rigidBody = GetComponent<Rigidbody>();
     }
     void Start()
     {
