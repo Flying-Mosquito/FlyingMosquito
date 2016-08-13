@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     public float angrygauge = 0;
 
     Randommove movetransform;
-
+    private Rigidbody rigidBody;
 
 
 
@@ -104,6 +104,16 @@ public class EnemyAI : MonoBehaviour
 
     //   myTransform.rotation = Quaternion.Euler(0, target.position.z - myTransform.position.z * rotationSpeed * Time.deltaTime, 0);
     // myTransform.rotation = Quaternion.LookRotation(new Vector3(0, target.position.y,0) - myTransform.position);
+
+    void OnCollisionEnter(Collision coll)
+    {
+        if (coll.gameObject.tag == "WALL")
+        {
+            print("부딛힘");
+            myTransform.gameObject.transform.Rotate(40,90, 40);
+
+        }
+    }
 
 
     IEnumerator FSM()
