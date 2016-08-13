@@ -13,7 +13,7 @@ public class Timer : Singleton<Timer>
     public float totaltime = 60;
    public bool isEnable = false;
 
-    public float score;
+    public float[] score = new float[9];
 
 
     // Use this for initialization
@@ -55,22 +55,25 @@ public class Timer : Singleton<Timer>
         {
             gameover.gameObject.SetActive(false);
         }
-       
-        if (PlayerCtrl.Instance.iBlood > 190)
-        {
-            gameClear.gameObject.SetActive(true);
-            
-            StopTimer();
 
-            score = (PlayerCtrl.Instance.iBlood * 2) + (Timer.Instance.totaltime * 2);
-            ScoreText.text = score.ToString();
+        for (int i = 1; i < 9; i++)
+        {
+            if (PlayerCtrl.Instance.iBlood > 190 && PlayerCtrl.Instance.CheckTimer[i] == 1)
+            {
+                gameClear.gameObject.SetActive(true);
+
+                StopTimer();
+
+
+                score[i] = (Timer.Instance.totaltime * 2);
+                ScoreText.text = score[i].ToString();
+
+
+            }
 
         }
        
-        else 
-            gameClear.gameObject.SetActive(false);
-       
-
+      
         if (isEnable)
         {
              totaltime -=Time.deltaTime;

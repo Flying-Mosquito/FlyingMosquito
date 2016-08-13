@@ -48,11 +48,13 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
    // private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
     public int[] stage = new int[2] { 0, 1 };
+    public int[] CheckTimer = new int[2] { 0, 1 };
 
     void Awake()
     {
         DontDestroyOnLoad(this);
         stage = new int[9];
+        CheckTimer = new int[9];
         for (int i = 0; i < 9; i++)
         {
             stage[i] = 0;
@@ -146,16 +148,22 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     public void CheckS()
     {
-        for (int i = 0; i < 9; i++) {
-            if (Application.loadedLevelName == "Stage"+i.ToString())
+        for (int i = 1; i < 9; i++)
+        {
+            CheckTimer[i] = 0;
+
+            if (Application.loadedLevelName == "Stage" + i.ToString())
             {
                 stage[i] = 1;
+                CheckTimer[i] = 1;
                 if (Application.loadedLevelName == "Stage3")
-                blooding();
+                    blooding();
+                else if (Application.loadedLevelName == "Stage2")
+                    blooding();
 
             }
         }
-       
+
     }
     public void blooding()
     {
