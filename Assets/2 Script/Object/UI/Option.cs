@@ -21,6 +21,8 @@ public class Option : MonoBehaviour {
     public void Click()
     {
         PlayerCtrl.Instance.iBlood = 0;
+       PlayerCtrl.Instance.SetParentNull();
+        PlayerCtrl.Instance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         Timer.Instance.gameover.gameObject.SetActive(false);
         Timer.Instance.gameClear.gameObject.SetActive(false);
 
