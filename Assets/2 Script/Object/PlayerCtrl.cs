@@ -7,59 +7,55 @@ using UnityEngine.UI;
 // 2. 기본 가속도? 
 public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 {
-    //  public Text text;
-    //private CharacterController controller;
     private Transform tr;
+    public  Transform targetPlus;
+    public  Transform equipPoint;
     private Transform[] tr_Mesh;
-    public Transform targetPlus;
+    private GameObject fx_boost;
+    public  GameObject ClingObj;
+    public  GameObject Player_Target;
+    private RainDrop dest_script;
     private Rigidbody rigidBody;
+
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
-    public GameObject Player_Target;
-    private RainDrop dest_script;
-    private GameObject fx_boost;
-    public Vector3 prePosition;
-    public float startTime;
+    public  Vector3 prePosition;  // 개구리에서쓰고있네..
+
     // 플레이어 상태와 변수상태가 들어가 있는 변수 
     public ulong state { get; private set; }
     public ulong variable;
 
-    public float iHP { get; private set; }
-    public float fStamina; // 스테미나 총량
-    private float fStaminaMinus;    // 스테미나 감소량 
-    public float fSpeed { get; private set; }       // 플레이어 최종 속도값
-    private float fSpeedVal = 2f;                    // 플레이어 속도 증가값 
-    private float fBoostMinus = 20f;                  // 부스터 사용 후에 속도감소 변화값 
+    public  float iHP { get; private set; }
+    public  float fStamina;                             // 스테미나 총량
+    public  float fXAngle { get; private set; }         // 좌우   회전값
+    public  float fYAngle { get; private set; }         // 위아래 회전값
+    public  float startTime;
+    public  float fSpeed { get; private set; }          // 플레이어 최종 속도값
+    public  float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
+    private float fStaminaMinus;                        // 스테미나 감소량 
+    private float fSpeedVal = 2f;                       // 플레이어 속도 증가값 
+    private float fBoostMinus = 20f;                    // 부스터 사용 후에 속도감소 변화값 
     private float fBoostPlus = 10f;                     // 부스터 사용 시 속도증가 값
-    private float fBoostSpeed;    // 기본속도에 더해지는 가속도값   private
-    private float MAXBOOST;// { get; private set; }     // Boost 사용시의 최대 가속도값   private
-    public float OWNMAXSPEED = 6f;                       // 일반속도 최대값        private
-    private float fOwnSpeed;//    { get; private set; }    // 일반속도 값                   private
-    private float fRotSpeed;// { get; private set; }                    //private
-                            // public  float fOwnRotSpeed  { get; private set; }     //private 
-
-    public float fXAngle { get; private set; }      // 좌우   회전값
-    public float fYAngle { get; private set; }      // 위아래 회전값
-
-
-    public GameObject ClingObj;
-    EnemyAI enemyai;
-    public int iBlood = 0; // 흡혈량 ( 미구현 )
-   // private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
-
-   
+    private float fBoostSpeed;                          // 기본속도에 더해지는 가속도값 
+    private float MAXBOOST;                             // Boost 사용시의 최대 가속도값   
+    private float fOwnSpeed;                            // 일반속도 값                  
+    private float fRotSpeed;           
+    public  int iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
     void Awake()
     {
         DontDestroyOnLoad(this);
-       
-        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
-        ClingObj = GameObject.Find("ClingObject");
+      
+        
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
+        equipPoint = GameObject.Find("EquipPoint").transform;
         rigidBody = GetComponent<Rigidbody>();
+
+        ClingObj = GameObject.Find("ClingObject");
         fx_boost = GetComponentInChildren<ParticleSystem>().gameObject;
         fx_boost.SetActive(false);
+
 
         vDir = Vector3.zero;
         state = Constants.ST_IDLE;//ST_CLING;
@@ -75,11 +71,9 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         fSpeed = 0f;
         fRotSpeed = 55f;
         // fOwnRotSpeed = 55f;
-
         fBoostSpeed = 0f;
         MAXBOOST = 10f;
 
-      //  isHold = false;
     }
     void FixedUpdate()
     {
@@ -143,7 +137,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
    
     public void blooding()
     {
-        //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)
         if ((variable & Constants.BV_bBlood) > 0)
         {
             startTime += Time.deltaTime;
@@ -667,18 +660,22 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     {
         if ((variable & Constants.BV_IsHold) > 0)
         {
+            print("Drop");
             //isHold = false;
             variable &= ~(Constants.BV_IsHold);
-            Collider[] colls = tr.GetComponentsInChildren<Collider>();
-            Rigidbody[] rBody = tr.GetComponentsInChildren<Rigidbody>();
+            Collider[] colls = equipPoint.GetComponentsInChildren<Collider>();
+            Rigidbody rBody = equipPoint.GetComponentInChildren<Rigidbody>();
 
             // Player에게는 RigidBody하나, Collision하나 있으니 그것을 제외하고
-            colls[1].enabled = true;
-            rBody[1].isKinematic = false;
+            for(int i = 0; i< colls.Length; ++i)
+                colls[i].enabled = true;
+            if (!rBody)
+                Time.timeScale = 0f;
+            rBody.isKinematic = false;
             //tr.GetComponent<Collider>().enabled = true;
             //tr.GetComponent<Rigidbody>().isKinematic = false;
 
-            tr.DetachChildren();// 흠...
+            equipPoint.DetachChildren();// 흠...
         }
         /*
         if (Player_Target != null)
@@ -958,6 +955,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
     public void ClingBtDown()
     {
+      //  print("버튼당운");
         //variable &= ~(Constants.BV_IsMove);
         if(Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
         {
@@ -965,10 +963,10 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
 
             if (Player_Target.gameObject.layer == LayerMask.NameToLayer("MOVABLE"))
             {
-                variable |= Constants.BV_IsHold;
+                //variable |= Constants.BV_IsHold;
                 variable &= ~(Constants.BV_IsCling);
             }
-            else
+            else if( state != Constants.ST_HOLD)
             {
                 variable |= Constants.BV_IsCling;
                 variable &= ~(Constants.BV_IsHold);

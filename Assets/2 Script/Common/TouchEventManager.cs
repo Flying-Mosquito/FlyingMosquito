@@ -42,6 +42,18 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
 #if !UNITY_ANDROID
         {
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlayerCtrl.Instance.ClingBtDown();
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                print("keyUp");
+                PlayerCtrl.Instance.ClingBtUp();
+            }
+
             if (Input.GetMouseButton(0))
             {
                 if (Input.GetMouseButtonDown(0))
@@ -60,16 +72,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
             }
 
 
-        
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    PlayerCtrl.Instance.ClingBtDown();
-                }
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    print("keyUp");
-                    PlayerCtrl.Instance.ClingBtUp();
-                }
 
             if (Input.GetKeyDown(KeyCode.Semicolon))
                 PlayerCtrl.Instance.FlyBtDown();
