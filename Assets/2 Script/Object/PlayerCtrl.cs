@@ -47,18 +47,12 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public int iBlood = 0; // 흡혈량 ( 미구현 )
    // private bool isHold; // Cling할 물체가 플레이어가 이동시킬 수 있는 물체인지 확인 
 
-    public int[] stage = new int[2] { 0, 1 };
-    public int[] CheckTimer = new int[2] { 0, 1 };
+   
 
     void Awake()
     {
         DontDestroyOnLoad(this);
-        stage = new int[9];
-        CheckTimer = new int[9];
-        for (int i = 0; i < 9; i++)
-        {
-            stage[i] = 0;
-        }
+       
         enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
         ClingObj = GameObject.Find("ClingObject");
         tr = GetComponent<Transform>();
@@ -100,7 +94,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
-        CheckS();
+        
         //print("Update state:" + state);
 
         /*
@@ -146,25 +140,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     print("NULL");
                     */
     }
-    public void CheckS()
-    {
-        for (int i = 1; i < 9; i++)
-        {
-            CheckTimer[i] = 0;
-
-            if (Application.loadedLevelName == "Stage" + i.ToString())
-            {
-                stage[i] = 1;
-                CheckTimer[i] = 1;
-                if (Application.loadedLevelName == "Stage3")
-                    blooding();
-                else if (Application.loadedLevelName == "Stage2")
-                    blooding();
-
-            }
-        }
-
-    }
+   
     public void blooding()
     {
         //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(enemyai.transform.position.x, 0, 0)) < 5)

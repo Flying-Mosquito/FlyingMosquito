@@ -36,6 +36,8 @@ public class CharacterState : MonoBehaviour
         PlayerCtrl.Instance.SetHP(75);
         PlayerCtrl.Instance.iBlood = 0;
         PlayerCtrl.Instance.fStamina = 200;
+        Timer.Instance.totaltime = 60;
+        Timer.Instance.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
         PlayerCtrl.Instance.SetIsInStage(true);
        
