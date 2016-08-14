@@ -646,7 +646,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     }
     public void SetParentNull()
     {
-        tr.transform.parent = null;
+        tr.gameObject.transform.parent = null;
         //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 수정?
         ClingObj.transform.parent = null;
         //ClingObj.transform.localScale = Vector3.one;
