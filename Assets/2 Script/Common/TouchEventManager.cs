@@ -44,19 +44,24 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         {
 
 
-            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 PlayerCtrl.Instance.ClingBtDown();
             }
-            if (Input.GetKeyUp(KeyCode.LeftBracket))
+            if (Input.GetKeyUp(KeyCode.P))
             {
                 PlayerCtrl.Instance.ClingBtUp();
             }
 
-            if (Input.GetKeyDown(KeyCode.RightBracket))
+            if (Input.GetKeyDown(KeyCode.LeftBracket))
                 PlayerCtrl.Instance.FlyBtDown();
-            if (Input.GetKeyUp(KeyCode.RightBracket))
+            else if (Input.GetKeyDown(KeyCode.RightBracket))
+                PlayerCtrl.Instance.boostdown();
+
+            if (Input.GetKeyUp(KeyCode.LeftBracket))
                 PlayerCtrl.Instance.FlyBtUp();
+            else if (Input.GetKeyUp(KeyCode.RightBracket))
+                PlayerCtrl.Instance.boostup();
 
             if (Input.GetMouseButton(0))
             {
