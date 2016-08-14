@@ -89,7 +89,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         Action();
         RotateAnimation();
         
-        //print("Update state:" + state);
+        print("Update state:" + state);
 
         /*
                  print("┌──────────────────────────────────────────┐");
@@ -322,13 +322,13 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         if ((variable & Constants.BV_IsInStage) == 0)//state == Constants.ST_IDLE) // Idle 이면 시작전 
             return;
 
-        if ((variable & Constants.BV_IsMove) > 0)
-        {
+        if ((variable & Constants.BV_bStun) > 0)
+            state = Constants.ST_STUN;
+        else if ((variable & Constants.BV_IsMove) > 0)
             state = Constants.ST_FLYING;
-            //    print(" state = flying");
-        }
         else
         {
+            print("아이들!!");
             state = Constants.ST_IDLE;
             fOwnSpeed = 0f;
             fSpeed = 0f;
@@ -374,8 +374,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             state = Constants.ST_HOLD;
         }
 
-        if ((variable & Constants.BV_bStun) > 0)
-            state = Constants.ST_STUN;
+  
 
         if (((variable & Constants.BV_bCling) > 0) && (variable & Constants.BV_ClickRaindrop) > 0)//true == isInRainzone && // true == bCling )//&& false == isCling ) // rainzone 안에 있고, 빗방울에  붙으려고 할 때 
         {
