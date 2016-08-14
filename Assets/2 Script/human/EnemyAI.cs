@@ -34,7 +34,8 @@ public class EnemyAI : MonoBehaviour
 
 
     //partol
-    public GameObject[] Randommove;
+    public GameObject waypoint1;
+    public GameObject waypoint2;
     private int moveNumbe;
     public float patrolSpeed = 0.5f;
 
@@ -161,13 +162,32 @@ public class EnemyAI : MonoBehaviour
         GameObject go = GameObject.FindGameObjectWithTag("Move");
 
         target = go.transform;
-        myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed * Time.deltaTime);
-        myTransform.position += new Vector3(myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
         //if (Vector3.Distance(this.transform.position,Randommove[moveNumber].transform.position)>=2)
         //        {
 
 
         //        }
+
+        if(Application.loadedLevelName =="Stage7")
+        {
+            if (Vector3.Distance(this.transform.position, waypoint1.transform.position) <= 2)
+            {
+                myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(waypoint2.transform.position - myTransform.position), rotationSpeed * Time.deltaTime);
+
+            }
+            else
+            {
+                myTransform.position += new Vector3(myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
+            }
+
+        }
+        else
+        {
+
+            myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed * Time.deltaTime);
+            myTransform.position += new Vector3(myTransform.forward.x * moveSpeed * Time.deltaTime, 0, myTransform.forward.z * moveSpeed * Time.deltaTime);
+
+        }
     }
 
 
