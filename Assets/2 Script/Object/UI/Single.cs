@@ -21,6 +21,10 @@ public class Single : MonoBehaviour
     {
 
     }
+    public void MainS()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void Click()
     {
 
