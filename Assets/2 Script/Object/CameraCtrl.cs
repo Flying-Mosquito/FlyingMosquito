@@ -7,7 +7,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     [System.Serializable]
     public enum eMoveState { TRIGGER, COLLIDER }
     // LateUpdate쪽으로 바꿔줘야 하는데 .. 무엇을..?
-    private Transform targetTr;
+    public Transform targetTr;
     private Transform rayTarget;
     private float preYAngle;
     public bool isLookFar;

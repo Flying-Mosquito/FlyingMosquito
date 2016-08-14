@@ -89,7 +89,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         Action();
         RotateAnimation();
         
-        print("Update state:" + state);
+      //  print("Update state:" + state);
 
         /*
                  print("┌──────────────────────────────────────────┐");
@@ -328,7 +328,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             state = Constants.ST_FLYING;
         else
         {
-            print("아이들!!");
             state = Constants.ST_IDLE;
             fOwnSpeed = 0f;
             fSpeed = 0f;
