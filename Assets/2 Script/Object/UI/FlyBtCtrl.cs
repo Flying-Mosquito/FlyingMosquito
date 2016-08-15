@@ -14,13 +14,13 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     //   private bool isOnTouch = false;
     private float fStraightAngle;
 
-    private PlayerCtrl player;
+    private PlayerCtrl player = null;
    // private bool isBoost = false;
     // public static 
     void Start()
     {
         tr = GetComponent<Transform>();
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+       // player = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
 
         //  startPosition = tr.position;
@@ -32,7 +32,10 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
         //fStraightAngle = (StartPosition.y - endPosition.y) / (StartPosition.x - endPosition.x); // 직선의방정식 기울기 
     }
 
-
+    public void SetPlayer(PlayerCtrl _player)
+    {
+        player = _player;
+    }
     /*
       void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
        {
@@ -94,31 +97,37 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     {
         isMouseDown = true;
         //isOnTouch = true;
-
-        if (startPosition == Vector3.zero)
+        if (player != null)
         {
-            startPosition = tr.position;
-            endPosition = endTr.position;
+            if (startPosition == Vector3.zero)
+            {
+                startPosition = tr.position;
+                endPosition = endTr.position;
+            }
+
+            fStraightAngle = (endPosition.y - startPosition.y) / (endPosition.x - startPosition.x); // 직선의방정식 기울기 
+
+
+            player.FlyBtDown();
         }
-
-        fStraightAngle = (endPosition.y - startPosition.y) / (endPosition.x - startPosition.x); // 직선의방정식 기울기 
-
-        player.FlyBtDown();
     }
 
     public override void OnTouchMove(Vector2 _pos)
     {
         //isOnTouch = true;
-        tr.position = CalculatePositionBetweenStartPositionAndBoostPosition(_pos.x);//Input.mousePosition;////
-        if (tr.position == endPosition)
+        if (player != null)
         {
-            player.FlyBtUp();
-            player.boostdown();
-        }
-        else
-        {
-            player.boostup();
-            player.FlyBtDown();
+            tr.position = CalculatePositionBetweenStartPositionAndBoostPosition(_pos.x);//Input.mousePosition;////
+            if (tr.position == endPosition)
+            {
+                player.FlyBtUp();
+                player.boostdown();
+            }
+            else
+            {
+                player.boostup();
+                player.FlyBtDown();
+            }
         }
         //   print("무브 :  " + tr.position);
     }
@@ -127,10 +136,13 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     {
         //isOnTouch = true;
         isMouseDown = false;
-        tr.position = startPosition;
+        if (player != null)
+        {
+            tr.position = startPosition;
 
-        player.FlyBtUp();
-        player.boostup();
+            player.FlyBtUp();
+            player.boostup();
+        }
         //   print("엔드 :  " + tr.position);
     }
 

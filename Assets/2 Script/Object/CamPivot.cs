@@ -50,7 +50,7 @@ public class CamPivot : MonoBehaviour
         // 카메라를 상하좌우로 흔들기 위한 캐릭터 기울기값
 
         // CamPivot은 플레이어가 생성된후 만들어진다
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();// PlayerCtrl.Instance;//GameManager.Instance.PlayerCtrl;//GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();// PlayerCtrl.Instance;//GameManager.Instance.PlayerCtrl;//GameObject.Find("Player").GetComponent<Player>();
 
         Target_fXAngle = player.fXAngle;
         Target_fYAngle = player.fYAngle;

@@ -16,7 +16,7 @@ public class CharacterState : MonoBehaviour
     void Start () {
 
 
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();// GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
 
 
@@ -36,8 +36,8 @@ public class CharacterState : MonoBehaviour
         playerctrl.SetHP(75);
         playerctrl.iBlood = 0;
         playerctrl.fStamina = 200;
-        Timer.Instance.totaltime = 60;
-        Timer.Instance.isEnable = true;
+        //Timer.Instance.totaltime = 60;
+        //Timer.Instance.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
         playerctrl.SetIsInStage(true);
        

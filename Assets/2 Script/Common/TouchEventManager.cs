@@ -39,9 +39,9 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     }
 
 #if !UNITY_ANDROID
-    public void SetPlayer(GameObject _player)
+    public void SetPlayer(PlayerCtrl _player)
     {
-        player = _player.GetComponent<PlayerCtrl>();
+        player = _player;
          
     }
 #endif

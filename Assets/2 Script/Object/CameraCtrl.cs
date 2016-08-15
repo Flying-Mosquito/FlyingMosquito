@@ -9,7 +9,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     public enum eMoveState { TRIGGER, COLLIDER }
     // LateUpdate쪽으로 바꿔줘야 하는데 .. 무엇을..?
     public PlayerCtrl player = null;
-    public Transform targetTr;
+    public Transform targetTr = null;
     private Transform rayTarget;
     private float preYAngle;
     public bool isLookFar;
@@ -38,12 +38,12 @@ public class CameraCtrl : Singleton<CameraCtrl>
     void Start()
     {
         //  Camera = 
-        targetTr = GameObject.Find("CamPivot").transform;
+        
         dof = transform.GetComponent<DepthOfField>();
         fx_speedLight = GetComponentInChildren<ParticleSystem>();
-        fx_speedLight.gameObject.SetActive(false);
+       // fx_speedLight.gameObject.SetActive(false);
 
-        transform.LookAt(targetTr);
+     //   transform.LookAt(targetTr);
         fTargetDist = 0.8f;//1.5f;
         fNormalDist = 0.8f;//1.5f;
         fFarDist = 18f;
@@ -55,6 +55,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     public void SetPlayer(GameObject _player)
     {
         player = _player.GetComponent<PlayerCtrl>();
+        targetTr = GameObject.Find("CamPivot").transform;
     }
     public void SetTarget(GameObject _obj)
     {
@@ -77,10 +78,14 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
     void LateUpdate()
     {
-        if (!player)
+        if (player == null)
         {
-            transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
-            transform.LookAt(targetTr.position);
+            if (!(targetTr == null))
+            {
+                print("target: " + targetTr);
+                transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
+                transform.LookAt(targetTr.position);
+            }
         }
         else
         {
@@ -170,7 +175,8 @@ public class CameraCtrl : Singleton<CameraCtrl>
                // MakeObjTransparent();
             }
         }
-        MakeObjTransparent();
+        if(!(rayTarget==null))
+            MakeObjTransparent();
 
         CameraEffct();
     }

@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
     }
     void Start()
     {
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
         state = EnemyAI.State.PATROL;
         alive = true;
         StartCoroutine("FSM");

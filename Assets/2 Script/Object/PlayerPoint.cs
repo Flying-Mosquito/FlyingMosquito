@@ -46,7 +46,9 @@ public class PlayerPoint : MonoBehaviour
             {
                 player.SetIsInStage(true);
                 player.SetHP(100);
+                TouchEventManager.Instance.SetPlayer(player);
                 gameObject.SetActive(false);
+             
             }
             else
             {
@@ -56,6 +58,13 @@ public class PlayerPoint : MonoBehaviour
                     //   PlayerCtrl.Instance.SetStateIdle(false);
                     player.SetIsInStage(true);
                     gameObject.SetActive(false);
+                    //UI.Instance.SetPlayer(player);
+                    //FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+                    //ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
+
+                    //Timer.Instance.enabled = false;
+                    //clingbt.SetPlayer(null);
+                    //flybt.SetPlayer(null);
                 }
             }
             

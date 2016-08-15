@@ -697,7 +697,7 @@ public class PlayerCtrl : MonoBehaviour
 
         rigidBody.isKinematic = false;
         print("SetParentNull");
-       Time.timeScale = 0f;
+    //   Time.timeScale = 0f;
         
         //ClingObj.transform.localScale = Vector3.one;
 

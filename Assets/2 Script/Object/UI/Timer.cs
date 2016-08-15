@@ -18,7 +18,7 @@ public class Timer : Singleton<Timer>
     public int[] CheckTimer = new int[2] { 0, 1 };
 
     // Use this for initialization
-    PlayerCtrl playerctrl;
+    PlayerCtrl playerctrl=null;
 
     void onEnable()
     {
@@ -28,13 +28,18 @@ public class Timer : Singleton<Timer>
     void Awake()
     {
         DontDestroyOnLoad(this);
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        //playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         stage = new int[9];
         CheckTimer = new int[9];
         for (int i = 0; i < 9; i++)
         {
             stage[i] = 0;
         }
+    }
+    public void SetPlayer()
+    {
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        
     }
     void Start()
     {
@@ -48,53 +53,55 @@ public class Timer : Singleton<Timer>
     // Update is called once per frame
     void Update()
     {
-        CheckS();
-
-
-        if (playerctrl.iHP <5|| totaltime < 1)
+        if (!(playerctrl== null))
         {
-            gameover.gameObject.SetActive(true);
+            CheckS();
 
-            StopTimer();
 
-        }
-       
-        else
-        {
-            gameover.gameObject.SetActive(false);
-        }
-
-        for (int i = 1; i < 9; i++)
-        {
-            if (playerctrl.iBlood > 190 && CheckTimer[i] == 1)
+            if (playerctrl.iHP < 5 || totaltime < 1)
             {
-                gameClear.gameObject.SetActive(true);
+                gameover.gameObject.SetActive(true);
 
                 StopTimer();
 
+            }
 
-                score[i] = (Timer.Instance.totaltime * 2);
-                ScoreText.text = score[i].ToString();
+            else
+            {
+                gameover.gameObject.SetActive(false);
+            }
 
+            for (int i = 1; i < 9; i++)
+            {
+                if (playerctrl.iBlood > 190 && CheckTimer[i] == 1)
+                {
+                    gameClear.gameObject.SetActive(true);
+
+                    StopTimer();
+
+
+                    score[i] = (Timer.Instance.totaltime * 2);
+                    ScoreText.text = score[i].ToString();
+
+
+                }
 
             }
 
+
+            if (isEnable)
+            {
+                totaltime -= Time.deltaTime;
+            }
+
+
+
+            string minutes = ((int)totaltime / 60).ToString();
+            string seconds = (totaltime % 60).ToString("f2");
+
+            timerText.text = minutes + ":" + seconds;
+
         }
-       
-      
-        if (isEnable)
-        {
-             totaltime -=Time.deltaTime;
-        }
-
-
-
-        string minutes = ((int)totaltime / 60).ToString();
-        string seconds = (totaltime % 60).ToString("f2");
-
-        timerText.text = minutes + ":" + seconds;
-
-
 
 
     }
