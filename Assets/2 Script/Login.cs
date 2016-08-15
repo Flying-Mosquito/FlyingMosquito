@@ -73,13 +73,13 @@ public class Login : MonoBehaviour
         Password = GUI.TextField(new Rect(390 - control * 2, 275 - control, 220, 25), Password);
 
 
-        if (GUI.Button(new Rect(360 - control * 2, 360 - control, 120, 25), "Create Account"))
+        if (GUI.Button(new Rect(360 - control * 2- 40, 360 - control, 120, 25), "Create Account"))
         {
             CurrentMenu = "CreateAccount";
         }
 
 
-        if (GUI.Button(new Rect(520 - control * 2, 360 - control, 120, 25), "Log in"))
+        if (GUI.Button(new Rect(520 - control * 2 - 40, 360 - control, 120, 25), "Log in"))
         {
             WWWForm form = new WWWForm();
             form.AddField("user_id", Id);
