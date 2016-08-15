@@ -10,14 +10,14 @@ public class CharacterState : MonoBehaviour
     public Scrollbar StaminaBar;
     public Scrollbar bloodBar;
 
-
+    PlayerCtrl playerctrl;
 
 
     void Start () {
 
 
-       
-      
+        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+
 
 
 
@@ -26,20 +26,20 @@ public class CharacterState : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        HealthBar.value = PlayerCtrl.Instance.iHP / 100f;
+        HealthBar.value =playerctrl.iHP / 100f;
 
-        StaminaBar.size = PlayerCtrl.Instance.fStamina/ 100f;
-        bloodBar.value = PlayerCtrl.Instance.iBlood /200f;
+        StaminaBar.size = playerctrl.fStamina/ 100f;
+        bloodBar.value = playerctrl.iBlood /200f;
     }
     public void gamestart()
     {
-        PlayerCtrl.Instance.SetHP(75);
-        PlayerCtrl.Instance.iBlood = 0;
-        PlayerCtrl.Instance.fStamina = 200;
+        playerctrl.SetHP(75);
+        playerctrl.iBlood = 0;
+        playerctrl.fStamina = 200;
         Timer.Instance.totaltime = 60;
         Timer.Instance.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
-        PlayerCtrl.Instance.SetIsInStage(true);
+        playerctrl.SetIsInStage(true);
        
     }
 }

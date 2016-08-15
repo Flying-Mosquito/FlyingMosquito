@@ -18,7 +18,7 @@ public class Timer : Singleton<Timer>
     public int[] CheckTimer = new int[2] { 0, 1 };
 
     // Use this for initialization
-
+    PlayerCtrl playerctrl;
 
     void onEnable()
     {
@@ -28,6 +28,7 @@ public class Timer : Singleton<Timer>
     void Awake()
     {
         DontDestroyOnLoad(this);
+        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         stage = new int[9];
         CheckTimer = new int[9];
         for (int i = 0; i < 9; i++)
@@ -50,7 +51,7 @@ public class Timer : Singleton<Timer>
         CheckS();
 
 
-        if (PlayerCtrl.Instance.iHP <5|| totaltime < 1)
+        if (playerctrl.iHP <5|| totaltime < 1)
         {
             gameover.gameObject.SetActive(true);
 
@@ -65,7 +66,7 @@ public class Timer : Singleton<Timer>
 
         for (int i = 1; i < 9; i++)
         {
-            if (PlayerCtrl.Instance.iBlood > 190 && CheckTimer[i] == 1)
+            if (playerctrl.iBlood > 190 && CheckTimer[i] == 1)
             {
                 gameClear.gameObject.SetActive(true);
 
@@ -108,10 +109,10 @@ public class Timer : Singleton<Timer>
                 stage[i] = 1;
                 CheckTimer[i] = 1;
                 if (Application.loadedLevelName == "Stage3")
-                    PlayerCtrl.Instance.blooding();
+                    playerctrl.blooding();
                   
                 else if (Application.loadedLevelName == "Stage2")
-                    PlayerCtrl.Instance.blooding();
+                    playerctrl.blooding();
 
             }
         }

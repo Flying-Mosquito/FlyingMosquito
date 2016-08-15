@@ -3,9 +3,11 @@ using System.Collections;
 
 public class heckC : MonoBehaviour
 {
-    public EnemyAI enemyai;
+    EnemyAI enemyai;
+    PlayerCtrl playerctrl;
     void Start()
     {
+        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
     }
     void OnCollisionEnter(Collision coll)
@@ -13,13 +15,13 @@ public class heckC : MonoBehaviour
 
         if (coll.gameObject.tag == "PLAYER" )
         {
-            PlayerCtrl.Instance.Damaged(30);
+            playerctrl.Damaged(30);
         }
 
 
         else if (coll.gameObject.tag == "PLAYER")
         {
-            PlayerCtrl.Instance.Damaged(30);
+            playerctrl.Damaged(30);
         }
     }
 }

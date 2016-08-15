@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
     public State state;
     private bool alive;
 
-
+    PlayerCtrl playerctrl;
 
     //partol
     public GameObject waypoint1;
@@ -48,7 +48,7 @@ public class EnemyAI : MonoBehaviour
     }
     void Start()
     {
-
+        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
         state = EnemyAI.State.PATROL;
         alive = true;
         StartCoroutine("FSM");
@@ -58,10 +58,10 @@ public class EnemyAI : MonoBehaviour
     {
        
 
-        if ((PlayerCtrl.Instance.state == Constants.ST_BLOOD))
+        if ((playerctrl.state == Constants.ST_BLOOD))
         {
 
-            PlayerCtrl.Instance.iBlood += 1;
+            playerctrl.iBlood += 1;
             angrygauge += 1;
 
         }
@@ -94,7 +94,7 @@ public class EnemyAI : MonoBehaviour
             state = EnemyAI.State.LAID;
         }
         //Foot
-        if (angrygauge < 70 && angrygauge > 10 && (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(target.transform.position.x, 0, 0)) < 5) && PlayerCtrl.Instance.transform.position.y < 5)
+        if (angrygauge < 70 && angrygauge > 10 && (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(target.transform.position.x, 0, 0)) < 5) && playerctrl.transform.position.y < 5)
         {
             state = EnemyAI.State.FOOT;
         }

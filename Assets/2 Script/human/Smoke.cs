@@ -3,13 +3,17 @@ using System.Collections;
 
 public class Smoke : MonoBehaviour {
 
-
+    PlayerCtrl playerctrl;
+    void Start()
+        {
+        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+    }
     void OnCollisionEnter(Collision coll)
     {
 
         if (coll.gameObject.tag == "PLAYER")
         {
-            PlayerCtrl.Instance.Damaged(30);
+            playerctrl.Damaged(30);
 
 
         }
