@@ -7,13 +7,11 @@ public class Option : MonoBehaviour {
     public Button exit;
     public Button back;
     // Use this for initialization
-    Timer timer;
 
     PlayerCtrl playerctrl;
     public bool backBool;
 	void Start () {
         playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
     }
 	
 	// Update is called once per frame
@@ -25,8 +23,8 @@ public class Option : MonoBehaviour {
         playerctrl.iBlood = 0;
         playerctrl.SetParentNull();
         playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        timer.gameover.gameObject.SetActive(false);
-       timer.gameClear.gameObject.SetActive(false);
+        Timer.Instance.gameover.gameObject.SetActive(false);
+        Timer.Instance.gameClear.gameObject.SetActive(false);
 
         SceneManager.LoadScene(13);
         

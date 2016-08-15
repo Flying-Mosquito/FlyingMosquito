@@ -12,7 +12,7 @@ public class CheckStage : MonoBehaviour {
   
     SelectStage selectstage;
     public int stageNum;
-    Timer timer;
+
     public Transform[] Stage = new Transform[9];
     private int MAXINDEX = 3;
    public int[] Arr = new int[3] {0,1,2};
@@ -23,17 +23,17 @@ public class CheckStage : MonoBehaviour {
         selectstage = gameObject.GetComponent("SelectStage") as SelectStage;
         Arr = new int[iStage];
         print("dddd");
-        timer = gameObject.GetComponent("Timer") as Timer;
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer != null)
+        if (Timer.Instance != null)
         {
             for (int i = 0; i < 5; i++)
             {
-                if (timer.stage[i] == 1)
+                if (Timer.Instance.stage[i] == 1)
                 {
                     Arr[i] = 1;
                 }

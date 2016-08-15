@@ -10,14 +10,14 @@ public class CharacterState : MonoBehaviour
     public Scrollbar StaminaBar;
     public Scrollbar bloodBar;
 
-   public PlayerCtrl playerctrl;
-    public Timer timer;
+    PlayerCtrl playerctrl;
+
 
     void Start () {
 
 
         playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
-       timer=  GameObject.Find("Timer").GetComponent<Timer>();
+
 
 
 
@@ -36,8 +36,8 @@ public class CharacterState : MonoBehaviour
         playerctrl.SetHP(75);
         playerctrl.iBlood = 0;
         playerctrl.fStamina = 200;
-       timer.totaltime = 60;
-        timer.isEnable = true;
+        Timer.Instance.totaltime = 60;
+        Timer.Instance.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
         playerctrl.SetIsInStage(true);
        
