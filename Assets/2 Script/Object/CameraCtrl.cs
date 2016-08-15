@@ -41,7 +41,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
         targetTr = GameObject.Find("CamPivot").transform;
         dof = transform.GetComponent<DepthOfField>();
         fx_speedLight = GetComponentInChildren<ParticleSystem>();
-        fx_speedLight.gameObject.SetActive(false);
+    //    fx_speedLight.gameObject.SetActive(false);
 
         transform.LookAt(targetTr);
         fTargetDist = 0.8f;//1.5f;
@@ -170,9 +170,11 @@ public class CameraCtrl : Singleton<CameraCtrl>
                // MakeObjTransparent();
             }
         }
-        MakeObjTransparent();
 
-        CameraEffct();
+        if (rayTarget)
+            MakeObjTransparent();
+
+           CameraEffct();
     }
 
     private void CameraEffct()
