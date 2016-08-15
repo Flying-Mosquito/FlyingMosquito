@@ -53,6 +53,10 @@ public class Timer : Singleton<Timer>
     // Update is called once per frame
     void Update()
     {
+        if (Application.loadedLevelName == "Stage1")
+        {
+            SetPlayer();
+        }
         if (!(playerctrl== null))
         {
             CheckS();

@@ -8,33 +8,46 @@ public class Option : MonoBehaviour {
     public Button back;
     // Use this for initialization
 
-    PlayerCtrl playerctrl;
+    public PlayerCtrl playerctrl;
     public bool backBool;
 	void Start () {
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+       
+      
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+        if (Application.loadedLevelName == "Stage1")
+        {
+            SetPlayer();
+        }
+    }
     public void Click()
     {
-        playerctrl.iBlood = 0;
-        playerctrl.SetParentNull();
-        playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        Timer.Instance.gameover.gameObject.SetActive(false);
-        Timer.Instance.gameClear.gameObject.SetActive(false);
+        if (!(playerctrl == null))
+        {
+            playerctrl.iBlood = 0;
+            playerctrl.SetParentNull();
+            playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            Timer.Instance.gameover.gameObject.SetActive(false);
+            Timer.Instance.gameClear.gameObject.SetActive(false);
 
-        SceneManager.LoadScene(13);
-        
-        //PlayerCtrl.Instance.state = Constants.ST_IDLE;
-        //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
-        // //   PlayerCtrl.Instance.SetStateIdle(true);
-        // PlayerCtrl.Instance.SetIsInStage(false);
+            SceneManager.LoadScene(13);
 
-        // Timer.Instance.totaltime = 60;
-        // Timer.Instance.isEnable = true;
+            //PlayerCtrl.Instance.state = Constants.ST_IDLE;
+            //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
+            // //   PlayerCtrl.Instance.SetStateIdle(true);
+            // PlayerCtrl.Instance.SetIsInStage(false);
+
+            // Timer.Instance.totaltime = 60;
+            // Timer.Instance.isEnable = true;
+        }
+    }
+    public void SetPlayer()
+    {
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
+
     }
     public void intoMulti()
     {

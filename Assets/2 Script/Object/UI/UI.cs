@@ -1,22 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UI : Singleton<UI>
+ public class UI : Singleton<UI>
 {
 
     public Transform timer;
+    
     PlayerCtrl playerctrl = null;
     // Use this for initialization
     void Awake()
     {
         DontDestroyOnLoad(this);
         timer.gameObject.SetActive(false);
-      //  playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        //playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        //  playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       if(Application.loadedLevelName == "Stage1")
+        {
+            SetPlayer();
+        }
         if (playerctrl != null)
         {
             if ((playerctrl.variable & Constants.BV_IsInStage) > 0)
@@ -36,10 +42,9 @@ public class UI : Singleton<UI>
                 ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
 
 
-                clingbt.SetPlayer(playerctrl);
-                flybt.SetPlayer(playerctrl);
+                
             }
-        }  
+        }
     }
 
     public void SetPlayer()
