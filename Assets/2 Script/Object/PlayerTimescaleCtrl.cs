@@ -4,12 +4,13 @@ using System.Collections;
 // 이름 바꿔줘야함 Player를 지워..
 public class PlayerTimescaleCtrl : MonoBehaviour
 {
-
+    private PlayerCtrl player = null;
     //private Transform tr;
     // Use this for initialization
     void Awake()
     {
         //   tr = GetComponent<Transform>();
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 
 
@@ -20,11 +21,11 @@ public class PlayerTimescaleCtrl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             Time.timeScale = 1f;
 
-        if (CollisionManager.Instance.Check_Sight(PlayerCtrl.Instance.transform, transform.position, 50f, 30f))//Check_RayHit(PlayerCtrl.Instance.transform, "PLAYER", 300f)) 
+        if (CollisionManager.Instance.Check_Sight(player.transform, transform.position, 50f, 30f))//Check_RayHit(PlayerCtrl.Instance.transform, "PLAYER", 300f)) 
         {
             //Debug.DrawRay(transform.position, (PlayerCtrl.Instance.transform.position - transform.position).normalized * 1000f, Color.blue);
             //Time.timeScale = 0.3f;
-            PlayerCtrl.Instance.ChangeTimeScale();
+            player.ChangeTimeScale();
         }
     }
 }

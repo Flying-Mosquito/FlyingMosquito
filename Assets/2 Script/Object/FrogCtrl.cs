@@ -8,7 +8,7 @@ public class FrogCtrl : MonoBehaviour
 
     private Transform tr;
     //private Transform _TongueTr;
-    private PlayerCtrl _Player;
+    private PlayerCtrl player;
     //private GameObject _Tongue;
     private FrogTongue _Tongue;
 
@@ -21,7 +21,7 @@ public class FrogCtrl : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        _Player = PlayerCtrl.Instance;//GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
         tr = GetComponent<Transform>();
 
         //  _TongueTr = tr.transform.FindChild("Tongue");   // 자식으로 가진 Tongue의 Transform을 가져오기 위해 사용 
@@ -44,32 +44,32 @@ public class FrogCtrl : MonoBehaviour
     void Update()
     {    //excution Order를 변경했기 때문에 Player 이후에 호출됨
          // isInSight = Check_Sight();
-        if ((PlayerCtrl.Instance.variable & Constants.BV_Stick) > 0)
+        if ((player.variable & Constants.BV_Stick) > 0)
             return;
 
-        isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 80f);
+        isInSight = CollisionManager.Instance.Check_Sight(tr, player.transform.position, fLength, 80f);
         if (isInSight)
         {
             // Time.timeScale = 0f;
             int iPlayerMove;
 
-            if (PlayerCtrl.Instance.state != Constants.ST_FLYING)
+            if (player.state != Constants.ST_FLYING)
             {
                 iPlayerMove = 1;
-                vTongueDir = (_Player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
+                vTongueDir = (player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
              //   print("가야할방향 : " + vTongueDir);
             }
             else
             {
                 iPlayerMove = 2;
-                vTongueDir = (_Player.transform.position + _Player.transform.forward * 1.5f/*(_Player.transform.position - _Player.prePosition)*/) - (_Tongue.transform.position);    // 방향벡터 구하기
+                vTongueDir = (player.transform.position + player.transform.forward * 1.5f/*(_Player.transform.position - _Player.prePosition)*/) - (_Tongue.transform.position);    // 방향벡터 구하기
                // print("_Player.transform.position -_Player.prePosition  ..  : " + (_Player.transform.position - _Player.prePosition));
 
             }
 
             vTongueDir.Normalize();               // 정규화
 
-            Vector3 vTemp = (_Player.transform.position - tr.position);
+            Vector3 vTemp = (player.transform.position - tr.position);
             vTemp.Normalize();
 
 

@@ -5,6 +5,7 @@ public class SpiderCtrl : MonoBehaviour
 {
     public Animator Anim;
     public Transform tr;
+    private PlayerCtrl player = null;
 
     public enum eState { IDLE, MOVE, ATTACK }
     public eState state;
@@ -15,6 +16,7 @@ public class SpiderCtrl : MonoBehaviour
     {
         tr = GetComponent<Transform>();
         Anim = GetComponent<Animator>();
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
         state = eState.IDLE;
         fDist = 8f;
@@ -23,7 +25,7 @@ public class SpiderCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(tr.position, PlayerCtrl.Instance.transform.position) < fDist)
+        if (Vector3.Distance(tr.position, player.transform.position) < fDist)
             state = eState.ATTACK;
         else
             state = eState.IDLE;

@@ -15,6 +15,10 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     delegate void listener(string _str, float _fX, float _fY, int _iFingerId);
     event listener begin, move, end;
 
+#if !UNITY_ANDROID
+    public PlayerCtrl player;
+#endif
+
     BaseButton[] touchObject = new BaseButton[5]; //  id마다 터치한 obj
     private readonly float _fDist;
 
@@ -23,6 +27,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this);
+
         begin += OnTouch;
         move += OnTouch;
         end += OnTouch;
@@ -33,6 +38,13 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         Input.multiTouchEnabled = true;
     }
 
+#if !UNITY_ANDROID
+    public void SetPlayer(GameObject _player)
+    {
+        player = _player.GetComponent<PlayerCtrl>();
+         
+    }
+#endif
     // Update is called once per frame
     void Update()
     {
@@ -46,22 +58,22 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                PlayerCtrl.Instance.ClingBtDown();
+                player.ClingBtDown();
             }
             if (Input.GetKeyUp(KeyCode.P))
             {
-                PlayerCtrl.Instance.ClingBtUp();
+                player.ClingBtUp();
             }
 
             if (Input.GetKeyDown(KeyCode.LeftBracket))
-                PlayerCtrl.Instance.FlyBtDown();
+                player.FlyBtDown();
             else if (Input.GetKeyDown(KeyCode.RightBracket))
-                PlayerCtrl.Instance.boostdown();
+                player.boostdown();
 
             if (Input.GetKeyUp(KeyCode.LeftBracket))
-                PlayerCtrl.Instance.FlyBtUp();
+                player.FlyBtUp();
             else if (Input.GetKeyUp(KeyCode.RightBracket))
-                PlayerCtrl.Instance.boostup();
+                player.boostup();
 
             if (Input.GetMouseButton(0))
             {

@@ -26,7 +26,7 @@ public class StageObject : MonoBehaviour {
                 // print("셋아이들 펄스");
                 //PlayerCtrl.Instance.SetStateIdle(false);
                 // print("씬이 바뀔때야");
-                PlayerCtrl.Instance.SetParentNull();
+              //  PlayerCtrl.Instance.SetParentNull();
            // gameObject.SetActive(false);
             GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stageNum.ToString());
             
@@ -35,7 +35,7 @@ public class StageObject : MonoBehaviour {
 
         }
     }
-
+    /*
     void OnCollisionEnter(Collision coll)
     {
         if(coll.gameObject.CompareTag("PLAYER"))
@@ -52,5 +52,5 @@ public class StageObject : MonoBehaviour {
                 
             //}
         }
-    }
+    }*/
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // 해야할 일 : 기울기에 따라 플레이어가 너무 움직인다 - 조정필요 
 // 2. 기본 가속도? 
-public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
+public class PlayerCtrl : MonoBehaviour
 {
     private Transform tr;
     public  Transform targetPlus;
@@ -16,6 +16,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
     public  GameObject Player_Target;
     private RainDrop dest_script;
     private Rigidbody rigidBody;
+    public Animator anim;
 
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
@@ -55,7 +56,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         ClingObj = GameObject.Find("ClingObject");
         fx_boost = GetComponentInChildren<ParticleSystem>().gameObject;
         fx_boost.SetActive(false);
-
+        anim = GetComponent<Animator>();
 
         vDir = Vector3.zero;
         state = Constants.ST_IDLE;//ST_CLING;
@@ -88,6 +89,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         KeyInput();
         Action();
         RotateAnimation();
+        Animate();
         
       //  print("Update state:" + state);
 
@@ -134,6 +136,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                     print("NULL");
                     */
     }
+
+
    
     public void blooding()
     {
@@ -1040,5 +1044,44 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         // print("pos  : " + tr.position);
     }
 
+    private void Animate()
+    {
+
+        switch (state)
+        {
+            case Constants.ST_FLYING:
+                {
+                    anim.SetInteger("state", 0);
+                    //  anim.speed = PlayerCtrl.Instance.fSpeed * 0.2f;
+                    // print("Player speed : " + PlayerCtrl.Instance.fSpeed);
+                    // print("anim speed : " + anim.speed);
+                    break;
+                }
+
+
+            case Constants.ST_IDLE:
+                {
+                    anim.SetInteger("state", 1);
+                    break;
+                }
+            case Constants.ST_CLING:
+                {
+                    anim.SetInteger("state", 2);
+                    break;
+                }
+
+            case Constants.ST_STUN:
+                {
+                    anim.SetInteger("state", 3);
+
+                    break;
+                }
+            case Constants.ST_BLOOD:
+                {
+                    anim.SetInteger("state", 4);
+                    break;
+                }
+        }
+    }
 
 }

@@ -4,6 +4,12 @@ using System.Collections;
 public class TimescaleChangeFromPlayer : MonoBehaviour {
     public float fLength = 50f;
     public float fAngle = 30f;
+    private PlayerCtrl player = null;
+
+    void Awake()
+    {
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+    }
 
     // 플레이어에서 객체로 향하는 각도를 계산하여 TimeScale을 바꿈 
     void Update()
@@ -13,8 +19,8 @@ public class TimescaleChangeFromPlayer : MonoBehaviour {
             Time.timeScale = 1f;
 
 
-        if (CollisionManager.Instance.Check_Sight(PlayerCtrl.Instance.transform, transform.position, fLength, fAngle))//Check_RayHit(PlayerCtrl.Instance.transform, "PLAYER", 300f)) 
-            PlayerCtrl.Instance.ChangeTimeScale();
+        if (CollisionManager.Instance.Check_Sight(player.transform, transform.position, fLength, fAngle))//Check_RayHit(PlayerCtrl.Instance.transform, "PLAYER", 300f)) 
+            player.ChangeTimeScale();
 
     }
 }

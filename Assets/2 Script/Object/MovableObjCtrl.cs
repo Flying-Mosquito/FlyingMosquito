@@ -9,21 +9,24 @@ public class MovableObjCtrl : MonoBehaviour {
 
     public Transform tr;
     public Transform equipPoint;
-    private bool isPlayerCollision; 
+    private bool isPlayerCollision;
+    private PlayerCtrl player;
 
    void Start()
     {
+
         equipPoint = GameObject.Find("EquipPoint").transform;
         tr = GetComponent<Transform>();
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 
    void Update()
     {
         // 이순간 Trigger로 바뀜
-        if (isPlayerCollision && ((PlayerCtrl.Instance.variable & Constants.BV_bCling) > 0 )) // 수정
+        if (isPlayerCollision && ((player.variable & Constants.BV_bCling) > 0 )) // 수정
         {
             tr.SetParent(equipPoint);
-            PlayerCtrl.Instance.Equip(gameObject);
+            player.Equip(gameObject);
             isPlayerCollision = false;  
         }
     }

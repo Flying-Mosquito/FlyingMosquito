@@ -8,6 +8,7 @@ public class RainDrop : MonoBehaviour
 {
 
     private Rigidbody rigidBody;
+    private PlayerCtrl player = null;
     //private Collider col;
     public bool bCheck;//{ get; private set; } // 플레이어가 타겟으로 삼았는지 아닌지에 대한 변수 
     public bool isPlop;  // 플레이어가 매달릴 수 있는지 없는지의 유무 .  플레이어가 부모-자식관계를 해제하게 한다
@@ -17,6 +18,7 @@ public class RainDrop : MonoBehaviour
 
     void Awake()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerCtrl>(); 
         rigidBody = GetComponent<Rigidbody>();
         //col = GetComponent<Collider>();
         bCheck = false;
@@ -64,8 +66,8 @@ public class RainDrop : MonoBehaviour
             {
                 if (true == bCheck) // 어딘가에 부딪혀서 빗방울이 사라지는 상태. 플레이어의 체력을 깎는다 
                 {
-                    if ((PlayerCtrl.Instance.state & Constants.ST_CLING) > 0)    // 플레이어가 붙어있을 때만 체력을 깎음 . 바닥에 충돌할 때에는 플레이어가 알아서 할거야 
-                        PlayerCtrl.Instance.Damaged(5);
+                    if ((player.state & Constants.ST_CLING) > 0)    // 플레이어가 붙어있을 때만 체력을 깎음 . 바닥에 충돌할 때에는 플레이어가 알아서 할거야 
+                        player.Damaged(5);
                     //else
                     //  PlayerCtrl.Instance // bCling상태면 , click을 해제해줘도 됨...? 클릭상태 해제 후, 플레이어가 다른 오브젝트에 충돌하면 bCling상태를 지워줌 
                 }

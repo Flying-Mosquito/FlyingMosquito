@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerAnimation : MonoBehaviour {
     public Animator anim;
+
 	// Use this for initialization
     void Awake()
     {
@@ -13,9 +14,10 @@ public class PlayerAnimation : MonoBehaviour {
         StartCoroutine("PlayerAnim"); // ?? 어떤게 낫지..
 	}*/
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
        
-
+        /*
         switch(PlayerCtrl.Instance.state)
         {
             case Constants.ST_FLYING:
@@ -51,5 +53,6 @@ public class PlayerAnimation : MonoBehaviour {
                     break;
                 }
         }
+        */
 	}
 }

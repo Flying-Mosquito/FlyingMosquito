@@ -5,14 +5,28 @@ public class PlayerPoint : MonoBehaviour
 {
     public enum ePointState {  eMenu, eStage}
     public ePointState state;
+    public GameObject PlayerPrefeb;
+    private PlayerCtrl player = null;
+
 
     public bool isCamStateCollider;
 
     void Awake()
     {
         CameraCtrl.Instance.GetComponent<CameraEffect>().SetParentCamp();
-     //   PlayerCtrl.Instance.SetStateIdle(true);
-        PlayerCtrl.Instance.SetTransform(transform.position, transform.rotation);
+        //   PlayerCtrl.Instance.SetStateIdle(true);
+
+        CreatePlayer();
+        
+        //PlayerCtrl.Instance.SetTransform(transform.position, transform.rotation);
+    }
+   
+    void CreatePlayer()
+    {
+        GameObject _player = Instantiate(PlayerPrefeb, transform.position, transform.rotation) as GameObject;
+        CameraCtrl.Instance.SetPlayer(_player);
+
+        player = _player.GetComponent<PlayerCtrl>();
     }
 
     void Start ()
@@ -30,8 +44,8 @@ public class PlayerPoint : MonoBehaviour
         {
             if (state == ePointState.eStage)
             {
-                PlayerCtrl.Instance.SetIsInStage(true);
-                PlayerCtrl.Instance.SetHP(100);
+                player.SetIsInStage(true);
+                player.SetHP(100);
                 gameObject.SetActive(false);
             }
             else
@@ -40,7 +54,7 @@ public class PlayerPoint : MonoBehaviour
                 if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))
                 {
                     //   PlayerCtrl.Instance.SetStateIdle(false);
-                    PlayerCtrl.Instance.SetIsInStage(true);
+                    player.SetIsInStage(true);
                     gameObject.SetActive(false);
                 }
             }

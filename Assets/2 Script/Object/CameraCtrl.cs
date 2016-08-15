@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityStandardAssets.ImageEffects;
 using System.Collections;
 
 public class CameraCtrl : Singleton<CameraCtrl>
@@ -7,12 +8,16 @@ public class CameraCtrl : Singleton<CameraCtrl>
     [System.Serializable]
     public enum eMoveState { TRIGGER, COLLIDER }
     // LateUpdate쪽으로 바꿔줘야 하는데 .. 무엇을..?
+    public PlayerCtrl player = null;
     public Transform targetTr;
     private Transform rayTarget;
     private float preYAngle;
     public bool isLookFar;
     Vector3 vLerp;
 
+    private CamPivot ParentCamp = null;
+    DepthOfField dof;
+    Component fx_speedLight;
     private List<ObjStruct> preRayHitObjList = new List<ObjStruct>();      //이전에 충돌한 gameObject를 가지고 있는 List
                                                                            //private GameObject Camera;
                                                                            //private List<string> preRayHitObj
@@ -34,6 +39,10 @@ public class CameraCtrl : Singleton<CameraCtrl>
     {
         //  Camera = 
         targetTr = GameObject.Find("CamPivot").transform;
+        dof = transform.GetComponent<DepthOfField>();
+        fx_speedLight = GetComponentInChildren<ParticleSystem>();
+        fx_speedLight.gameObject.SetActive(false);
+
         transform.LookAt(targetTr);
         fTargetDist = 0.8f;//1.5f;
         fNormalDist = 0.8f;//1.5f;
@@ -42,110 +51,14 @@ public class CameraCtrl : Singleton<CameraCtrl>
         isLookFar = false;
         preYAngle = transform.eulerAngles.y;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void SetPlayer(GameObject _player)
     {
-
+        player = _player.GetComponent<PlayerCtrl>();
     }
-
-
-    void LateUpdate()
-    {
-        //if (targetTr != null)           // 여기도 수정해줘야하지.. 카메라 상태에 따라서 멀리 있는 것 투명하게 만들 것인지, 아니면 카메라가 물체를 못 뚫게 할 것인지 정해줘야 한다.
-        //{
-        //prePos = transform.position;
-        if (PlayerCtrl.Instance.state != Constants.ST_CLING)        // 붙어있지 않을 때의 카메라 효과(위치)
-        {
-            isLookFar = false;
-            if (fTargetDist != fNormalDist)
-                fTargetDist = Mathf.Lerp(fTargetDist, fNormalDist, 0.3f);
-
-        }
-
-        transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
-
-        transform.LookAt(targetTr.position);
-        //  print("rotate.y: " + transform.eulerAngles.y);
-
-        if (preYAngle - transform.eulerAngles.y > 179f)
-        {
-
-            float _y = transform.eulerAngles.y + 180f;
-
-            transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
-            //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
-
-            // Time.timeScale = 0f;
-            preYAngle = _y;
-
-        }
-        else
-            preYAngle = transform.eulerAngles.y;
-
-        // transform.Rotate(-20, 0, 0);
-        // transform.rotation = targetTr.rotation;
-
-
-        rayTarget = PlayerCtrl.Instance.transform;    // 수정필요, rayTarget을 잡아주는 함수 
-        if (moveState == eMoveState.TRIGGER)
-        {
-            if (PlayerCtrl.Instance.state == Constants.ST_CLING)
-            {
-                if (isLookFar != true)
-                {
-                    Transform parentTr = PlayerCtrl.Instance.GetParent();
-                    if ((parentTr != null) && parentTr.CompareTag("RAINDROP"))
-                        StartCoroutine("DelayLerpPosition", 0f);
-                    else
-                        StartCoroutine("DelayLerpPosition", 1f);
-                }
-                else
-                {
-
-                    if (fTargetDist < fFarDist)
-                        fTargetDist = Mathf.Lerp(fTargetDist, fFarDist, 0.3f);
-                    transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + (targetTr.up * fTargetHeight);
-                }
-
-            }
-            MakeObjTransparent();
-        }
-        else  // movecState == eMoveState.COLLIDER;
-        {
-            if (PlayerCtrl.Instance.state == Constants.ST_CLING)
-            {
-                // 카메라가 멀리 떨어지게함...
-                if (isLookFar != true)
-                {
-                    StartCoroutine("DelayLerpPosition", 1.5f);
-
-                }
-                else
-                {
-                    // 카메라 충돌 체크, 플레이어가 가려지는 일이 발생하지 않게 함
-
-                    Vector3 vDir = transform.position - targetTr.position;
-                    vDir.Normalize();
-
-
-                    if (fTargetDist < fFarDist)
-                        fTargetDist = Mathf.Lerp(fTargetDist, fFarDist, 0.3f);
-
-                    //이게 정상동작 코드
-                    // transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fFarDist, "CAMERA");
-                    transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fTargetDist, "WALL");
-
-                }
-            }
-            MakeObjTransparent();
-        }
-
-    }
-
     public void SetTarget(GameObject _obj)
     {
-        if (targetTr != null)
+        if ((targetTr != null) || _obj == null)
             targetTr = null;
 
         targetTr = _obj.transform;
@@ -161,6 +74,142 @@ public class CameraCtrl : Singleton<CameraCtrl>
     {
         transform.localPosition = _pos;
     }
+
+    void LateUpdate()
+    {
+        if (!player)
+        {
+            transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
+            transform.LookAt(targetTr.position);
+        }
+        else
+        {
+            if (player.state != Constants.ST_CLING)        // 붙어있지 않을 때의 카메라 효과(위치)
+            {
+                isLookFar = false;
+                if (fTargetDist != fNormalDist)
+                    fTargetDist = Mathf.Lerp(fTargetDist, fNormalDist, 0.3f);
+
+            }
+
+            transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
+
+            transform.LookAt(targetTr.position);
+            //  print("rotate.y: " + transform.eulerAngles.y);
+
+            if (preYAngle - transform.eulerAngles.y > 179f)
+            {
+
+                float _y = transform.eulerAngles.y + 180f;
+
+                transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
+                //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
+
+                // Time.timeScale = 0f;
+                preYAngle = _y;
+
+            }
+            else
+                preYAngle = transform.eulerAngles.y;
+
+            // transform.Rotate(-20, 0, 0);
+            // transform.rotation = targetTr.rotation;
+
+
+            rayTarget = player.transform;    // 수정필요, rayTarget을 잡아주는 함수 
+            if (moveState == eMoveState.TRIGGER)
+            {
+                if (player.state == Constants.ST_CLING)
+                {
+                    if (isLookFar != true)
+                    {
+                        Transform parentTr = player.GetParent();
+                        if ((parentTr != null) && parentTr.CompareTag("RAINDROP"))
+                            StartCoroutine("DelayLerpPosition", 0f);
+                        else
+                            StartCoroutine("DelayLerpPosition", 1f);
+                    }
+                    else
+                    {
+
+                        if (fTargetDist < fFarDist)
+                            fTargetDist = Mathf.Lerp(fTargetDist, fFarDist, 0.3f);
+                        transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + (targetTr.up * fTargetHeight);
+                    }
+
+                }
+                //MakeObjTransparent();
+            }
+            else  // movecState == eMoveState.COLLIDER;
+            {
+                if (player.state == Constants.ST_CLING)
+                {
+                    // 카메라가 멀리 떨어지게함...
+                    if (isLookFar != true)
+                    {
+                        StartCoroutine("DelayLerpPosition", 1.5f);
+
+                    }
+                    else
+                    {
+                        // 카메라 충돌 체크, 플레이어가 가려지는 일이 발생하지 않게 함
+
+                        Vector3 vDir = transform.position - targetTr.position;
+                        vDir.Normalize();
+
+
+                        if (fTargetDist < fFarDist)
+                            fTargetDist = Mathf.Lerp(fTargetDist, fFarDist, 0.3f);
+
+                        //이게 정상동작 코드
+                        // transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fFarDist, "CAMERA");
+                        transform.position = CollisionManager.Instance.Get_RayCollisionPositionFromObj(targetTr.position, vDir, fTargetDist, "WALL");
+
+                    }
+                }
+               // MakeObjTransparent();
+            }
+        }
+        MakeObjTransparent();
+
+        CameraEffct();
+    }
+
+    private void CameraEffct()
+    {
+        if (player && ParentCamp)
+        {
+            //print("maxBlurSize = " + dof.maxBlurSize);
+            if (player.fSpeed > 8f)
+            {
+                //print("스피드 8이상");
+                fx_speedLight.gameObject.SetActive(true);
+                //transform.GetComponent<DepthTextureMode>();
+                //dof.enabled = true;
+                //dof.maxBlurSize = 0.52f;
+                //  dof.maxBlurSize += 5 * Time.deltaTime;
+                // print("maxBlurSize = " + dof.maxBlurSize);
+            }
+            else if (player.state == Constants.ST_STUN)
+            {
+                //   print("스턴");
+                fx_speedLight.gameObject.SetActive(false);
+                dof.enabled = true;
+                dof.maxBlurSize = 10f;
+            }
+
+            else
+            {
+                // print("히");
+                fx_speedLight.gameObject.SetActive(false);
+                dof.enabled = false;
+
+
+                dof.maxBlurSize = Mathf.Lerp(dof.maxBlurSize, 0f, 0.008f);
+            }
+        }
+    }
+
     private void MakeObjTransparent()
     {
         RaycastHit[] RayHit = CollisionManager.Instance.Get_RayCollisionsAFromB(this.transform, rayTarget);     // 여기에 충돌한 정보가 들어감 
