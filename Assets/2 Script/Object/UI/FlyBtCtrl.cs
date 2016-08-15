@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPointerUpHandler 
 {
     private Transform tr;
-    public Transform StartTr;  // 처음 시작하는 위치 ( FlyButton위치 )           
+   // public Transform StartTr;  // 처음 시작하는 위치 ( FlyButton위치 )           
     public Transform endTr;       // 부스트의 위치
-    private Vector3 startPosition;
+    public Vector3 startPosition;
     private Vector3 endPosition;
     //   private bool isMouseDown = false;
     //   private bool isOnTouch = false;
@@ -95,10 +95,12 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
 
     public override void OnTouchBegin(Vector2 _pos)
     {
+        print("플라이버튼 온터치비긴");
         isMouseDown = true;
         //isOnTouch = true;
         if (player != null)
         {
+            print("플레이어가 널이 아님");
             if (startPosition == Vector3.zero)
             {
                 startPosition = tr.position;

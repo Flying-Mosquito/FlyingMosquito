@@ -8,7 +8,7 @@ public class FrogCtrl : MonoBehaviour
 
     private Transform tr;
     //private Transform _TongueTr;
-    private PlayerCtrl player;
+    public PlayerCtrl player;
     //private GameObject _Tongue;
     private FrogTongue _Tongue;
 
@@ -21,7 +21,7 @@ public class FrogCtrl : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
+        player = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>(); //PlayerCtrl.Instance;// 
         tr = GetComponent<Transform>();
 
         //  _TongueTr = tr.transform.FindChild("Tongue");   // 자식으로 가진 Tongue의 Transform을 가져오기 위해 사용 

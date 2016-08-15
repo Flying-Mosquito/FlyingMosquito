@@ -8,7 +8,7 @@ public class TimescaleChangeFromPlayer : MonoBehaviour {
 
     void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        player = GameObject.FindObjectOfType<PlayerCtrl>(); // GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 
     // 플레이어에서 객체로 향하는 각도를 계산하여 TimeScale을 바꿈 

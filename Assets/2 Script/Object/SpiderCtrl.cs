@@ -16,7 +16,7 @@ public class SpiderCtrl : MonoBehaviour
     {
         tr = GetComponent<Transform>();
         Anim = GetComponent<Animator>();
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
         state = eState.IDLE;
         fDist = 8f;

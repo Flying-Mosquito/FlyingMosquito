@@ -18,7 +18,7 @@ public class RainDrop : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>(); 
+        player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>(); 
         rigidBody = GetComponent<Rigidbody>();
         //col = GetComponent<Collider>();
         bCheck = false;

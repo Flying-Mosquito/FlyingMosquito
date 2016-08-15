@@ -42,6 +42,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     public void SetPlayer(PlayerCtrl _player)
     {
         player = _player;
+        print("TouchEvent - SetPlayer");
          
     }
 #endif
@@ -54,10 +55,12 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
 #if !UNITY_ANDROID
         {
-
+            if (!player)
+                return;
 
             if (Input.GetKeyDown(KeyCode.P))
             {
+                print("피키");
                 player.ClingBtDown();
             }
             if (Input.GetKeyUp(KeyCode.P))
@@ -79,6 +82,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    print("온터치비긴");
                     begin("OnTouchBegin", Input.mousePosition.x, Input.mousePosition.y, 0);
                 }
                 else
@@ -166,6 +170,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
                     if (col = Physics2D.OverlapPoint(_pos))//Physics.Raycast(ray, out hit, 30000f))//, 1 << LayerMask.NameToLayer("UI")))
                     {
+                        print("충돌체 있음");
                         isTouchBegin3DObj = false;
                         //if (col.gameObject.name == "HoldButton")
                         //    TempText4.text = Input.touchCount.ToString();//"HOLDBUTTON down";
@@ -187,6 +192,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                     }
                     else  // 터치는 했는데 충돌을 안했으면 버튼에 터치를 안한거지
                     {
+                        print("3d물체 터치");
                         isTouchBegin3DObj = true;
                         //3d체크, Raindrop만 체크함
                         Ray ray = Camera.main.ScreenPointToRay(_pos);

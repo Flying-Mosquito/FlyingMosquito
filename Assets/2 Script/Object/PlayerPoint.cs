@@ -49,7 +49,7 @@ public class PlayerPoint : MonoBehaviour
                 player.SetHP(100);
                 TouchEventManager.Instance.SetPlayer(player);
                 gameObject.SetActive(false);
-             
+
             }
             else
             {
@@ -57,15 +57,17 @@ public class PlayerPoint : MonoBehaviour
                 if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))
                 {
                     //   PlayerCtrl.Instance.SetStateIdle(false);
+                  
                     player.SetIsInStage(true);
                     gameObject.SetActive(false);
+                    TouchEventManager.Instance.SetPlayer(player);
                     //UI.Instance.SetPlayer(player);
-                    //FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
-                    //ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
-
+                    FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+                    ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
+                    clingbt.SetPlayer(null);
+                    flybt.SetPlayer(null);
                     //Timer.Instance.enabled = false;
-                    //clingbt.SetPlayer(null);
-                    //flybt.SetPlayer(null);
+
                 }
             }
             

@@ -41,6 +41,12 @@ public class CharacterState : MonoBehaviour
         Timer.Instance.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
         playerctrl.SetIsInStage(true);
-       
+
+
+         FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+         ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
+        clingbt.SetPlayer(playerctrl);
+        flybt.SetPlayer(playerctrl);
+
     }
 }

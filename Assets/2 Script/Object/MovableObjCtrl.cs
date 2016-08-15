@@ -17,7 +17,7 @@ public class MovableObjCtrl : MonoBehaviour {
 
         equipPoint = GameObject.Find("EquipPoint").transform;
         tr = GetComponent<Transform>();
-        player = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
 
    void Update()
