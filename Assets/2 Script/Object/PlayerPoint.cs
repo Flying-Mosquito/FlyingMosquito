@@ -23,6 +23,7 @@ public class PlayerPoint : MonoBehaviour
    
     void CreatePlayer()
     {
+        // 플레이어 만들면서 카메라도 셋팅 
         GameObject _player = Instantiate(PlayerPrefeb, transform.position, transform.rotation) as GameObject;
         CameraCtrl.Instance.SetPlayer(_player);
 

@@ -31,7 +31,7 @@ public class PlayerCtrl : MonoBehaviour
     public  float fXAngle { get; private set; }         // 좌우   회전값
     public  float fYAngle { get; private set; }         // 위아래 회전값
     public  float startTime;
-    public  float fSpeed { get; private set; }          // 플레이어 최종 속도값
+    public float fSpeed;//{ get; private set; }          // 플레이어 최종 속도값
     public  float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
     private float fStaminaMinus;                        // 스테미나 감소량 
     private float fSpeedVal = 2f;                       // 플레이어 속도 증가값 

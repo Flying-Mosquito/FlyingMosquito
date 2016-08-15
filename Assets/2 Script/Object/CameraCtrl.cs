@@ -15,7 +15,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     public bool isLookFar;
     Vector3 vLerp;
 
-    private CamPivot ParentCamp = null;
+   // private CamPivot ParentCamp = null;
     DepthOfField dof;
     Component fx_speedLight;
     private List<ObjStruct> preRayHitObjList = new List<ObjStruct>();      //이전에 충돌한 gameObject를 가지고 있는 List
@@ -41,7 +41,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
         
         dof = transform.GetComponent<DepthOfField>();
         fx_speedLight = GetComponentInChildren<ParticleSystem>();
-       // fx_speedLight.gameObject.SetActive(false);
+        fx_speedLight.gameObject.SetActive(false);
 
      //   transform.LookAt(targetTr);
         fTargetDist = 0.8f;//1.5f;
@@ -56,6 +56,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     {
         player = _player.GetComponent<PlayerCtrl>();
         targetTr = GameObject.Find("CamPivot").transform;
+       // ParentCamp = player.GetComponentInChildren<CamPivot>();
     }
     public void SetTarget(GameObject _obj)
     {
@@ -74,6 +75,11 @@ public class CameraCtrl : Singleton<CameraCtrl>
     public void SetLocalPosition(Vector3 _pos)
     {
         transform.localPosition = _pos;
+    }
+
+    void Update()
+    {
+        CameraEffct();
     }
 
     void LateUpdate()
@@ -178,17 +184,15 @@ public class CameraCtrl : Singleton<CameraCtrl>
         if(!(rayTarget==null))
             MakeObjTransparent();
 
-        CameraEffct();
     }
 
     private void CameraEffct()
     {
-        if (player && ParentCamp)
+        if (player && targetTr)
         {
             //print("maxBlurSize = " + dof.maxBlurSize);
             if (player.fSpeed > 8f)
             {
-                //print("스피드 8이상");
                 fx_speedLight.gameObject.SetActive(true);
                 //transform.GetComponent<DepthTextureMode>();
                 //dof.enabled = true;
@@ -198,7 +202,6 @@ public class CameraCtrl : Singleton<CameraCtrl>
             }
             else if (player.state == Constants.ST_STUN)
             {
-                //   print("스턴");
                 fx_speedLight.gameObject.SetActive(false);
                 dof.enabled = true;
                 dof.maxBlurSize = 10f;
@@ -206,7 +209,6 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
             else
             {
-                // print("히");
                 fx_speedLight.gameObject.SetActive(false);
                 dof.enabled = false;
 
