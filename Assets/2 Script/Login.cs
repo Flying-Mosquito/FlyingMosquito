@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Login : MonoBehaviour {
     #region Variables
     //Static Variables
-    public static string NickName = "";
+    public static string Email = "";
     public static string Password = "";
     //Public Variables
     public string CurrentMenu = "Login";
@@ -13,7 +13,7 @@ public class Login : MonoBehaviour {
    // private string LoginUrl = "";
     private string ConfrimPass = "";
     private string ConfirmEmail = "";
-    private string CNickName = "";
+    private string CEmail = "";
     private string Cpassword = "";
 
     //GUI Test section
@@ -59,7 +59,7 @@ public class Login : MonoBehaviour {
 
         }
         GUI.Label(new Rect(300 - control*2, 200 - control, 220, 25), "Email");
-        NickName = GUI.TextField(new Rect(390 - control*2, 225 - control, 220,25), NickName);
+        Email = GUI.TextField(new Rect(390 - control*2, 225 - control, 220,25), Email);
 
         GUI.Label(new Rect(300 - control*2, 250 - control, 220, 25), "Password");
         Password = GUI.TextField(new Rect(390 - control*2, 275 - control, 220, 25), Password);
@@ -79,8 +79,8 @@ public class Login : MonoBehaviour {
         GUI.Box(new Rect(280 - control*2, 120 - control, (Screen.width / 4) + 200, (Screen.height / 4) + 250), "Create Account");
 
      
-        GUI.Label(new Rect(370 - control*2, 200 - control, 220, 25), "NickName");
-        CNickName = GUI.TextField(new Rect(390 - control * 2, 225 - control, 220, 25), CNickName);
+        GUI.Label(new Rect(370 - control*2, 200 - control, 220, 25), "Email");
+        CEmail = GUI.TextField(new Rect(390 - control * 2, 225 - control, 220, 25), CEmail);
 
         GUI.Label(new Rect(370 - control * 2, 250 - control, 220, 25), "Password");
         Cpassword = GUI.TextField(new Rect(390 - control * 2, 275 - control, 220, 25), Cpassword);
