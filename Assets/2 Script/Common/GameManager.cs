@@ -21,7 +21,20 @@ public class GameManager : Singleton<GameManager> {
       
         // Init_Singleton();
     }
-
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(Time.timeScale == 0)
+            {
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+            }
+        }
+    }
     public IEnumerator StartLoad(string strSceneName)
     {
         /*if ( "00 Logo" == Application.loadedLevelName )
@@ -29,7 +42,7 @@ public class GameManager : Singleton<GameManager> {
           
         }
         */
-
+        print("timee:" + time);
         if (isLoadGame == false)
         {
             isLoadGame = true;
@@ -48,6 +61,7 @@ public class GameManager : Singleton<GameManager> {
                     isLoadGame = false;
                     async.allowSceneActivation = true;  // 2초 후에 씬을 넘김 
                     UIManager.isFadeOut = false;
+                    time = 0f;
                 }
                 yield return new WaitForFixedUpdate();
             }

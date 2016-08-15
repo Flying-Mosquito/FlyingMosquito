@@ -69,7 +69,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         fYAngle = 0f;
 
         fSpeed = 0f;
-        fRotSpeed = 55f;
+        fRotSpeed = 80f;//55f;
         // fOwnRotSpeed = 55f;
         fBoostSpeed = 0f;
         MAXBOOST = 10f;
@@ -636,22 +636,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             StartCoroutine("ChangeSlowVal");
         }
     }
-    public Transform GetParent()
-    {
-        if (tr.transform.parent)
-            return tr.transform.parent;
 
-        return null;
-
-    }
-    public void SetParentNull()
-    {
-        tr.gameObject.transform.parent = null;
-        //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 수정?
-        ClingObj.transform.parent = null;
-        //ClingObj.transform.localScale = Vector3.one;
-
-    }
     public void Drop()
     {
         if ((variable & Constants.BV_IsHold) > 0)
@@ -683,12 +668,37 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
         }
         */
     }
+
+    public Transform GetParent()
+    {
+        if (tr.transform.parent)
+            return tr.transform.parent;
+
+        return null;
+
+    }
     private void SetParent(Transform collTr)
     {
-//        print("setParent");
+        //        print("setParent");
         ClingObj.transform.parent = collTr;
         tr.transform.parent = ClingObj.transform;
     }
+    public void SetParentNull()
+    {
+        tr.gameObject.transform.parent = null;
+        //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 수정?
+        ClingObj.transform.parent = null;
+
+        variable &= ~(Constants.BV_Stick);
+
+        rigidBody.isKinematic = false;
+        print("SetParentNull");
+       Time.timeScale = 0f;
+        
+        //ClingObj.transform.localScale = Vector3.one;
+
+    }
+
     public void Equip(GameObject _item)  // 외부에서 불러주게 됨 
     {
         if (Player_Target == _item)
@@ -832,7 +842,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             variable |= Constants.BV_bBlood;
 
         }
-
+        /*
         if (coll.gameObject.tag == "FROG_TONGUE")
         {
             variable |= Constants.BV_Stick;//isStick = true;
@@ -840,7 +850,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
             rigidBody.isKinematic = true;   // 물리적인 영향을 끔 
             iHP = 0;
         }
-
+        */
 
 
 
@@ -990,6 +1000,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>//MonoBehaviour
                 }
                 else
                 {
+                    print("이쪽");
                     SetParentNull();
                 }
 

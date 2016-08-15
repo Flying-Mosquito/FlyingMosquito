@@ -52,12 +52,6 @@ public class FrogTongue : MonoBehaviour
         bIdle = true;
         fSpeed = 100f;// 2.5f;
     }
-
-    void Start()
-    {
-
-    }
-
     void FixedUpdate()
     {
         MoveTongue();
@@ -134,8 +128,4 @@ public class FrogTongue : MonoBehaviour
         tr.transform.localScale = new Vector3(0.2f, 0.2f, x);
     }
     */
-    void EnterCollision()
-    {
-        //bSwallow = true;
-    }
 }

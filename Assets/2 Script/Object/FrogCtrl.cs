@@ -44,6 +44,8 @@ public class FrogCtrl : MonoBehaviour
     void Update()
     {    //excution Order를 변경했기 때문에 Player 이후에 호출됨
          // isInSight = Check_Sight();
+        if ((PlayerCtrl.Instance.variable & Constants.BV_Stick) > 0)
+            return;
 
         isInSight = CollisionManager.Instance.Check_Sight(tr, _Player.transform.position, fLength, 80f);
         if (isInSight)
@@ -55,13 +57,13 @@ public class FrogCtrl : MonoBehaviour
             {
                 iPlayerMove = 1;
                 vTongueDir = (_Player.transform.position /*+ _Player.transform.forward*/) - _Tongue.transform.position;    // 방향벡터 구하기
-                print("가야할방향 : " + vTongueDir);
+             //   print("가야할방향 : " + vTongueDir);
             }
             else
             {
                 iPlayerMove = 2;
                 vTongueDir = (_Player.transform.position + _Player.transform.forward * 1.5f/*(_Player.transform.position - _Player.prePosition)*/) - (_Tongue.transform.position);    // 방향벡터 구하기
-                print("_Player.transform.position -_Player.prePosition  ..  : " + (_Player.transform.position - _Player.prePosition));
+               // print("_Player.transform.position -_Player.prePosition  ..  : " + (_Player.transform.position - _Player.prePosition));
 
             }
 

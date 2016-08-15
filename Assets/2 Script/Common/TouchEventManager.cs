@@ -101,28 +101,28 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
             Vector2 touchPosition = touch.position; // 터치 좌표
 
-            if (TempText2 != null && (Input.touchCount > 0))
-                TempText2.text = touchPosition.ToString();//Input.touchCount.ToString();
+          //  if (TempText2 != null && (Input.touchCount > 0))
+           //     TempText2.text = touchPosition.ToString();//Input.touchCount.ToString();
 
 
             if (touch.phase == TouchPhase.Began)
             {
-                if (TempText != null && (Input.touchCount > 0))
-                    TempText.text = Input.GetTouch(0).phase.ToString();
+              //  if (TempText != null && (Input.touchCount > 0))
+              //      TempText.text = Input.GetTouch(0).phase.ToString();
 
                 begin("OnTouchBegin", touchPosition.x, touchPosition.y, iId);
             }
             if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
             {
-                if (TempText != null && (Input.touchCount > 0))
-                    TempText.text = Input.GetTouch(0).phase.ToString();
+             //   if (TempText != null && (Input.touchCount > 0))
+              //      TempText.text = Input.GetTouch(0).phase.ToString();
 
                 move("OnTouchMove", touchPosition.x, touchPosition.y, iId);
             } 
             if(touch.phase == TouchPhase.Ended)
             {
-                if (TempText != null && (Input.touchCount > 0))
-                    TempText.text = Input.GetTouch(0).phase.ToString();
+               // if (TempText != null && (Input.touchCount > 0))
+               //     TempText.text = Input.GetTouch(0).phase.ToString();
 
                 end("OnTouchEnd", touchPosition.x, touchPosition.y, iId);
                    
