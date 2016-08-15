@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Timer : Singleton<Timer>
+public class Timer : MonoBehaviour
 {
 
     public Text timerText;
@@ -16,7 +16,7 @@ public class Timer : Singleton<Timer>
     public float[] score = new float[9];
     public int[] stage = new int[2] { 0, 1 };
     public int[] CheckTimer = new int[2] { 0, 1 };
-
+    Timer timer;
     // Use this for initialization
     PlayerCtrl playerctrl;
 
@@ -27,8 +27,10 @@ public class Timer : Singleton<Timer>
 
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        
         playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+
         stage = new int[9];
         CheckTimer = new int[9];
         for (int i = 0; i < 9; i++)
@@ -73,7 +75,7 @@ public class Timer : Singleton<Timer>
                 StopTimer();
 
 
-                score[i] = (Timer.Instance.totaltime * 2);
+                score[i] = (timer.totaltime * 2);
                 ScoreText.text = score[i].ToString();
 
 

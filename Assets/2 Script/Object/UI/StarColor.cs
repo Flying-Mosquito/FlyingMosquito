@@ -10,32 +10,33 @@ public class StarColor : MonoBehaviour
     public Image[] image2 = new Image[9];
     public Image[] image3 = new Image[9];
     public SelectStage select;
+    Timer timer;
 
     // Use this for initialization
     void Start()
     {
-
+        timer = gameObject.GetComponent("Timer") as Timer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Timer.Instance != null)
+        if (timer != null)
         {
             for (int i = 1; i < 6; i++)
             {
-                if (Timer.Instance.score[i] > 80 && Timer.Instance.stage[i] == 1)
+                if (timer.score[i] > 80 && timer.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                     image2[i - 1].color = Color.green;
                     image3[i - 1].color = Color.green;
                 }
-                else if (Timer.Instance.score[i] > 40 && Timer.Instance.score[i] < 80 && Timer.Instance.stage[i] == 1)
+                else if (timer.score[i] > 40 && timer.score[i] < 80 &&timer.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                     image2[i - 1].color = Color.green;
                 }
-                else if (Timer.Instance.score[i] > 5 && Timer.Instance.score[i] < 40 && Timer.Instance.stage[i] == 1)
+                else if (timer.score[i] > 5 && timer.score[i] < 40 && timer.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                 }
