@@ -28,6 +28,7 @@ public class SelectStage : MonoBehaviour
     {
 
         print(Application.loadedLevelName);
+        print("stagenum[0] : "+ stagenum[0]);
         SceneManager.LoadScene(stagenum[0]);
         
         
