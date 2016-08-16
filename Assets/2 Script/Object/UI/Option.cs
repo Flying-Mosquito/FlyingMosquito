@@ -33,7 +33,7 @@ public class Option : MonoBehaviour {
             Timer.Instance.gameover.gameObject.SetActive(false);
             Timer.Instance.gameClear.gameObject.SetActive(false);
 
-            SceneManager.LoadScene(13);
+            SceneManager.LoadScene(1);
 
             //PlayerCtrl.Instance.state = Constants.ST_IDLE;
             //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
