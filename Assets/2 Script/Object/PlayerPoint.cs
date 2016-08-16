@@ -47,7 +47,6 @@ public class PlayerPoint : MonoBehaviour
             {
                 player.SetIsInStage(true);
                 player.SetHP(100);
-                
                 TouchEventManager.Instance.SetPlayer(player);
                 gameObject.SetActive(false);
 

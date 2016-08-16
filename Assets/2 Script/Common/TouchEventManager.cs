@@ -15,8 +15,9 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     delegate void listener(string _str, float _fX, float _fY, int _iFingerId);
     event listener begin, move, end;
 
+#if !UNITY_ANDROID
     public PlayerCtrl player;
-
+#endif
 
     BaseButton[] touchObject = new BaseButton[5]; //  id마다 터치한 obj
     private readonly float _fDist;
@@ -37,14 +38,14 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         Input.multiTouchEnabled = true;
     }
 
-
+#if !UNITY_ANDROID
     public void SetPlayer(PlayerCtrl _player)
     {
         player = _player;
         print("TouchEvent - SetPlayer");
          
     }
-
+#endif
     // Update is called once per frame
     void Update()
     {
