@@ -350,23 +350,19 @@ public class PlayerCtrl : MonoBehaviour
         else { fx_boost.SetActive(false); }
 
 
-        if (((variable & Constants.BV_IsCling) > 0))// && (variable & Constants.BV_bBlood) > 0) //isCling)  
+        if (((variable & Constants.BV_IsCling) > 0) && (variable & Constants.BV_bBlood) > 0) //isCling)  
         {
-            if ((variable & Constants.BV_bBlood) > 0)
-                state = Constants.ST_BLOOD;
-            else
-                state = Constants.ST_CLING;
-
-            variable &= ~(Constants.BV_IsMove);     // 붙은상태면 움직이지 않게 함 
+            print("블러드..");
+            state = Constants.ST_BLOOD;
         }
-      /*  else if ((variable & Constants.BV_IsCling) > 0)
+        else if ((variable & Constants.BV_IsCling) > 0)
         {
-            //if ((variable & Constants.BV_IsHold) > 0)
-            //{
-            //    print("이즈홀드");
-            //    state = Constants.ST_HOLD;
-            //}
-            //else
+           /* if ((variable & Constants.BV_IsHold) > 0)
+            {
+                print("이즈홀드");
+                state = Constants.ST_HOLD;
+            }
+            else*/
             {
                 state = Constants.ST_CLING;
                 // print("ismove해제");
@@ -375,7 +371,7 @@ public class PlayerCtrl : MonoBehaviour
 
             //  if((variable & Constants.BV_IsCling) > 0)
 
-        }*/
+        }
         else if((variable & Constants.BV_IsHold) > 0)
         {
             state = Constants.ST_HOLD;
@@ -486,11 +482,11 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (/*(state == Constants.ST_IDLE) ||*/ (variable & Constants.BV_Stick) > 0) // 상태가 IDLE이거나 , 어딘가에 달라붙은 경우라면 움직이지 못함 
         {
-               print("1번");
+             //  print("1번");
         }
         else if ((state == Constants.ST_STUN)) // 플레이어가 스턴상태이면 중력을 받는 것 처럼 떨어뜨림
         {
-             print("2번");
+          //    print("2번");
             // rigidBody.MovePosition(tr.position + (-Vector3.up * Time.deltaTime));
             rigidBody.velocity = (-Vector3.up * 5f * Time.deltaTime);// tr.position + (-Vector3.up * Time.deltaTime);
 
@@ -501,7 +497,7 @@ public class PlayerCtrl : MonoBehaviour
             Debug.DrawRay(tr.position, tr.forward * 1f, Color.blue);
             if (((variable & Constants.BV_ClickRaindrop) > 0) && ((variable & Constants.BV_bCling) > 0))//true == isInRainzone && 
             {
-                  print("3번");
+               //   print("3번");
                 // rigidBody.MovePosition(tr.position + (vDir * fSpeed * Time.deltaTime)); //이녀석
                 rigidBody.velocity = vDir * fSpeed;
                 //   print("vDir : " + vDir);
@@ -540,8 +536,8 @@ public class PlayerCtrl : MonoBehaviour
                 // state로 해도 될걸-수정
                 if ((variable & Constants.BV_IsMove) > 0)
                 {
-                    print("4번 - 전진! ");
-                    print("speed : " +  fSpeed);
+                   // print("4번 - 전진! ");
+                //    print("speed : " +  fSpeed);
                     // 회전 
 
                     // 움직임
@@ -554,7 +550,7 @@ public class PlayerCtrl : MonoBehaviour
                 }
                 else
                 {
-                         print("5번");
+                       //  print("5번");
                     rigidBody.velocity = Vector3.zero;
                 }
             }
