@@ -25,18 +25,18 @@ public class StarColor : MonoBehaviour
         {
             for (int i = 1; i < 9; i++)
             {
-                if (timer.score[i] > 80 && UI.Instance.stage[i] == 1)
+                if (UI.Instance.score[i] > 80 && UI.Instance.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                     image2[i - 1].color = Color.green;
                     image3[i - 1].color = Color.green;
                 }
-                else if (timer.score[i] > 40 && timer.score[i] < 80 && UI.Instance.stage[i] == 1)
+                else if (UI.Instance.score[i] > 40 && UI.Instance.score[i] < 80 && UI.Instance.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                     image2[i - 1].color = Color.green;
                 }
-                else if (timer.score[i] > 5 && timer.score[i] < 40 && UI.Instance.stage[i] == 1)
+                else if (UI.Instance.score[i] > 5 && UI.Instance.score[i] < 40 && UI.Instance.stage[i] == 1)
                 {
                     image[i - 1].color = Color.green;
                 }

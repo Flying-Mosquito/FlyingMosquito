@@ -33,11 +33,7 @@ public class Single : MonoBehaviour
         //PlayerCtrl.Instance.state = Constants.ST_IDLE;
      
 
-        if (Timer.Instance != null)
-        {
-            Timer.Instance.totaltime = 60;
-            Timer.Instance.isEnable = true;
-        }
+       
     }
     public void Multi()
 

@@ -7,6 +7,7 @@ using System.Collections;
    
     public int[] stage = new int[2] { 0, 1 };
     public int[] CheckTimer = new int[2] { 0, 1 };
+    public float[] score = new float[9];
     PlayerCtrl playerctrl = null;
     // Use this for initialization
     void Awake()
@@ -15,6 +16,7 @@ using System.Collections;
        
         stage = new int[9];
         CheckTimer = new int[9];
+        score = new float[9];
         for (int i = 0; i < 9; i++)
         {
             stage[i] = 0;
@@ -32,11 +34,7 @@ using System.Collections;
             {
                 stage[i] = 1;
                 CheckTimer[i] = 1;
-                if (Application.loadedLevelName == "Stage3")
-                    playerctrl.blooding();
-
-                else if (Application.loadedLevelName == "Stage2")
-                    playerctrl.blooding();
+                
 
             }
         }

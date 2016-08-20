@@ -7,12 +7,12 @@ public class Option : MonoBehaviour {
     public Button exit;
     public Button back;
     // Use this for initialization
-
+    public Timer timer;
     public PlayerCtrl playerctrl;
     public bool backBool;
 	void Start () {
         playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();
-
+        timer = GameObject.FindObjectOfType<Timer>();
     }
 	
 	// Update is called once per frame
@@ -25,8 +25,8 @@ public class Option : MonoBehaviour {
             playerctrl.iBlood = 0;
             playerctrl.SetParentNull();
             playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            Timer.Instance.gameover.gameObject.SetActive(false);
-            Timer.Instance.gameClear.gameObject.SetActive(false);
+            timer.gameover.gameObject.SetActive(false);
+            timer.gameClear.gameObject.SetActive(false);
 
             SceneManager.LoadScene(1);
 
