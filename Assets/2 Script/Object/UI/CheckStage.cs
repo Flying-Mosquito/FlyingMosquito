@@ -29,11 +29,11 @@ public class CheckStage : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Timer.Instance != null)
+        if (UI.Instance != null)
         {
             for (int i = 0; i < 5; i++)
             {
-                if (Timer.Instance.stage[i] == 1)
+                if (UI.Instance.stage[i] == 1)
                 {
                     Arr[i] = 1;
                 }

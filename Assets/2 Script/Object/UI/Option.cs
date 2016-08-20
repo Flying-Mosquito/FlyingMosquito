@@ -11,22 +11,17 @@ public class Option : MonoBehaviour {
     public PlayerCtrl playerctrl;
     public bool backBool;
 	void Start () {
-       
-      
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Application.loadedLevelName == "Stage1")
-        {
-            SetPlayer();
-        }
     }
     public void Click()
     {
-        if (!(playerctrl == null))
-        {
+       
             playerctrl.iBlood = 0;
             playerctrl.SetParentNull();
             playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -42,7 +37,7 @@ public class Option : MonoBehaviour {
 
             // Timer.Instance.totaltime = 60;
             // Timer.Instance.isEnable = true;
-        }
+        
     }
     public void SetPlayer()
     {

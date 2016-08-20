@@ -14,9 +14,7 @@ public class Timer : Singleton<Timer>
    public bool isEnable = false;
 
     public float[] score = new float[9];
-    public int[] stage = new int[2] { 0, 1 };
-    public int[] CheckTimer = new int[2] { 0, 1 };
-
+   
     // Use this for initialization
     PlayerCtrl playerctrl=null;
 
@@ -29,12 +27,7 @@ public class Timer : Singleton<Timer>
     {
         DontDestroyOnLoad(this);
         //playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
-        stage = new int[9];
-        CheckTimer = new int[9];
-        for (int i = 0; i < 9; i++)
-        {
-            stage[i] = 0;
-        }
+       
     }
     public void SetPlayer()
     {
@@ -59,7 +52,7 @@ public class Timer : Singleton<Timer>
         }
         if (!(playerctrl== null))
         {
-            CheckS();
+            UI.Instance.CheckS();
 
 
             if (playerctrl.iHP < 5 || totaltime < 1)
@@ -77,7 +70,7 @@ public class Timer : Singleton<Timer>
 
             for (int i = 1; i < 9; i++)
             {
-                if (playerctrl.iBlood > 190 && CheckTimer[i] == 1)
+                if (playerctrl.iBlood > 190 && UI.Instance.CheckTimer[i] == 1)
                 {
                     gameClear.gameObject.SetActive(true);
 
@@ -109,26 +102,7 @@ public class Timer : Singleton<Timer>
 
 
     }
-    public void CheckS()
-    {
-        for (int i = 1; i < 9; i++)
-        {
-            CheckTimer[i] = 0;
-
-            if (Application.loadedLevelName == "Stage" + i.ToString())
-            {
-                stage[i] = 1;
-                CheckTimer[i] = 1;
-                if (Application.loadedLevelName == "Stage3")
-                    playerctrl.blooding();
-                  
-                else if (Application.loadedLevelName == "Stage2")
-                    playerctrl.blooding();
-
-            }
-        }
-
-    }
+   
     public void startTimer()
     {
        
