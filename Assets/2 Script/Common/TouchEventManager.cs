@@ -68,9 +68,9 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                 player.ClingBtUp();
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftBracket))
+            if (Input.GetKey(KeyCode.LeftBracket))
                 player.FlyBtDown();
-            else if (Input.GetKeyDown(KeyCode.RightBracket))
+            else if (Input.GetKey(KeyCode.RightBracket))
                 player.boostdown();
 
             if (Input.GetKeyUp(KeyCode.LeftBracket))
