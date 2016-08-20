@@ -90,7 +90,7 @@ public class PlayerCtrl : MonoBehaviour
         Action();
         RotateAnimation();
         Animate();
-        
+        blooding();
       //  print("Update state:" + state);
 
         /*
