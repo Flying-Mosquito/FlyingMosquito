@@ -6,7 +6,8 @@ public class Smoke : MonoBehaviour {
     PlayerCtrl playerctrl;
     void Start()
         {
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+       // playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();
     }
     void OnCollisionEnter(Collision coll)
     {

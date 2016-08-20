@@ -61,8 +61,8 @@ public class EnemyAI : MonoBehaviour
         if ((playerctrl.state == Constants.ST_BLOOD))
         {
 
-            playerctrl.iBlood += 1;
-            angrygauge += 1;
+            playerctrl.iBlood += 0.3f;
+            angrygauge += 0.3f;
 
         }
 

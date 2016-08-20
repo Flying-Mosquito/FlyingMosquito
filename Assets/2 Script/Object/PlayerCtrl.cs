@@ -41,7 +41,7 @@ public class PlayerCtrl : MonoBehaviour
     private float MAXBOOST;                             // Boost 사용시의 최대 가속도값   
     private float fOwnSpeed;                            // 일반속도 값                  
     private float fRotSpeed;           
-    public  int iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
+    public  float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
     void Awake()
     {
@@ -144,7 +144,7 @@ public class PlayerCtrl : MonoBehaviour
         if ((variable & Constants.BV_bBlood) > 0)
         {
             startTime += Time.deltaTime;
-            //  print(startTime);
+              print(startTime);
         }
         else
         {

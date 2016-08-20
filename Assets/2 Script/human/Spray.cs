@@ -4,12 +4,12 @@ using System.Collections;
 public class Spray : MonoBehaviour {
 
     public Transform OnSpray;
-     EnemyAI enemyai;
+     public EnemyAI enemyai;
     public GameObject human;
     // Use this for initialization
     void Start()
     {
-        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
+        enemyai = GameObject.FindObjectOfType<EnemyAI>();
     }
 
     // Update is called once per frame

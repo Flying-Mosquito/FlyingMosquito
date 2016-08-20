@@ -3,12 +3,13 @@ using System.Collections;
 
 public class heckC : MonoBehaviour
 {
-    EnemyAI enemyai;
+   
     PlayerCtrl playerctrl;
     void Start()
     {
-        playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
-        enemyai = gameObject.GetComponent("EnemyAI") as EnemyAI;
+       // playerctrl = GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        playerctrl = GameObject.FindObjectOfType<PlayerCtrl>();
+        
     }
     void OnCollisionEnter(Collision coll)
     {
