@@ -17,7 +17,7 @@ public class Login : MonoBehaviour
     public string CurrentMenu = "Login";
     //Private Variables
     private string CheckDupUrl = "http://192.168.1.105:8080/check_duplicate";
-    public string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
+    private string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
     private string CheckLoginUrl = "http://192.168.1.105:8080/check_login";
     private string TakeDataUrl = "http://192.168.1.105:8080/get_data";
     private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
@@ -31,6 +31,8 @@ public class Login : MonoBehaviour
     private string Cpassword = "";
     private string Cnickname = "";
     public string AccessNumber = "";
+    private string usrData = "";
+    private string[] userData;
     private int ActiveNum = 4;
     //GUI Test section
 
@@ -64,7 +66,7 @@ public class Login : MonoBehaviour
 
     void LoginGUI(WWW www)
     {
-        GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 4) + 200, (Screen.height / 4) + 250), "Login");
+        GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 2) + 200, (Screen.height / 2) + 250), "Login");
 
         GUI.Label(new Rect(390 - control * 2, 200 - control, 220, 25), "ID");
         Id = GUI.TextField(new Rect(390 - control * 2, 225 - control, 220, 25), Id);
@@ -73,13 +75,13 @@ public class Login : MonoBehaviour
         Password = GUI.TextField(new Rect(390 - control * 2, 275 - control, 220, 25), Password);
 
 
-        if (GUI.Button(new Rect(360 - control * 2- 40, 360 - control, 120, 25), "Create Account"))
+        if (GUI.Button(new Rect(360 - control * 2, 360 - control, 120, 25), "Create Account"))
         {
             CurrentMenu = "CreateAccount";
         }
 
 
-        if (GUI.Button(new Rect(520 - control * 2 - 40, 360 - control, 120, 25), "Log in"))
+        if (GUI.Button(new Rect(520 - control * 2, 360 - control, 120, 25), "Log in"))
         {
             WWWForm form = new WWWForm();
             form.AddField("user_id", Id);
@@ -91,9 +93,10 @@ public class Login : MonoBehaviour
             form.AddField("code", AccessNumber);
             StartCoroutine(CreateAccount(www, TakeDataUrl, form));
 
-           
-                SceneManager.LoadScene(12);
-            
+            //if (ActiveNum == 10)
+            //{
+            SceneManager.LoadScene(12);
+
         }
 
     }
@@ -157,7 +160,7 @@ public class Login : MonoBehaviour
     #endregion
 
     #region CoRoutines
-   public IEnumerator CreateAccount(WWW www,  string url, WWWForm form)
+    private IEnumerator CreateAccount(WWW www, string url, WWWForm form)
     {
 
         www = new WWW(url, form);
@@ -170,7 +173,7 @@ public class Login : MonoBehaviour
         }
         else
         {
-          string textReturn = www.text;
+            string textReturn = www.text;
             if (url == CheckDupUrl)
             {
                 if (textReturn == "0")
@@ -186,7 +189,6 @@ public class Login : MonoBehaviour
             {
                 AccessNumber = textReturn;
                 AccessNumber = AccessNumber.Insert(AccessNumber.Length, "L");
-                Debug.Log(AccessNumber);
             }
             else if (url == CreateAccountUrl)
             {
@@ -195,8 +197,8 @@ public class Login : MonoBehaviour
             }
             else if (url == TakeDataUrl)
             {
-                Debug.Log("TakeData");
-                Debug.Log(textReturn);
+                usrData = textReturn;
+                userData = usrData.Split('/');
                 ActiveNum = 10;
             }
         }
