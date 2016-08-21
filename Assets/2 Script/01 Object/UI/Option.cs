@@ -27,6 +27,7 @@ public class Option : MonoBehaviour {
             playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             timer.gameover.gameObject.SetActive(false);
             timer.gameClear.gameObject.SetActive(false);
+        TimeManager.Instance.DeleteAllObj();
 
             SceneManager.LoadScene(1);
 
