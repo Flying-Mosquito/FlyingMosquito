@@ -9,8 +9,8 @@ public class SelectStage : MonoBehaviour
     public Button back;
     // Use this for initialization
     public int[] stagenum=new int[9];
-   
-   
+  
+
     public bool backBool;
     void Start()
 
@@ -28,34 +28,39 @@ public class SelectStage : MonoBehaviour
     {
 
         print(Application.loadedLevelName);
-        SceneManager.LoadScene(stagenum[0]);
-        
-        
-        
+       
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[0].ToString());
+
+
     }
     public void Stage2()
     {
-        SceneManager.LoadScene(stagenum[1]);
-        
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[1].ToString());
+
     }
     public void Stage3()
     {
-        SceneManager.LoadScene(stagenum[2]);
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[2].ToString());
 
     }
     public void Stage4()
     {
-        SceneManager.LoadScene(stagenum[3]);
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[3].ToString());
 
     }
     public void Stage5()
     {
-        SceneManager.LoadScene(stagenum[4]);
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[4].ToString());
 
     }
     public void Stage6()
     {
-        SceneManager.LoadScene(stagenum[5]);
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[5].ToString());
+
+    }
+    public void Stage7()
+    {
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[6].ToString());
 
     }
 }

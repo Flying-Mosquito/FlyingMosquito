@@ -11,7 +11,7 @@ public class GetStage : Singleton<GetStage>
 
     private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
     private string AccessNumber = "";
-    public string myStage = "";
+    public string myStage = "";//클리어스테이지수
     public Login login;
 
     void Start()

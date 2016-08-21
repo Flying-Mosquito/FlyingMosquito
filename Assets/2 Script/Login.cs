@@ -6,7 +6,7 @@ using System.IO;
 using System.Net;
 using UnityEngine.SceneManagement;
 
-public class Login : MonoBehaviour
+public class Login : Singleton<Login>
 {
     #region Variables
     //Static Variables
@@ -32,7 +32,7 @@ public class Login : MonoBehaviour
     private string Cnickname = "";
     public string AccessNumber = "";
     private string usrData = "";
-    private string[] userData;
+    public string[] userData;
     private int ActiveNum = 4;
     //GUI Test section
 
@@ -95,7 +95,8 @@ public class Login : MonoBehaviour
 
             //if (ActiveNum == 10)
             //{
-            SceneManager.LoadScene(12);
+                SceneManager.LoadScene(1);
+            
 
         }
 

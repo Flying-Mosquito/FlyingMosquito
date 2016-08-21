@@ -33,18 +33,20 @@ public class SpiderCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MOVE();
-        
       
+            MOVE();
+        
         Animate();
     }
     void MOVE()
     {
+        state = eState.MOVE;
+
         if (curWaypoint < Waypoints.Length)
         {
             Target = Waypoints[curWaypoint].position;
             Movedirection = Target - transform.position;
-            Velocity = rigidbody.velocity;
+           
             if (Movedirection.magnitude < 1)
             {
                 curWaypoint++;
@@ -52,23 +54,30 @@ public class SpiderCtrl : MonoBehaviour
             }
             else
             {
-                Velocity = Movedirection.normalized * moveSpeed;
+
+               tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(Waypoints[curWaypoint].position -tr.position), rotationSpeed * Time.deltaTime);
+                tr.position += new Vector3(tr.forward.x * moveSpeed * Time.deltaTime, tr.forward.y * moveSpeed * Time.deltaTime, tr.forward.z * moveSpeed * Time.deltaTime);
+
             }
 
         }
         else
         {
-            if (doPatrol)
-            {
-                curWaypoint = 0;
-            }
-            else
-            {
-                Velocity = Vector3.zero;
-            }
+            curWaypoint = 0;
         }
-        rigidbody.velocity = Velocity;
-        transform.LookAt(Target);
+       
+    }
+
+    void OnCollisionEnter(Collision coll)
+    {
+
+        if (coll.gameObject.tag == "PLAYER")
+        {
+            player.Damaged(30);
+        }
+
+
+       
     }
     void Animate()
     {
