@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // 해야할 일 : 기울기에 따라 플레이어가 너무 움직인다 - 조정필요 
 // 2. 기본 가속도? 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 {
     private Transform tr;
     public  Transform targetPlus;
@@ -43,10 +43,11 @@ public class PlayerCtrl : MonoBehaviour
     private float fRotSpeed;           
     public  float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
-    void Awake()
+    public override void Awake()
     {
-      //  DontDestroyOnLoad(this);
-      
+        //  DontDestroyOnLoad(this);
+
+        base.Awake();
         
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
@@ -76,7 +77,7 @@ public class PlayerCtrl : MonoBehaviour
         MAXBOOST = 10f;
 
     }
-    void FixedUpdate()
+    public override void MyFixedUpdate()//void FixedUpdate()
     {
         prePosition = tr.position;
         Move();
@@ -84,7 +85,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
     }
-    void Update()
+    public override void MyUpdate() //void Update()
     {
         KeyInput();
         Action();
@@ -139,7 +140,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
    
-    public void blooding()
+    private void blooding()
     {
         if ((variable & Constants.BV_bBlood) > 0)
         {
