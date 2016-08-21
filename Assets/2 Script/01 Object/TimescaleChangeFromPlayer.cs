@@ -4,9 +4,9 @@ using System.Collections;
 public class TimescaleChangeFromPlayer : MonoBehaviour {
     public float fLength = 50f;
     public float fAngle = 30f;
-    private PlayerCtrl player = null;
+    public PlayerCtrl player = null;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.FindObjectOfType<PlayerCtrl>(); // GameObject.Find("Player").GetComponent<PlayerCtrl>();
     }
