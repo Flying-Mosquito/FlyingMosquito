@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TimeManager : Singleton<TimeManager>
 {
     public List<TimeAffectedObj> objList;
-    private bool isMenuOpen = false;
+    public bool isMenuOpen = false;
 
     void Awake()
     {
@@ -20,6 +20,7 @@ public class TimeManager : Singleton<TimeManager>
     public void DeleteAllObj()
     {
         objList.Clear();
+        isMenuOpen = false;
     }
 
     public void SetOption(bool _isMenuOpen)

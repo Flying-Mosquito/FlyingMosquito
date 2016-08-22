@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Option : MonoBehaviour {
+    public GameObject option_back;
     public Button exit;
     public Button back;
     // Use this for initialization
@@ -15,10 +16,18 @@ public class Option : MonoBehaviour {
         timer = GameObject.FindObjectOfType<Timer>();
     }
 	
-	// Update is called once per frame
-	void Update () {
-
+    public void OpenMenu()
+    {
+        option_back.SetActive(true);
+        TimeManager.Instance.isMenuOpen = true;
     }
+
+    public void Continue()
+    {
+        option_back.SetActive(false);
+        TimeManager.Instance.isMenuOpen = false;
+    }
+
     public void Click()
     {
        
@@ -28,6 +37,7 @@ public class Option : MonoBehaviour {
             timer.gameover.gameObject.SetActive(false);
             timer.gameClear.gameObject.SetActive(false);
         TimeManager.Instance.DeleteAllObj();
+
 
             SceneManager.LoadScene(1);
 
