@@ -149,7 +149,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
         else
         {
-           
+
             variable &= ~(Constants.BV_bBlood);
         }
 

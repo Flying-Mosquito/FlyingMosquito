@@ -3,7 +3,6 @@ using System.Collections;
 
 public abstract class TimeAffectedObj : MonoBehaviour
 {
-
     public virtual void Awake()
     {
         TimeManager.Instance.AddObj(this);

@@ -18,28 +18,30 @@ public class Option : MonoBehaviour {
 	
     public void OpenMenu()
     {
-        option_back.SetActive(true);
-        TimeManager.Instance.isMenuOpen = true;
+        if (!TimeManager.Instance.isMenuOpen)
+        {
+            option_back.SetActive(true);
+            TimeManager.Instance.SetOption(true);
+        }
     }
 
     public void Continue()
     {
+        TimeManager.Instance.SetOption(false);
         option_back.SetActive(false);
-        TimeManager.Instance.isMenuOpen = false;
+        
     }
 
     public void Click()
     {
-       
-            playerctrl.iBlood = 0;
-            playerctrl.SetParentNull();
-            playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            timer.gameover.gameObject.SetActive(false);
-            timer.gameClear.gameObject.SetActive(false);
+        playerctrl.iBlood = 0;
+        playerctrl.SetParentNull();
+        playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        TimeManager.Instance.SetOption(false);
+        timer.gameover.gameObject.SetActive(false);
+        timer.gameClear.gameObject.SetActive(false);
         TimeManager.Instance.DeleteAllObj();
-
-
-            SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
 
             //PlayerCtrl.Instance.state = Constants.ST_IDLE;
             //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);
