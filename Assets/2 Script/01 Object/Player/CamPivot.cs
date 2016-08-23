@@ -4,7 +4,7 @@ using DG.Tweening;
 
 
 // 플레이어가 전역으로 바뀌었기 때문에 컴퍼넌트 필요 없으니 수정이 필요함 
-public class CamPivot : MonoBehaviour
+public class CamPivot : TimeAffectedObj//MonoBehaviour
 {
     public PlayerCtrl player;
 
@@ -33,11 +33,9 @@ public class CamPivot : MonoBehaviour
     private bool isCollisionOthers;
 
     // Use this for initialization
-    void Awake()
+    public override void Awake()
     {
-
-
-
+        base.Awake();
     }
     void Start()
     {
@@ -72,7 +70,7 @@ public class CamPivot : MonoBehaviour
     }
 
     // 타깃이 움직인 이후에 움직여야 하기 때문에 LateUpdate()
-    void LateUpdate()
+    public override void MyLateUpdate()//void LateUpdate()
     {
         Target_fXAngle = player.fXAngle;
         Target_fYAngle = player.fYAngle;
