@@ -13,7 +13,7 @@ public class PlayerPoint : MonoBehaviour
 
     void Awake()
     {
-        CameraCtrl.Instance.GetComponent<CameraEffect>().SetParentCamp();
+     //   CameraCtrl.Instance.GetComponent<CameraEffect>().SetParentCamp();
         //   PlayerCtrl.Instance.SetStateIdle(true);
 
         CreatePlayer();

@@ -79,11 +79,18 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
     void Update()
     {
+
+        if (TimeManager.Instance.isMenuOpen)
+            return;
         CameraEffct();
     }
 
     void LateUpdate()
     {
+
+        if (TimeManager.Instance.isMenuOpen)
+            return;
+
         if (player == null)
         {
             if (!(targetTr == null))
