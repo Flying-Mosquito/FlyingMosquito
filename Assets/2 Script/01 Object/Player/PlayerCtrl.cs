@@ -8,31 +8,31 @@ using UnityEngine.UI;
 public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 {
     private Transform tr;
-    public  Transform targetPlus;
-    public  Transform equipPoint;
+    public Transform targetPlus;
+    public Transform equipPoint;
     private Transform[] tr_Mesh;
     private GameObject fx_boost;
-    public  GameObject ClingObj;
-    public  GameObject Player_Target;
+    public GameObject ClingObj;
+    public GameObject Player_Target;
     private RainDrop dest_script;
     private Rigidbody rigidBody;
     public Animator anim;
 
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
-    public  Vector3 prePosition;  // 개구리에서쓰고있네..
+    public Vector3 prePosition;  // 개구리에서쓰고있네..
 
     // 플레이어 상태와 변수상태가 들어가 있는 변수 
-    public ulong state { get; private set; }
+    public ulong state;
     public ulong variable;
 
-    public  float iHP { get; private set; }
-    public  float fStamina;                             // 스테미나 총량
-    public  float fXAngle { get; private set; }         // 좌우   회전값
-    public  float fYAngle { get; private set; }         // 위아래 회전값
-    public  float startTime;
+    public float iHP { get; private set; }
+    public float fStamina;                             // 스테미나 총량
+    public float fXAngle { get; private set; }         // 좌우   회전값
+    public float fYAngle { get; private set; }         // 위아래 회전값
+    public float startTime;
     public float fSpeed;//{ get; private set; }          // 플레이어 최종 속도값
-    public  float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
+    public float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
     private float fStaminaMinus;                        // 스테미나 감소량 
     private float fSpeedVal = 2f;                       // 플레이어 속도 증가값 
     private float fBoostMinus = 20f;                    // 부스터 사용 후에 속도감소 변화값 
@@ -40,15 +40,15 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     private float fBoostSpeed;                          // 기본속도에 더해지는 가속도값 
     private float MAXBOOST;                             // Boost 사용시의 최대 가속도값   
     private float fOwnSpeed;                            // 일반속도 값                  
-    private float fRotSpeed;           
-    public  float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
+    private float fRotSpeed;
+    public float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
     public override void Awake()
     {
         //  DontDestroyOnLoad(this);
 
         base.Awake();
-        
+
         tr = GetComponent<Transform>();
         tr_Mesh = GetComponentsInChildren<Transform>();
         equipPoint = GameObject.Find("EquipPoint").transform;
@@ -92,7 +92,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         RotateAnimation();
         Animate();
         blooding();
-      //  print("Update state:" + state);
+        //  print("Update state:" + state);
 
         /*
                  print("┌──────────────────────────────────────────┐");
@@ -139,13 +139,13 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
 
 
-   
+
     private void blooding()
     {
         if ((variable & Constants.BV_bBlood) > 0)
         {
             startTime += Time.deltaTime;
-              print(startTime);
+            print(startTime);
         }
         else
         {
@@ -158,8 +158,8 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             ClingBtUp();
             startTime = 0;
         }
-    
-}
+
+    }
     private void KeyInput()     // StateCheck 로 이름을 바꾸자..
     {
         if (state != Constants.ST_STUN)// && state != Constants.ST_CLING)
@@ -358,12 +358,12 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
         else if ((variable & Constants.BV_IsCling) > 0)
         {
-           /* if ((variable & Constants.BV_IsHold) > 0)
-            {
-                print("이즈홀드");
-                state = Constants.ST_HOLD;
-            }
-            else*/
+            /* if ((variable & Constants.BV_IsHold) > 0)
+             {
+                 print("이즈홀드");
+                 state = Constants.ST_HOLD;
+             }
+             else*/
             {
                 state = Constants.ST_CLING;
                 // print("ismove해제");
@@ -373,12 +373,12 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             //  if((variable & Constants.BV_IsCling) > 0)
 
         }
-        else if((variable & Constants.BV_IsHold) > 0)
+        else if ((variable & Constants.BV_IsHold) > 0)
         {
             state = Constants.ST_HOLD;
         }
 
-  
+
 
         if (((variable & Constants.BV_bCling) > 0) && (variable & Constants.BV_ClickRaindrop) > 0)//true == isInRainzone && // true == bCling )//&& false == isCling ) // rainzone 안에 있고, 빗방울에  붙으려고 할 때 
         {
@@ -483,22 +483,22 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     {
         if (/*(state == Constants.ST_IDLE) ||*/ (variable & Constants.BV_Stick) > 0) // 상태가 IDLE이거나 , 어딘가에 달라붙은 경우라면 움직이지 못함 
         {
-             //  print("1번");
+            //  print("1번");
         }
         else if ((state == Constants.ST_STUN)) // 플레이어가 스턴상태이면 중력을 받는 것 처럼 떨어뜨림
         {
-          //    print("2번");
+            //    print("2번");
             // rigidBody.MovePosition(tr.position + (-Vector3.up * Time.deltaTime));
             rigidBody.velocity = (-Vector3.up * 5f * Time.deltaTime);// tr.position + (-Vector3.up * Time.deltaTime);
 
         }
 
-        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && (variable & Constants.BV_IsHold) > 0) ) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
+        else if ((!(Constants.ST_CLING == state) && !(Constants.ST_BLOOD == state)) || (Constants.ST_CLING == state && (variable & Constants.BV_IsHold) > 0)) // 어딘가에 붙어있지 않다면. 일반적인 움직임, Boost || 물건을 들고있는경우 
         {
             Debug.DrawRay(tr.position, tr.forward * 1f, Color.blue);
             if (((variable & Constants.BV_ClickRaindrop) > 0) && ((variable & Constants.BV_bCling) > 0))//true == isInRainzone && 
             {
-               //   print("3번");
+                //   print("3번");
                 // rigidBody.MovePosition(tr.position + (vDir * fSpeed * Time.deltaTime)); //이녀석
                 rigidBody.velocity = vDir * fSpeed;
                 //   print("vDir : " + vDir);
@@ -527,9 +527,9 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                     _fY = 75f;
 
                 tr.localRotation = Quaternion.Euler(_fY, _fX, 0f);
-        
-          
-                
+
+
+
 
 
 
@@ -537,8 +537,8 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 // state로 해도 될걸-수정
                 if ((variable & Constants.BV_IsMove) > 0)
                 {
-                   // print("4번 - 전진! ");
-                //    print("speed : " +  fSpeed);
+                    // print("4번 - 전진! ");
+                    //    print("speed : " +  fSpeed);
                     // 회전 
 
                     // 움직임
@@ -551,14 +551,14 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 }
                 else
                 {
-                       //  print("5번");
+                    //  print("5번");
                     rigidBody.velocity = Vector3.zero;
                 }
             }
         }
         else // 붙어 있을 시 아무 동작도 하지 않도록 함 
         {
-           // print("6번");
+            // print("6번");
             // tr.Rotate(Vector3.up * fXAngle * Time.deltaTime * fRotSpeed, Space.Self);
             // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);
         }
@@ -653,7 +653,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             Rigidbody rBody = equipPoint.GetComponentInChildren<Rigidbody>();
 
             // Player에게는 RigidBody하나, Collision하나 있으니 그것을 제외하고
-            for(int i = 0; i< colls.Length; ++i)
+            for (int i = 0; i < colls.Length; ++i)
                 colls[i].enabled = true;
             if (!rBody)
                 Time.timeScale = 0f;
@@ -698,8 +698,8 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
         rigidBody.isKinematic = false;
         print("SetParentNull");
-    //   Time.timeScale = 0f;
-        
+        //   Time.timeScale = 0f;
+
         //ClingObj.transform.localScale = Vector3.one;
 
     }
@@ -714,12 +714,12 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             //    Player_Target.transform.parent = tr; // 이건 아이템쪽에서 하게됨 
             Collider[] colls = _item.GetComponentsInChildren<Collider>();
 
-            for(int i = 0; i <colls.Length; ++i)
+            for (int i = 0; i < colls.Length; ++i)
                 colls[i].enabled = false;
-            
+
             _item.GetComponent<Rigidbody>().isKinematic = true;
-           // Player_Target.GetComponent<Collider>().enabled = false;
-           // Player_Target.GetComponent<Rigidbody>().isKinematic = true;
+            // Player_Target.GetComponent<Collider>().enabled = false;
+            // Player_Target.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
@@ -804,7 +804,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 //text.text = "playerDest는 널이 아님 ";
                 if (Player_Target.gameObject == coll.gameObject)    // 충돌한 물체가 목표물과 같다면 달라붙는다 -- 벽이 여기서 에러 
                 {
-                    if(coll.gameObject.layer != LayerMask.NameToLayer("MOVABLE") && (variable & Constants.BV_IsHold) == 0)
+                    if (coll.gameObject.layer != LayerMask.NameToLayer("MOVABLE") && (variable & Constants.BV_IsHold) == 0)
                     {
                         rigidBody.velocity = Vector3.zero;
                         SetParent(coll.transform);
@@ -954,10 +954,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
     public void ClingBtDown()
     {
-      //  print("버튼당운");
+        //  print("버튼당운");
         //variable &= ~(Constants.BV_IsMove);
         //if(state != Constants.ST_HOLD)
-        if(Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
+        if (Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
         {
             variable |= Constants.BV_bCling;
 
@@ -966,7 +966,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 //variable |= Constants.BV_IsHold;
                 variable &= ~(Constants.BV_IsCling);
             }
-            else if( state != Constants.ST_HOLD)
+            else if (state != Constants.ST_HOLD)
             {
                 variable |= Constants.BV_IsCling;
                 variable &= ~(Constants.BV_IsHold);
@@ -974,17 +974,17 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
             return;
         }
-        
+
         // 붙지 않은상태면 붙으려고  하는 상태인지 체크
         if ((Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 10f)))//CollisionManager.Instance.Get_MouseCollisionObj(100f)) != null)
         // if (CollisionManager.Instance.Check_RayHit(tr.position, tr.forward, "WALL", 3f))  // 벽에 붙을지 체크 
-        { 
+        {
             variable |= Constants.BV_bCling;//bCling = true;
                                             //  if((variable & Constants.BV_IsCling) > 0)
                                             //    variable &= ~(Constants.BV_IsMove);
 
 
-  
+
 
 
             //state = Constants.ST_CLING;//|= Constants.ST_CLING;
@@ -1021,7 +1021,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             // state = Constants.ST_FLYING;
 
         }
-        
+
 
     }
 
