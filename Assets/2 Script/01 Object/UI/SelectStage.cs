@@ -27,7 +27,7 @@ public class SelectStage : MonoBehaviour
     public void Stage1()
     {
 
-        print(Application.loadedLevelName);
+       
        
         GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[0].ToString());
 

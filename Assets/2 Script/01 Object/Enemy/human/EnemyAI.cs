@@ -71,11 +71,11 @@ public class EnemyAI : MonoBehaviour
 
            // angrygauge -= 4 * Time.deltaTime;
 
-            if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(target.transform.position.x, 0, 0)) < 5)
+            if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(playerctrl.transform.position.x, 0, 0)) < 5)
             {
                 state = EnemyAI.State.ATTACK;
             }
-            else if (Vector3.Distance(this.transform.position, target.transform.position) > 5)
+            else if (Vector3.Distance(this.transform.position, playerctrl.transform.position) > 5)
             {
                 state = EnemyAI.State.CHASE;
             }

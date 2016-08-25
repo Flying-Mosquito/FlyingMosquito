@@ -9,14 +9,16 @@ public class ChameleonCtrl : MonoBehaviour {
 
     public int iFoodNum; // 만족시켜야 하는 먹이 개수 
     public int iFoodCount; // 먹은 먹이 개수 
-    
+    public PlayerCtrl player;
 
 	// Use this for initialization
 	void Start ()
     {
+        player = GameObject.FindObjectOfType<PlayerCtrl>();
         Anim = GetComponent<Animator>();
         state = eState.IDLE;
         iFoodCount = 0;
+
     }
 	
 	// Update is called once per frame
@@ -28,8 +30,14 @@ public class ChameleonCtrl : MonoBehaviour {
             state = eState.IDLE;
             Anim.SetInteger("iState", 0);
             print("EAT");
+           
         }
-	}
+        if (Application.loadedLevelName == "Stage5" && iFoodCount == 1)
+        {
+            player.iBlood = 200;
+        }
+
+    }
 
     void OnCollisionEnter(Collision _coll)
     {

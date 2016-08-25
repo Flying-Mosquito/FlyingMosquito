@@ -33,7 +33,12 @@ public class SpiderCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(player.transform.position.x, 0, 0)) < 5)
+        {
+            state=eState.ATTACK;
+            player.Damaged(20);
+        }
+        else
             MOVE();
         
         Animate();

@@ -38,6 +38,6 @@ public class Single : MonoBehaviour
     public void Multi()
 
     {
-        SceneManager.LoadScene(14);
+        SceneManager.LoadScene(13);
     }
 }

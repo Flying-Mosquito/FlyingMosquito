@@ -31,7 +31,7 @@ public class CheckStage : MonoBehaviour {
     {
         if (UI.Instance != null)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 8; i++)
             {
                 if (UI.Instance.stage[i] == 1)
                 {
@@ -39,7 +39,7 @@ public class CheckStage : MonoBehaviour {
                 }
             }
             //1성공 2닫힘
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i <8; i++)
             {
                 if ((Arr[i] == 0 && Arr[i + 1] == 1) || (Arr[i] == 1 && Arr[i + 1] == 1))
                 {
