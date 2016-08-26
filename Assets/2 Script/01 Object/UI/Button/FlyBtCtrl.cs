@@ -10,6 +10,12 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     public Transform endTr;       // 부스트의 위치
     public Vector3 startPosition;
     private Vector3 endPosition;
+    private Image image;
+
+    public Sprite idleSp;
+    public Sprite downSp;
+    public Sprite boostSp;
+    private Color idleAlpha;
     //   private bool isMouseDown = false;
     //   private bool isOnTouch = false;
     private float fStraightAngle;
@@ -20,7 +26,9 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     void Start()
     {
         tr = GetComponent<Transform>();
-       // player = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        idleAlpha = new Color(1f, 1f, 1f, 0.3f);
+        image = GetComponent<Image>();
+        // player = GameObject.FindObjectOfType<PlayerCtrl>();//GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
 
         //  startPosition = tr.position;
@@ -95,12 +103,9 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
 
     public override void OnTouchBegin(Vector2 _pos)
     {
-        print("플라이버튼 온터치비긴");
         isMouseDown = true;
-        //isOnTouch = true;
         if (player != null)
         {
-            print("플레이어가 널이 아님");
             if (startPosition == Vector3.zero)
             {
                 startPosition = tr.position;
@@ -111,12 +116,14 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
 
 
             player.FlyBtDown();
+
+            image.sprite = downSp;
+            image.color = Vector4.one;
         }
     }
 
     public override void OnTouchMove(Vector2 _pos)
     {
-        //isOnTouch = true;
         if (player != null)
         {
             tr.position = CalculatePositionBetweenStartPositionAndBoostPosition(_pos.x);//Input.mousePosition;////
@@ -124,6 +131,9 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
             {
                 player.FlyBtUp();
                 player.boostdown();
+
+                image.sprite = boostSp;
+                
             }
             else
             {
@@ -131,12 +141,10 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
                 player.FlyBtDown();
             }
         }
-        //   print("무브 :  " + tr.position);
     }
 
     public override void OnTouchEnd(Vector2 _pos)
     {
-        //isOnTouch = true;
         isMouseDown = false;
         if (player != null)
         {
@@ -144,8 +152,10 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
 
             player.FlyBtUp();
             player.boostup();
+
+            image.sprite = idleSp;
+            image.color = idleAlpha;
         }
-        //   print("엔드 :  " + tr.position);
     }
 
     private Vector3 CalculatePositionBetweenStartPositionAndBoostPosition(float _fX) // 마우스의 x값을 넣어서 y값을 정해주는 함수 

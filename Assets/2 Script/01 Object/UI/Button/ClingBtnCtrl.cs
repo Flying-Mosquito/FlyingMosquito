@@ -8,14 +8,17 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
    // private Transform tr;
    // private bool isMouseDown = false;
     private PlayerCtrl player = null;
-    public Image idleImage;
-    public Image downImage;
+    private Color idleAlpha;
+    private Image image;
+    public Sprite idleSp;
+    public Sprite downSp;
     // Use this for initialization
     void Start ()
     {
         //tr = GetComponent<Transform>();
         //  player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
-       // idleImage = GetComponent<Image>();
+        idleAlpha = new Color(1f, 1f, 1f, 0.3f);
+        image = GetComponent<Image>();
     }
 
 
@@ -28,6 +31,9 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
         //isOnTouch = true;
         if(player!=null)
             player.ClingBtDown(); // left가 되었다
+
+        image.sprite = downSp;
+        image.color = Vector4.one;
        // Text.text = "OnTouchBegin";
     }
     /*
@@ -52,6 +58,8 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
         if(player!=null)
             player.ClingBtUp();
 
+        image.sprite = idleSp;
+        image.color = idleAlpha;
 
         //Text.text = "OnTouchEnd";
     }
