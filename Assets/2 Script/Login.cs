@@ -16,13 +16,13 @@ public class Login : Singleton<Login>
     //Public Variables
     public string CurrentMenu = "Login";
     //Private Variables
-    private string CheckDupUrl = "http://192.168.1.105:8080/check_duplicate";
-    private string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
-    private string CheckLoginUrl = "http://192.168.1.105:8080/check_login";
-    private string TakeDataUrl = "http://192.168.1.105:8080/get_data";
-    private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
-    private string EnterStageUrl = "http://192.168.1.105:8080/enter_stage";
-    private string EndStageUrl = "http://192.168.1.105:8080/end_stage";
+    private string CheckDupUrl = "http://192.168.0.13:8080/check_duplicate";
+    private string CreateAccountUrl = "http://192.168.0.13:8080/make_account";
+    private string CheckLoginUrl = "http://192.168.0.13:8080/check_login";
+    private string TakeDataUrl = "http://192.168.0.13:8080/get_data";
+    private string GetStageUrl = "http://192.168.0.13:8080/get_stage_list";
+    private string EnterStageUrl = "http://192.168.0.13:8080/enter_stage";
+    private string EndStageUrl = "http://192.168.0.13:8080/end_stage";
 
     // private string LoginUrl = "";
     private string ConfrimPass = "";
@@ -41,30 +41,34 @@ public class Login : Singleton<Login>
     public float Width;
     public float Height;
     public float control = 60;
+
+    private WWW www;
     #endregion 
-    // Use this for initialization
+
     void Start()
     {
-
+        www = new WWW("http://");
     }
     void OnGUI()
     {
-        WWW www = new WWW("http://");
+       // WWW www = new WWW("http://");
+        
 
         if (CurrentMenu == "Login")
         {
-            LoginGUI(www);
+            LoginGUI();
+            
         }
         else if (CurrentMenu == "CreateAccount")
         {
-            CreateAccountGUI(www);
+            CreateAccountGUI();
         }
 
     }
 
     #region Custom methods
 
-    void LoginGUI(WWW www)
+    void LoginGUI()
     {
         GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 2) + 200, (Screen.height / 2) + 250), "Login");
 
@@ -87,11 +91,11 @@ public class Login : Singleton<Login>
             form.AddField("user_id", Id);
             form.AddField("user_passwd", Password);
 
-            StartCoroutine(CreateAccount(www, CheckLoginUrl, form));
+            StartCoroutine(CreateAccount(CheckLoginUrl, form));
 
             form = new WWWForm();
             form.AddField("code", AccessNumber);
-            StartCoroutine(CreateAccount(www, TakeDataUrl, form));
+            StartCoroutine(CreateAccount(TakeDataUrl, form));
 
             //if (ActiveNum == 10)
             //{
@@ -111,7 +115,7 @@ public class Login : Singleton<Login>
         }
 
     }
-    void CreateAccountGUI(WWW www)
+    void CreateAccountGUI()
     {
         GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 4) + 200, (Screen.height / 4) + 250), "Create Account");
 
@@ -133,7 +137,7 @@ public class Login : Singleton<Login>
             form.AddField("user_id", CEmail);
             form.AddField("user_nickname", Cnickname);
 
-            StartCoroutine(CreateAccount(www, CheckDupUrl, form));
+            StartCoroutine(CreateAccount(CheckDupUrl, form));
 
             if (ActiveNum == 1)
             {
@@ -141,7 +145,7 @@ public class Login : Singleton<Login>
                 form.AddField("user_id", CEmail);
                 form.AddField("user_nickname", Cnickname);
                 form.AddField("user_passwd", Cpassword);
-                StartCoroutine(CreateAccount(www, CreateAccountUrl, form));
+                StartCoroutine(CreateAccount(CreateAccountUrl, form));
                 if (ActiveNum == 5)
                 {
                     CurrentMenu = "Login";
@@ -161,7 +165,7 @@ public class Login : Singleton<Login>
     #endregion
 
     #region CoRoutines
-    private IEnumerator CreateAccount(WWW www, string url, WWWForm form)
+    private IEnumerator CreateAccount(string url, WWWForm form)
     {
 
         www = new WWW(url, form);
