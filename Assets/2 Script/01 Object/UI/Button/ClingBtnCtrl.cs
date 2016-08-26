@@ -8,11 +8,14 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
    // private Transform tr;
    // private bool isMouseDown = false;
     private PlayerCtrl player = null;
+    public Image idleImage;
+    public Image downImage;
     // Use this for initialization
     void Start ()
     {
         //tr = GetComponent<Transform>();
-      //  player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
+        //  player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
+       // idleImage = GetComponent<Image>();
     }
 
 
@@ -48,6 +51,8 @@ public class ClingBtnCtrl : BaseButton//MonoBehaviour
 
         if(player!=null)
             player.ClingBtUp();
+
+
         //Text.text = "OnTouchEnd";
     }
 
