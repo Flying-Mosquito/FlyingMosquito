@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Net;
+using System;
 using UnityEngine.SceneManagement;
 
 public class Login : Singleton<Login>
 {
     #region Variables
+    
     //Static Variables
     public static string Id = "";
     public static string Password = "";
@@ -178,31 +180,31 @@ public class Login : Singleton<Login>
         }
         else
         {
-            string textReturn = www.text;
+            long textReturn =Convert.ToInt64( www.text);
             if (url == CheckDupUrl)
             {
-                if (textReturn == "0")
+                if (textReturn.ToString() == "0")
                 {
                     ActiveNum = 1;  // 중복이 아닐때 (계정 생성 가능할때)
                 }
-                else if (textReturn == "1")
+                else if (textReturn.ToString() == "1")
                 {
                     ActiveNum = 0;  // 중복일때
                 }
             }
             else if (url == CheckLoginUrl)
             {
-                AccessNumber = textReturn;
+                AccessNumber = textReturn.ToString();
                 AccessNumber = AccessNumber.Insert(AccessNumber.Length, "L");
             }
             else if (url == CreateAccountUrl)
             {
-                if (textReturn == "make account OK")
+                if (textReturn.ToString() == "make account OK")
                     ActiveNum = 5;  // 계정 생성 완료
             }
             else if (url == TakeDataUrl)
             {
-                usrData = textReturn;
+                usrData = textReturn.ToString();
                 userData = usrData.Split('/');
                 ActiveNum = 10;
             }
