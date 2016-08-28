@@ -129,6 +129,7 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
             tr.position = CalculatePositionBetweenStartPositionAndBoostPosition(_pos.x);//Input.mousePosition;////
             if (tr.position == endPosition)
             {
+                endTr.gameObject.SetActive(true);
                 player.FlyBtUp();
                 player.boostdown();
 
@@ -149,7 +150,7 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
         if (player != null)
         {
             tr.position = startPosition;
-
+            endTr.gameObject.SetActive(false);
             player.FlyBtUp();
             player.boostup();
 

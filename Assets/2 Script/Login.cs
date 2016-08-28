@@ -18,13 +18,13 @@ public class Login : Singleton<Login>
     //Public Variables
     public string CurrentMenu = "Login";
     //Private Variables
-    private string CheckDupUrl = "http://192.168.0.13:8080/check_duplicate";
-    private string CreateAccountUrl = "http://192.168.0.13:8080/make_account";
-    private string CheckLoginUrl = "http://192.168.0.13:8080/check_login";
-    private string TakeDataUrl = "http://192.168.0.13:8080/get_data";
-    private string GetStageUrl = "http://192.168.0.13:8080/get_stage_list";
-    private string EnterStageUrl = "http://192.168.0.13:8080/enter_stage";
-    private string EndStageUrl = "http://192.168.0.13:8080/end_stage";
+    private string CheckDupUrl = "http://192.168.1.105:8080/check_duplicate";
+    private string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
+    private string CheckLoginUrl = "http://192.168.1.105:8080/check_login";
+    private string TakeDataUrl = "http://192.168.1.105:8080/get_data";
+    private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
+    private string EnterStageUrl = "http://192.168.1.105:8080/enter_stage";
+    private string EndStageUrl = "http://192.168.1.105:8080/end_stage";
 
     // private string LoginUrl = "";
     private string ConfrimPass = "";
@@ -101,8 +101,8 @@ public class Login : Singleton<Login>
 
             //if (ActiveNum == 10)
             //{
-                SceneManager.LoadScene(1);
-            
+            SceneManager.LoadScene(1);
+          
 
         }
 
@@ -171,7 +171,7 @@ public class Login : Singleton<Login>
     {
 
         www = new WWW(url, form);
-
+        Debug.Log(Convert.ToInt64(www.text));
         yield return www;
         if (www.error != null)
         {
@@ -180,6 +180,7 @@ public class Login : Singleton<Login>
         }
         else
         {
+            
             long textReturn =Convert.ToInt64( www.text);
             if (url == CheckDupUrl)
             {
