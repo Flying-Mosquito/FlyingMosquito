@@ -32,12 +32,22 @@ using System.Collections;
 
             if (Application.loadedLevelName == "Stage" + i.ToString())
             {
-                
 
-                  
+                if (Application.loadedLevelName == "Stage6")
+                {
+
+                    Sleep = GameObject.FindObjectOfType<SleepHuman>();
+                    if (Sleep.Sleep1 == true && Sleep.Sleep2 == true)
+                    {
+                        stage[6] = 1;
+                        CheckTimer[6] = 1;
+                    }
+                }
+
+                else {
                     stage[i] = 1;
                     CheckTimer[i] = 1;
-             
+                }
 
             }
         }

@@ -36,7 +36,10 @@ public class ChameleonCtrl : MonoBehaviour {
         {
             player.iBlood = 200;
         }
-
+        if (Application.loadedLevelName == "Stage8" && iFoodCount == 2)
+        {
+            player.iBlood = 200;
+        }
     }
 
     void OnCollisionEnter(Collision _coll)

@@ -12,9 +12,9 @@ public class Timer :MonoBehaviour
     public Transform gameClear;
     public float totaltime = 60;
    public bool isEnable = false;
+    public SleepHuman Sleep;
 
-   
-   
+
     // Use this for initialization
     PlayerCtrl playerctrl=null;
 
@@ -64,15 +64,18 @@ public class Timer :MonoBehaviour
             {
                 if (playerctrl.iBlood > 190 && UI.Instance.CheckTimer[i] == 1)
                 {
-                    gameClear.gameObject.SetActive(true);
+                   
 
-                    StopTimer();
+                        
+                        gameClear.gameObject.SetActive(true);
+
+                        StopTimer();
 
 
-                    UI.Instance.score[i] = (totaltime * 2);
-                    ScoreText.text = UI.Instance.score[i].ToString();
+                        UI.Instance.score[i] = (totaltime * 2);
+                        ScoreText.text = UI.Instance.score[i].ToString();
 
-
+                   
                 }
 
             }

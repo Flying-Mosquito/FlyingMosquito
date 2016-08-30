@@ -49,7 +49,14 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         playerctrl = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
-        state = EnemyAI.State.PATROL;
+
+        if (Application.loadedLevelName == "Stage9")
+        {
+            state = EnemyAI.State.LAID;
+        }
+        else {
+            state = EnemyAI.State.PATROL;
+        }
         alive = true;
         StartCoroutine("FSM");
     }
@@ -62,7 +69,7 @@ public class EnemyAI : MonoBehaviour
         {
 
             playerctrl.iBlood += 0.3f;
-            angrygauge += 0.3f;
+            angrygauge += 0.1f;
 
         }
 
