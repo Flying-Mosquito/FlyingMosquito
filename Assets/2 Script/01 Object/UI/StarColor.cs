@@ -27,18 +27,18 @@ public class StarColor : MonoBehaviour
             {
                 if (UI.Instance.score[i] > 80 && UI.Instance.stage[i] == 1)
                 {
-                    image[i - 1].color = Color.green;
-                    image2[i - 1].color = Color.green;
-                    image3[i - 1].color = Color.green;
+                    image[i - 1].color = Color.cyan;
+                    image2[i - 1].color = Color.cyan;
+                    image3[i - 1].color = Color.cyan;
                 }
                 else if (UI.Instance.score[i] > 40 && UI.Instance.score[i] < 80 && UI.Instance.stage[i] == 1)
                 {
-                    image[i - 1].color = Color.green;
-                    image2[i - 1].color = Color.green;
+                    image[i - 1].color = Color.cyan;
+                    image2[i - 1].color = Color.cyan;
                 }
                 else if (UI.Instance.score[i] > 5 && UI.Instance.score[i] < 40 && UI.Instance.stage[i] == 1)
                 {
-                    image[i - 1].color = Color.green;
+                    image[i - 1].color = Color.cyan;
                 }
             }
         }
