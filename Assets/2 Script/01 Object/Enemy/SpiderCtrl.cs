@@ -35,8 +35,8 @@ public class SpiderCtrl : MonoBehaviour
     {
         if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(player.transform.position.x, 0, 0)) < 5)
         {
-            state=eState.ATTACK;
-            player.Damaged(20);
+            state = eState.ATTACK;
+
         }
         else
             MOVE();
@@ -73,17 +73,7 @@ public class SpiderCtrl : MonoBehaviour
        
     }
 
-    void OnCollisionEnter(Collision coll)
-    {
-
-        if (coll.gameObject.tag == "PLAYER")
-        {
-            player.Damaged(30);
-        }
-
-
-       
-    }
+   
     void Animate()
     {
         switch (state)

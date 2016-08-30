@@ -13,8 +13,8 @@ public class SleepHuman : MonoBehaviour {
     void Start()
     {
         
-        enemy1 = GameObject.Find("human").GetComponent<EnemyAI>();
-        enemy2 = GameObject.Find("human(1)").GetComponent<EnemyAI>();
+        enemy1 = GameObject.Find("Human").GetComponent<EnemyAI>();
+        enemy2 = GameObject.Find("human-2").GetComponent<EnemyAI>();
     }
 	// Update is called once per frame
 	void Update () {
