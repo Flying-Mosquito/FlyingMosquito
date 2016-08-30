@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 
 public class CheckStage : MonoBehaviour {
-    public Transform Stage1;
-    public Transform Stage2;
+   
     
     private int iStage = 9;
   
@@ -35,6 +34,7 @@ public class CheckStage : MonoBehaviour {
             {
                 if (UI.Instance.stage[i] == 1)
                 {
+                   
                     Arr[i] = 1;
                 }
             }
@@ -48,7 +48,7 @@ public class CheckStage : MonoBehaviour {
             }
             if (Arr[1] == 2)
             {
-                Stage2.Find("2-1").gameObject.SetActive(true);
+                
             }
 
 

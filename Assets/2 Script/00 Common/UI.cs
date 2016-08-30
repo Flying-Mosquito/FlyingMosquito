@@ -4,7 +4,7 @@ using System.Collections;
  public class UI : Singleton<UI>
 {
 
-   
+    public SleepHuman Sleep;
     public int[] stage = new int[2] { 0, 1 };
     public int[] CheckTimer = new int[2] { 0, 1 };
     public float[] score = new float[9];
@@ -32,9 +32,12 @@ using System.Collections;
 
             if (Application.loadedLevelName == "Stage" + i.ToString())
             {
-                stage[i] = 1;
-                CheckTimer[i] = 1;
                 
+
+                  
+                    stage[i] = 1;
+                    CheckTimer[i] = 1;
+             
 
             }
         }
