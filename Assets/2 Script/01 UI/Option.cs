@@ -41,7 +41,9 @@ public class Option : MonoBehaviour {
         timer.gameover.gameObject.SetActive(false);
         timer.gameClear.gameObject.SetActive(false);
         TimeManager.Instance.DeleteAllObj();
+        SoundManager.Instance.ClearSoundList();
         SceneManager.LoadScene(1);
+        
 
             //PlayerCtrl.Instance.state = Constants.ST_IDLE;
             //PlayerCtrl.Instance.variable &= ~(Constants.BV_Stick);

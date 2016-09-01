@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//게임내에서사운드바꿀거 생각해서
 public class SoundManager : Singleton<SoundManager>
 {
     public List<AudioSource> backgroundAudioList = new List<AudioSource>();
@@ -10,8 +11,15 @@ public class SoundManager : Singleton<SoundManager>
     public float backgroundSound = 1f;
     public float effectSound = 1f;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+        print("SoundAwake");
+    }
+
     public void AddBackgroundSound(AudioSource _source)
     {
+        print("Adddd");
         backgroundAudioList.Add(_source);
     }
     public void AddEffectSound(AudioSource _source)
@@ -25,7 +33,7 @@ public class SoundManager : Singleton<SoundManager>
         effectAudioList.Clear();
     }
 
-    public void SetBackgroundSound()
+    public void SetSound()
     {
       //  float sound = _sound / MAXSOUND;
        // if (sound > 1f)
@@ -35,8 +43,13 @@ public class SoundManager : Singleton<SoundManager>
         {
             backgroundAudioList[i].volume = backgroundSound;
         }
-    }
 
+        for (int i = 0; i < effectAudioList.Count; ++i)
+        {
+            effectAudioList[i].volume = effectSound;
+        }
+    }
+    /*
     public void SetEffectSound()
     {
        // float sound = _sound / MAXSOUND;
@@ -48,4 +61,5 @@ public class SoundManager : Singleton<SoundManager>
             effectAudioList[i].volume = effectSound;
         }
     }
+    */
 }
