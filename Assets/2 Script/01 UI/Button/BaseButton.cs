@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//TouchManager와 연관
 public abstract class BaseButton : MonoBehaviour
 {
     public bool isMouseDown = false;
