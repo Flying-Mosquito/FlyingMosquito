@@ -5,8 +5,8 @@ using System.Collections.Generic;
 //게임내에서사운드바꿀거 생각해서
 public class SoundManager : Singleton<SoundManager>
 {
-    public List<AudioSource> backgroundAudioList = new List<AudioSource>();
-    public List<AudioSource> effectAudioList     = new List<AudioSource>();
+    public  List<AudioSource> backgroundAudioList = new List<AudioSource>();
+    public  List<AudioSource> effectAudioList     = new List<AudioSource>();
     //private int MAXSOUND = 1f;
     public float backgroundSound = 1f;
     public float effectSound = 1f;
