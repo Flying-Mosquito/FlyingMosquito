@@ -171,7 +171,7 @@ public class Login : Singleton<Login>
     {
 
         www = new WWW(url, form);
-        Debug.Log(Convert.ToInt64(www.text));
+        //Debug.Log(Convert.ToInt64(www.text));
         yield return www;
         if (www.error != null)
         {
@@ -180,7 +180,6 @@ public class Login : Singleton<Login>
         }
         else
         {
-            
             long textReturn =Convert.ToInt64( www.text);
             if (url == CheckDupUrl)
             {

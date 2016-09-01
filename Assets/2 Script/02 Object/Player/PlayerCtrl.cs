@@ -145,7 +145,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         if ((variable & Constants.BV_bBlood) > 0)
         {
             startTime += Time.deltaTime;
-            print(startTime);
         }
         else
         {
@@ -353,7 +352,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
         if (((variable & Constants.BV_IsCling) > 0) && (variable & Constants.BV_bBlood) > 0) //isCling)  
         {
-            print("블러드..");
             state = Constants.ST_BLOOD;
         }
         else if ((variable & Constants.BV_IsCling) > 0)
@@ -697,7 +695,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         variable &= ~(Constants.BV_Stick);
 
         rigidBody.isKinematic = false;
-        print("SetParentNull");
         //   Time.timeScale = 0f;
 
         //ClingObj.transform.localScale = Vector3.one;

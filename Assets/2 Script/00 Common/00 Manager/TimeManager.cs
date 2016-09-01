@@ -41,7 +41,6 @@ public class TimeManager : Singleton<TimeManager>
         else
         {
             Time.timeScale = fPreTimeScale;  // = 1f;
-            print("타임스케일: " + fPreTimeScale);
         }
             
     }

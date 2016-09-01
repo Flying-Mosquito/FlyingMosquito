@@ -82,7 +82,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    print("온터치비긴");
                     begin("OnTouchBegin", Input.mousePosition.x, Input.mousePosition.y, 0);
                 }
                 else
@@ -192,7 +191,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                     }
                     else  // 터치는 했는데 충돌을 안했으면 버튼에 터치를 안한거지
                     {
-                        print("3d물체 터치");
                         isTouchBegin3DObj = true;
                         //3d체크, Raindrop만 체크함
                         Ray ray = Camera.main.ScreenPointToRay(_pos);
@@ -202,7 +200,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
                         //Physics.Raycast(ray, out hit, _fDist, 1 << LayerMask.NameToLayer(_Layer));
                         if (Physics.Raycast(ray, out hit, 1000f, 1 << LayerMask.NameToLayer("RAINDROP")))
                         {
-                            print("raindrop클릭!!!!");
                             raindrop = hit.collider.gameObject;
                         }
                         //else
