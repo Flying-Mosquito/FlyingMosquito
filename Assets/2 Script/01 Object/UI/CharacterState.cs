@@ -44,7 +44,7 @@ public class CharacterState : MonoBehaviour
 
 
          FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
-         ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
+        ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
         clingbt.SetPlayer(playerctrl);
         flybt.SetPlayer(playerctrl);
 

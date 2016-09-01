@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ClingBtnCtrl : BaseButton//MonoBehaviour
+public class ClingBtCtrl : BaseButton//MonoBehaviour
 {
   //  public Text Text;
    // private Transform tr;

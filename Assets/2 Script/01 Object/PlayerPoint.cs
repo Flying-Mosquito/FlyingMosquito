@@ -63,7 +63,7 @@ public class PlayerPoint : MonoBehaviour
                     TouchEventManager.Instance.SetPlayer(player);
                     //UI.Instance.SetPlayer(player);
                     FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
-                    ClingBtnCtrl clingbt = GameObject.FindObjectOfType<ClingBtnCtrl>();
+                    ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
                     clingbt.SetPlayer(null);
                     flybt.SetPlayer(null);
                     //Timer.Instance.enabled = false;
