@@ -12,7 +12,10 @@ public class MainMenuSoundCtrl : MonoBehaviour {
         // slider가 하나 더 들어오면 수정할거야 
         slider = GetComponentInChildren<Slider>();
         GO = GetComponentInChildren<Toggle>();
-        Check = GO.isOn;
+        if (Check == GO.isOn)
+            return;
+        else
+            GO.isOn=Check;
     }
     public void SetSound()
     {
@@ -23,6 +26,6 @@ public class MainMenuSoundCtrl : MonoBehaviour {
     }
     public void mark()
     {
-        GO.isOn = Check;
+        Check = GO.isOn;
     }
 }
