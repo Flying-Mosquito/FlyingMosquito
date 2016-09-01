@@ -140,6 +140,8 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
             {
                 player.boostup();
                 player.FlyBtDown();
+
+                image.sprite = downSp;
             }
         }
     }
