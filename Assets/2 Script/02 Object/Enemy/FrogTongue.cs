@@ -3,7 +3,7 @@ using System.Collections;
 
 // 개구리의 원점(Tongue)에 들어갈 코드
 // Tongue는 TongeObject를 가지고 있다.
-public class FrogTongue : MonoBehaviour
+public class FrogTongue : TimeAffectedObj
 {
 
     //private Transform tr;
@@ -35,12 +35,14 @@ public class FrogTongue : MonoBehaviour
 
 
                 vDir = _vDir;
-
+            print("---!!!!!!!!!!!!!!!!!!!!!");
+           // TimeManager.Instance.SetOption(true);
         }
     }
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         //tr = GetComponent<Transform>();
          child_tr = GetComponentInChildren<Transform>();
         //Tongue_tr = transform.parent.FindChild("Tongue");
@@ -52,15 +54,12 @@ public class FrogTongue : MonoBehaviour
         bIdle = true;
         fSpeed = 100f;// 2.5f;
     }
-    void FixedUpdate()
-    {
-        MoveTongue();
-    }
+
     // Update is called once per frame
-    void Update()
+    public override void MyUpdate()
     {
 
-        //MoveTongue();
+        MoveTongue();
     }
 
     private void MoveTongue()
