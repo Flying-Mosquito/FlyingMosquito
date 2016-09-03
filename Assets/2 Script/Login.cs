@@ -18,13 +18,13 @@ public class Login : Singleton<Login>
     //Public Variables
     public string CurrentMenu = "Login";
     //Private Variables
-    private string CheckDupUrl = "http://192.168.81.2:8080/check_duplicate";
-    private string CreateAccountUrl = "http://192.168.81.2:8080/make_account";
-    private string CheckLoginUrl = "http://192.168.81.2:8080/check_login";
-    private string TakeDataUrl = "http://192.168.81.2:8080/get_data";
-    private string GetStageUrl = "http://192.168.81.2:8080/get_stage_list";
-    private string EnterStageUrl = "http://192.168.81.2:8080/enter_stage";
-    private string EndStageUrl = "http://192.168.81.2:8080/end_stage";
+    private string CheckDupUrl = "http://192.168.1.105:8080/check_duplicate";
+    private string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
+    private string CheckLoginUrl = "http://192.168.1.105:8080/check_login";
+    private string TakeDataUrl = "http://192.168.1.105:8080/get_data";
+    private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
+    private string EnterStageUrl = "http://192.168.1.105:8080/enter_stage";
+    private string EndStageUrl = "http://192.168.1.105:8080/end_stage";
 
     // private string LoginUrl = "";
     private string ConfrimPass = "";
@@ -99,9 +99,8 @@ public class Login : Singleton<Login>
             form.AddField("code", AccessNumber);
             StartCoroutine(CreateAccount(TakeDataUrl, form));
 
-           // if (ActiveNum == 10)
-            //{
-            SceneManager.LoadScene(1);
+           // if (ActiveNum == 10)   
+                SceneManager.LoadScene(1);
           
 
         }
@@ -171,8 +170,8 @@ public class Login : Singleton<Login>
     {
 
         www = new WWW(url, form);
-        print("www : " + www.progress);
         //Debug.Log(Convert.ToInt64(www.text));
+        //print("www.bytesDownloaded : " + www.bytesDownloaded);
         yield return www;
         if (www.error != null)
         {
@@ -186,10 +185,12 @@ public class Login : Singleton<Login>
             {
                 if (textReturn.ToString() == "0")
                 {
+                    print("ActiveNum = 1");
                     ActiveNum = 1;  // 중복이 아닐때 (계정 생성 가능할때)
                 }
                 else if (textReturn.ToString() == "1")
                 {
+                    print("ActiveNum = 0");
                     ActiveNum = 0;  // 중복일때
                 }
             }
@@ -197,14 +198,17 @@ public class Login : Singleton<Login>
             {
                 AccessNumber = textReturn.ToString();
                 AccessNumber = AccessNumber.Insert(AccessNumber.Length, "L");
+                print("CheckLoginUrl");
             }
             else if (url == CreateAccountUrl)
             {
+                print("active = 5");
                 if (textReturn.ToString() == "make account OK")
                     ActiveNum = 5;  // 계정 생성 완료
             }
             else if (url == TakeDataUrl)
             {
+                print("active = 10");
                 usrData = textReturn.ToString();
                 userData = usrData.Split('/');
                 ActiveNum = 10;
