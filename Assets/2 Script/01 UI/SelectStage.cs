@@ -28,9 +28,8 @@ public class SelectStage : MonoBehaviour
     {
 
         SoundManager.Instance.ClearSoundList();
-
-        //GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[0].ToString());
-        GameManager.Instance.StartCoroutine("StartLoad", "Stage99");
+       
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[0].ToString());
 
 
     }
