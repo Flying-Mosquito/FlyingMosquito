@@ -7,17 +7,17 @@ using System.Collections;
     public SleepHuman Sleep;
     public int[] stage = new int[2] { 0, 1 };
     public int[] CheckTimer = new int[2] { 0, 1 };
-    public float[] score = new float[9];
+    public float[] score = new float[16];
     PlayerCtrl playerctrl = null;
     // Use this for initialization
     void Awake()
     {
         DontDestroyOnLoad(this);
        
-        stage = new int[9];
-        CheckTimer = new int[9];
-        score = new float[9];
-        for (int i = 0; i < 9; i++)
+        stage = new int[16];
+        CheckTimer = new int[16];
+        score = new float[16];
+        for (int i = 0; i < 15; i++)
         {
             stage[i] = 0;
         }
@@ -26,7 +26,7 @@ using System.Collections;
     }
     public void CheckS()
     {
-        for (int i = 1; i < 9; i++)
+        for (int i = 1; i < 16; i++)
         {
             CheckTimer[i] = 0;
 

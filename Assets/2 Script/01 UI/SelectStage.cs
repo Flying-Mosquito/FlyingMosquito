@@ -8,7 +8,7 @@ public class SelectStage : MonoBehaviour
     public Button exit;
     public Button back;
     // Use this for initialization
-    public int[] stagenum=new int[9];
+    public int[] stagenum=new int[16];
   
 
     public bool backBool;
@@ -69,4 +69,59 @@ public class SelectStage : MonoBehaviour
         GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[6].ToString());
 
     }
+    public void Stage8()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[7].ToString());
+
+    }
+    public void Stage9()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[8].ToString());
+
+    }
+    public void Stage10()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[9].ToString());
+
+    }
+    public void Stage11()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[10].ToString());
+
+    }
+    public void Stage12()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[11].ToString());
+
+    }
+    public void Stage13()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[12].ToString());
+
+    }
+    public void Stage14()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[13].ToString());
+
+    }
+    public void Stage15()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[14].ToString());
+
+    }
+    public void Stage16()
+    {
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[15].ToString());
+
+    }
+
 }

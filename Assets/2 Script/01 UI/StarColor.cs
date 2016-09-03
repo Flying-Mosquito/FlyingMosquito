@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class StarColor : MonoBehaviour
 {
-    public Transform[] star = new Transform[9];
-    public Image[] image = new Image[9];
-    public Image[] image2 = new Image[9];
-    public Image[] image3 = new Image[9];
+    public Transform[] star = new Transform[16];
+    public Image[] image = new Image[16];
+    public Image[] image2 = new Image[16];
+    public Image[] image3 = new Image[16];
     public SelectStage select;
     public Timer timer;
     // Use this for initialization

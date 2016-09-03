@@ -1,0 +1,96 @@
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 820M   (ID=0x1140)
+    Vendor:   NVIDIA
+    VRAM:     1994 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DemiLib.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DemiLib.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween43.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween43.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween46.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween46.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween50.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTween50.dll into Unity Child Domain
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTweenPro.dll (this message is harmless)
+Loading C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\DOTweenPro.dll into Unity Child Domain
+- Completed reload, in  0.168 seconds
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\taehee\Documents\GitHub\FlyingMosquito\Mosquito_Data\Managed\System.dll (this message is harmless)
+OnLevelWasLoaded was found on DOTweenComponent
+This message has been deprecated and will be removed in a later version of Unity.
+Add a delegate to SceneManager.sceneLoaded instead to get notifications after scene loading has completed
+ 
+(Filename:  Line: 375)
+
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 3.038054 ms
+SoundAwake
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 1bb4 -> priority: 1 
+timee:0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 10.488895 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 323.
+Total: 0.681026 ms (FindLiveObjects: 0.039243 ms CreateObjectMapping: 0.053733 ms MarkObjects: 0.553635 ms  DeleteObjects: 0.033206 ms)
+
+클릭
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.731583 ms
+dddd
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1135.
+Total: 4.751488 ms (FindLiveObjects: 0.114711 ms CreateObjectMapping: 0.074864 ms MarkObjects: 2.002024 ms  DeleteObjects: 2.558679 ms)
+
+Adddd
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+timee:0.09999999
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 10 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.500311 ms
+Adddd
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+
+Unloading 45 unused Assets to reduce memory usage. Loaded Objects now: 921.
+Total: 4.119365 ms (FindLiveObjects: 0.103240 ms CreateObjectMapping: 0.092977 ms MarkObjects: 1.163420 ms  DeleteObjects: 2.757916 ms)
+
+TouchEvent - SetPlayer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
