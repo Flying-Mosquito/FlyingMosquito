@@ -16,7 +16,7 @@ public class RainDrop : MonoBehaviour
 
     public Vector3 vGravity;
 
-    void Awake()
+    void Start()
     {
         player = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>(); 
         rigidBody = GetComponent<Rigidbody>();
@@ -31,10 +31,6 @@ public class RainDrop : MonoBehaviour
         //vGravity = Vector3.zero;
 
     }
-    void Start()
-    {
-        // rigidBody.AddForce(new Vector3(0f, -1f, 0f) * fSpeed);
-    }
 
     void FixedUpdate()
     {
@@ -44,11 +40,7 @@ public class RainDrop : MonoBehaviour
         //  rigidBody.MovePosition(transform.position + ( vGravity * Time.fixedDeltaTime));
         //rigidBody.velocity = vGravity;
     }
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+ 
     void OnCollisionEnter(Collision coll)
     {
         if ("RAINDROP" == coll.gameObject.tag)
@@ -71,10 +63,7 @@ public class RainDrop : MonoBehaviour
                     //else
                     //  PlayerCtrl.Instance // bCling상태면 , click을 해제해줘도 됨...? 클릭상태 해제 후, 플레이어가 다른 오브젝트에 충돌하면 bCling상태를 지워줌 
                 }
-
                 isPlop = true;
-
-
                 StartCoroutine("Plop");
             }
 
