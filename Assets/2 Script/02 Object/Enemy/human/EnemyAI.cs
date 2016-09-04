@@ -66,7 +66,7 @@ public class EnemyAI : MonoBehaviour
                 return;
         }
 
-        if ((playerctrl.state == Constants.ST_BLOOD))
+        if ((playerctrl.state == Constants.ST_BLOOD) && Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(playerctrl.transform.position.x, 0, 0)) < 3)
         {
 
             playerctrl.iBlood += 0.3f;

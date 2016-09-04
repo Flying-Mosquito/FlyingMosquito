@@ -32,12 +32,8 @@ public class SpiderL : MonoBehaviour
 
     void Update()
     {
-
-        if (Vector3.Distance(new Vector3(0, 0, this.transform.position.z), new Vector3(0, 0,cow.transform.position.z)) < 0.1)
-        {
-
-            this.transform.gameObject.SetActive(false);
-        }
+      
+        
         if (check[0]==true && check[1] == true&& check[0] == true)
         {
             this.transform.gameObject.SetActive(false);
