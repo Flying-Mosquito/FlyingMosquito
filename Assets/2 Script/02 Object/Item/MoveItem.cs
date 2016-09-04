@@ -22,6 +22,6 @@ public class MoveItem : MonoBehaviour
     }
     public void Click()
     {
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(3);
     }
 }
