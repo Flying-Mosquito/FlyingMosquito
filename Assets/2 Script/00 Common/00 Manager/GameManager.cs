@@ -11,7 +11,8 @@ public class GameManager : Singleton<GameManager> {
     public static string strSceneName;
     public float fAlpha;
     public float fAlphaSpeed;
-    public bool bSceneChange;
+    public bool bSceneChange;   // 페이드 아웃 후 씬을 바꿀 수 있는지    // ??필요 없을 것 같은데?
+    public bool isLoadingDone;  // 로딩 완료 후 씬을 바꿀 수 있는지
   //  private Animator Anim;
 
     public float waitForLoadingSeconds;
@@ -27,6 +28,7 @@ public class GameManager : Singleton<GameManager> {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         bSceneChange = false;
+        isLoadingDone = false;
         //  Anim = GetComponent<Animator>();
         isFadeOut = false;
         strSceneName = null;
@@ -36,7 +38,7 @@ public class GameManager : Singleton<GameManager> {
 
         // Init_Singleton();
     }
-    void Update()
+   /* void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -50,7 +52,7 @@ public class GameManager : Singleton<GameManager> {
             }
         }
     }
-
+    */
     public IEnumerator FadeOut()  // 장면이 어두워진다
     {
         //Anim.SetBool("isFadeOut", true);
@@ -93,6 +95,52 @@ public class GameManager : Singleton<GameManager> {
 
     }
 
+    public IEnumerator StartSceneLoadWithLoading(string strSceneName)   // 로딩씬 불러옴 
+    {
+
+        if (isLoadGame == false)
+        {
+            isLoadGame = true;
+
+            AsyncOperation async = SceneManager.LoadSceneAsync("Loading");//Application.LoadLevelAsync(strSceneName);
+
+
+            async.allowSceneActivation = false; // 씬을 로딩후 자동으로 넘어가지 못하게 한다.
+
+            StartCoroutine("FadeOut");
+
+            while (!async.isDone)
+            {
+                time += Time.deltaTime;
+
+                if (time >= waitForLoadingSeconds)  // waitForLoadingSeconds는 현재 2으로 설정해 놓았다.
+                {
+                    //isLoadGame = false;
+                    async.allowSceneActivation = true;  // 2초 후에 씬을 넘김 
+                    //UIManager.isFadeOut = false;
+                    bSceneChange = false;
+                    time = 0f;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+
+
+            async = SceneManager.LoadSceneAsync(strSceneName);
+            async.allowSceneActivation = false;
+            StartCoroutine("FadeIn");
+
+            while (!async.isDone)
+            {
+                if (isLoadingDone)
+                {
+                    isLoadGame = false;
+                    async.allowSceneActivation = true;
+                    bSceneChange = false;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
+    }
     public IEnumerator StartLoad(string strSceneName)
     {
         /*if ( "00 Logo" == Application.loadedLevelName )
