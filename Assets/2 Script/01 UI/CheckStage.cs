@@ -21,7 +21,7 @@ public class CheckStage : MonoBehaviour {
     void Awake () {
         selectstage = gameObject.GetComponent("SelectStage") as SelectStage;
         Arr = new int[iStage];
-        print("dddd");
+
        
     }
 

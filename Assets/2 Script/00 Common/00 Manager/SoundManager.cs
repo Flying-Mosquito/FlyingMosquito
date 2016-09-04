@@ -14,12 +14,12 @@ public class SoundManager : Singleton<SoundManager>
     void Awake()
     {
         DontDestroyOnLoad(this);
-        print("SoundAwake");
+
     }
 
     public void AddBackgroundSound(AudioSource _source)
     {
-        print("Adddd");
+
         backgroundAudioList.Add(_source);
     }
     public void AddEffectSound(AudioSource _source)

@@ -41,7 +41,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
     public void SetPlayer(PlayerCtrl _player)
     {
         player = _player;
-        print("TouchEvent - SetPlayer");
+
          
     }
 
@@ -168,7 +168,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
                     if (col = Physics2D.OverlapPoint(_pos))//Physics.Raycast(ray, out hit, 30000f))//, 1 << LayerMask.NameToLayer("UI")))
                     {
-                        print("충돌체 있음");
+
                         isTouchBegin3DObj = false;
                         //if (col.gameObject.name == "HoldButton")
                         //    TempText4.text = Input.touchCount.ToString();//"HOLDBUTTON down";

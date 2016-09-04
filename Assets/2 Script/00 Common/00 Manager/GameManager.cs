@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager> {
           
         }
         */
-        print("timee:" + time);
+
         if (isLoadGame == false)
         {
             isLoadGame = true;

@@ -33,7 +33,7 @@ public class Single : MonoBehaviour
     }
     public void Click()
     {
-        print("클릭");
+
 
         // SceneManager.LoadScene(13);
 

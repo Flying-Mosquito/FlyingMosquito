@@ -62,9 +62,17 @@ public class EnemyAI : MonoBehaviour
         if (Application.loadedLevelName == "Stage9" || Application.loadedLevelName == "Stage10")
         {
             state = EnemyAI.State.LAID;
+            if ((playerctrl.state == Constants.ST_BLOOD) && Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(playerctrl.transform.position.x, 0, 0)) < 3)
+            {
+
+                playerctrl.iBlood += 0.3f;
+                angrygauge += 0.1f;
+
+            }
             if (angrygauge < 10)
                 return;
         }
+
 
         if ((playerctrl.state == Constants.ST_BLOOD) && Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(playerctrl.transform.position.x, 0, 0)) < 3)
         {
@@ -73,7 +81,6 @@ public class EnemyAI : MonoBehaviour
             angrygauge += 0.1f;
 
         }
-
         if (angrygauge > 10 && angrygauge < 90)
         {
 

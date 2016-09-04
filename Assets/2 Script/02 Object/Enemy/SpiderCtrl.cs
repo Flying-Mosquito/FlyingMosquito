@@ -35,9 +35,12 @@ public class SpiderCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(sline1.gameObject.activeInHierarchy==false && sline2.gameObject.activeInHierarchy == false)
+        if (Application.loadedLevelName == "Stage11")
         {
-            player.iBlood = 200;
+            if (sline1.gameObject.activeInHierarchy == false && sline2.gameObject.activeInHierarchy == false)
+            {
+                player.iBlood = 200;
+            }
         }
             //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(player.transform.position.x, 0, 0)) < 5)
             //{
