@@ -21,13 +21,15 @@ public class Option : MonoBehaviour {
         if (!TimeManager.Instance.isMenuOpen)
         {
             option_back.SetActive(true);
-            TimeManager.Instance.SetOption(true);
+            //TimeManager.Instance.SetOption(true);
+            TimeManager.Instance.StartCoroutine("SetOption", true);
         }
     }
 
     public void Continue()
     {
-        TimeManager.Instance.SetOption(false);
+        //TimeManager.Instance.SetOption(false);
+        TimeManager.Instance.StartCoroutine("SetOption", false);
         option_back.SetActive(false);
         
     }
@@ -37,7 +39,8 @@ public class Option : MonoBehaviour {
         playerctrl.iBlood = 0;
         playerctrl.SetParentNull();
         playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        TimeManager.Instance.SetOption(false);
+        //TimeManager.Instance.SetOption(false);
+        TimeManager.Instance.StartCoroutine("SetOption", false);
         timer.gameover.gameObject.SetActive(false);
         timer.gameClear.gameObject.SetActive(false);
         TimeManager.Instance.DeleteAllObj();

@@ -36,6 +36,8 @@ public class PlayerPoint : MonoBehaviour
             CameraCtrl.Instance.SetStateToCollider(true);
         else
             CameraCtrl.Instance.SetStateToCollider(false);
+        TimeManager.Instance.StartCoroutine("SetOption",true);
+
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class PlayerPoint : MonoBehaviour
                 gameObject.SetActive(false);
 
             }
-            else
+            else // ???
             {
                 GameObject _obj = null;
                 if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))

@@ -40,6 +40,7 @@ public class CharacterState : MonoBehaviour
        
        timer.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
+        TimeManager.Instance.StartCoroutine("SetOption", false);
         playerctrl.SetIsInStage(true);
 
 
