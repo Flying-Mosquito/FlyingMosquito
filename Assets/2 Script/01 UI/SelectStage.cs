@@ -8,7 +8,7 @@ public class SelectStage : MonoBehaviour
     public Button exit;
     public Button back;
     // Use this for initialization
-    public int[] stagenum=new int[16];
+    public int[] stagenum=new int[12];
   
 
     public bool backBool;
@@ -99,29 +99,6 @@ public class SelectStage : MonoBehaviour
         GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[11].ToString());
 
     }
-    public void Stage13()
-    {
-        SoundManager.Instance.ClearSoundList();
-        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[12].ToString());
-
-    }
-    public void Stage14()
-    {
-        SoundManager.Instance.ClearSoundList();
-        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[13].ToString());
-
-    }
-    public void Stage15()
-    {
-        SoundManager.Instance.ClearSoundList();
-        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[14].ToString());
-
-    }
-    public void Stage16()
-    {
-        SoundManager.Instance.ClearSoundList();
-        GameManager.Instance.StartCoroutine("StartLoad", "Stage" + stagenum[15].ToString());
-
-    }
+  
 
 }

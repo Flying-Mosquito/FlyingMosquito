@@ -60,7 +60,7 @@ public class Timer :MonoBehaviour
                 gameover.gameObject.SetActive(false);
             }
 
-            for (int i = 1; i < 16; i++)
+            for (int i = 1; i < 12  ; i++)
             {
                 if (playerctrl.iBlood > 190 && UI.Instance.CheckTimer[i] == 1)
                 {

@@ -21,8 +21,8 @@ public class MapSoundCtrl : MonoBehaviour {
     {
       
        
-        SoundManager.Instance.backgroundSound = slider.value;
-        SoundManager.Instance.SetSound();
+        //SoundManager.Instance.backgroundSound = slider.value;
+        //SoundManager.Instance.SetSound();
     }
     public void mark()
     {

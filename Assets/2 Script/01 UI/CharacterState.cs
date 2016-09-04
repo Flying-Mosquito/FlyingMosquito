@@ -6,7 +6,7 @@ public class CharacterState : MonoBehaviour
 
 {
 
-    public Scrollbar HealthBar;
+   
     public Scrollbar StaminaBar;
     public Scrollbar bloodBar;
 
@@ -26,7 +26,7 @@ public class CharacterState : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        HealthBar.value =playerctrl.iHP / 100f;
+       
 
         StaminaBar.size = playerctrl.fStamina/ 100f;
         bloodBar.value = playerctrl.iBlood /200f;
@@ -35,7 +35,7 @@ public class CharacterState : MonoBehaviour
     {
         playerctrl.SetHP(100);
         playerctrl.iBlood = 0;
-        playerctrl.fStamina = 300;
+        
         
        
        timer.isEnable = true;
