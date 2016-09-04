@@ -35,7 +35,7 @@ public class FrogTongue : TimeAffectedObj
 
 
                 vDir = _vDir;
-            print("---!!!!!!!!!!!!!!!!!!!!!");
+
            // TimeManager.Instance.SetOption(true);
         }
     }

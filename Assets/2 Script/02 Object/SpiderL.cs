@@ -14,9 +14,10 @@ public class SpiderL : MonoBehaviour
     public Transform b1;
     public Transform b2;
     public Transform b3;
-
+    public SpiderCtrl cow;
     void Start()
     {
+        cow  = GameObject.FindObjectOfType<SpiderCtrl>();
         player = GameObject.FindObjectOfType<PlayerCtrl>();
         check[0] = false;
         check[1] = false;
@@ -31,7 +32,13 @@ public class SpiderL : MonoBehaviour
 
     void Update()
     {
-        if(check[0]==true && check[1] == true&& check[0] == true)
+
+        if (Vector3.Distance(new Vector3(0, 0, this.transform.position.z), new Vector3(0, 0,cow.transform.position.z)) < 0.1)
+        {
+
+            this.transform.gameObject.SetActive(false);
+        }
+        if (check[0]==true && check[1] == true&& check[0] == true)
         {
             this.transform.gameObject.SetActive(false);
             player.SetParentNull();
@@ -78,7 +85,8 @@ public class SpiderL : MonoBehaviour
     }
     void OnCollisionEnter(Collision coll)
     {
-
+      
+       
         if (coll.gameObject.tag == "PLAYER")
         {
             if ((player.variable & Constants.BV_Stick) > 0)

@@ -55,7 +55,7 @@ public class FrogCtrl : TimeAffectedObj
             // Time.timeScale = 0f;
             int iPlayerMove;
 
-            print("fspeed : " + player.fSpeed);
+
             if (player.fSpeed < 4.5f )//player.state != Constants.ST_FLYING)
             {
                 iPlayerMove = 1;
@@ -77,7 +77,7 @@ public class FrogCtrl : TimeAffectedObj
             //vTemp.Normalize();
             _Tongue.SetMoveState(iPlayerMove);
             _Tongue.SetDir(vTongueDir);
-            print("Player Position : " + player.transform.position);
+
         }
 
     }

@@ -23,7 +23,7 @@ public class StarColor : MonoBehaviour
     {
         if (UI.Instance.stage[1] == 1)
         {
-            for (int i = 1; i < 9; i++)
+            for (int i = 1; i < 16; i++)
             {
                 if (UI.Instance.score[i] > 80 && UI.Instance.stage[i] == 1)
                 {

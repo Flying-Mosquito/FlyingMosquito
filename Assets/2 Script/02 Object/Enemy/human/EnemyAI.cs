@@ -50,20 +50,21 @@ public class EnemyAI : MonoBehaviour
     {
         playerctrl = GameObject.FindObjectOfType<PlayerCtrl>(); //GameObject.Find("Player").GetComponent<PlayerCtrl>();
 
-        if (Application.loadedLevelName == "Stage9")
-        {
-            state = EnemyAI.State.LAID;
-        }
-        else {
+      
             state = EnemyAI.State.PATROL;
-        }
+       
         alive = true;
         StartCoroutine("FSM");
     }
     void Update()
 
     {
-       
+        if (Application.loadedLevelName == "Stage9" || Application.loadedLevelName == "Stage10")
+        {
+            state = EnemyAI.State.LAID;
+            if (angrygauge < 10)
+                return;
+        }
 
         if ((playerctrl.state == Constants.ST_BLOOD))
         {

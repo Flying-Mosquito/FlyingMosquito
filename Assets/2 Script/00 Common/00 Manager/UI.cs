@@ -43,6 +43,7 @@ using System.Collections;
                         CheckTimer[6] = 1;
                     }
                 }
+             
 
                 else {
                     stage[i] = 1;
