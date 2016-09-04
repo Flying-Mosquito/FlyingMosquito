@@ -7,7 +7,7 @@ public class StarColor : MonoBehaviour
 {
     
     public Text myGold;
-    public Text Stamina;
+   
     public Transform[] star = new Transform[12];
     public Image[] image = new Image[12];
     public Image[] image2 = new Image[12];
@@ -23,7 +23,7 @@ public class StarColor : MonoBehaviour
         {
             UI.Instance.Tscore += UI.Instance.score[i];
         }
-        UI.Instance.Tscore -= UI.Instance.Gold;
+        UI.Instance.Tscore -= UI.Instance.plusSt*50;
     }
 
         // Update is called once per frame

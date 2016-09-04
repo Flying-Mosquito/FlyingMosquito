@@ -10,7 +10,7 @@ using System.Collections;
     public float[] score = new float[12];
     PlayerCtrl playerctrl = null;
     public float Tscore;
-    public float Gold;
+    public float MyGold;
     public int plusSt;
     // Use this for initialization
     void Awake()

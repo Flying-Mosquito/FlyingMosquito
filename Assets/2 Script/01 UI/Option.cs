@@ -33,7 +33,10 @@ public class Option : MonoBehaviour {
         option_back.SetActive(false);
         
     }
-
+    public void gomap()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void Click()
     {
         playerctrl.iBlood = 0;
