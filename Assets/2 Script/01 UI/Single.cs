@@ -21,12 +21,6 @@ public class Single : MonoBehaviour
         WebServScript.enabled = false;
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void MainS()
     {
         SceneManager.LoadScene(1);
