@@ -8,31 +8,32 @@ using UnityEngine.UI;
 public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 {
     private Transform tr;
-    public Transform targetPlus;
-    public Transform equipPoint;
+    public  Transform targetPlus;
+    public  Transform equipPoint;
     private Transform[] tr_Mesh;
     private GameObject fx_boost;
-    public GameObject ClingObj;
-    public GameObject Player_Target;
+    public  GameObject ClingObj;
+    public  GameObject Player_Target;
     private RainDrop dest_script;
     private Rigidbody rigidBody;
-    public Animator anim;
+    public  Animator anim;
+    private StatusUICtrl statusUI;
 
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
-    public Vector3 prePosition;  // 개구리에서쓰고있네..
+    public  Vector3 prePosition;  // 개구리에서쓰고있네..  ??
 
     // 플레이어 상태와 변수상태가 들어가 있는 변수 
     public ulong state;
     public ulong variable;
 
-    public float iHP { get; private set; }
-    public float fStamina;                             // 스테미나 총량
-    public float fXAngle { get; private set; }         // 좌우   회전값
-    public float fYAngle { get; private set; }         // 위아래 회전값
-    public float startTime;
-    public float fSpeed;//{ get; private set; }          // 플레이어 최종 속도값
-    public float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
+    public  float iHP { get; private set; }
+    public  float fStamina;                             // 스테미나 총량
+    public  float fXAngle { get; private set; }         // 좌우   회전값
+    public  float fYAngle { get; private set; }         // 위아래 회전값
+    public  float startTime;
+    public  float fSpeed;//{ get; private set; }          // 플레이어 최종 속도값
+    public  float OWNMAXSPEED = 6f;                     // 일반속도 최대값       
     private float fStaminaMinus;                        // 스테미나 감소량 
     private float fSpeedVal = 2f;                       // 플레이어 속도 증가값 
     private float fBoostMinus = 20f;                    // 부스터 사용 후에 속도감소 변화값 
@@ -41,7 +42,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     private float MAXBOOST;                             // Boost 사용시의 최대 가속도값   
     private float fOwnSpeed;                            // 일반속도 값                  
     private float fRotSpeed;
-    public float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
+    public  float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
     public override void Awake()
     {
@@ -58,6 +59,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         fx_boost = GetComponentInChildren<ParticleSystem>().gameObject;
         fx_boost.SetActive(false);
         anim = GetComponent<Animator>();
+        statusUI = GetComponent<StatusUICtrl>();
 
         vDir = Vector3.zero;
         state = Constants.ST_IDLE;//ST_CLING;
@@ -652,6 +654,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         iHP -= iDamage;
         fOwnSpeed = 0f;
         fBoostSpeed = 0f;
+        statusUI.SetPlayerHP(iHP);
         StartCoroutine("StartConfused", 0.5f);
 
         if ((variable & Constants.BV_bCling) > 0) // 어떤 부모에 붙은 상태라면 해제
