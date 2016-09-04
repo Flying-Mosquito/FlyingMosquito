@@ -51,11 +51,12 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         raindrop = null;
         isTouchBegin3DObj = false;
 
+        if (!player)
+            return;
+
 
 #if !UNITY_ANDROID
         {
-            if (!player)
-                return;
 
             if (Input.GetKeyDown(KeyCode.P))
             {
