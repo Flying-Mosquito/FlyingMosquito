@@ -9,6 +9,9 @@ using System.Collections;
     public int[] CheckTimer = new int[2] { 0, 1 };
     public float[] score = new float[12];
     PlayerCtrl playerctrl = null;
+    public float Tscore;
+    public float Gold;
+    public int plusSt;
     // Use this for initialization
     void Awake()
     {

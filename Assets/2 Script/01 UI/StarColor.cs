@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class StarColor : MonoBehaviour
 {
+    
+    public Text myGold;
+    public Text Stamina;
     public Transform[] star = new Transform[12];
     public Image[] image = new Image[12];
     public Image[] image2 = new Image[12];
@@ -15,12 +18,19 @@ public class StarColor : MonoBehaviour
     void Start()
     {
         timer= GameObject.FindObjectOfType<Timer>();
-
+        UI.Instance.Tscore = 0;
+        for (int i = 1; i < 12; i++)
+        {
+            UI.Instance.Tscore += UI.Instance.score[i];
+        }
+        UI.Instance.Tscore -= UI.Instance.Gold;
     }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
+        myGold.text = UI.Instance.Tscore.ToString();
+
         if (UI.Instance.stage[1] == 1)
         {
             for (int i = 1; i < 12; i++)
