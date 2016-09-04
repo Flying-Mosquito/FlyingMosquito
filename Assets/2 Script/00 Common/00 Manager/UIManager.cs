@@ -9,11 +9,11 @@ public class UIManager : MonoBehaviour {
     public static string strSceneName;
     private Animator Anim;
 
-
-
     // Use this for initialization
     void Awake()
     {
+        DontDestroyOnLoad(this);
+
         Anim = GetComponent<Animator>();
         isFadeOut = false;
         strSceneName = null;

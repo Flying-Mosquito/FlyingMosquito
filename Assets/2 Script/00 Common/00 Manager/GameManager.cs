@@ -7,6 +7,13 @@ public class GameManager : Singleton<GameManager> {
     /*
    
     */
+    public static bool isFadeOut;
+    public static string strSceneName;
+    public float fAlpha;
+    public float fAlphaSpeed;
+    public bool bSceneChange;
+  //  private Animator Anim;
+
     public float waitForLoadingSeconds;
     private bool isLoadGame = false;                                    // loding drag
     private float time;
@@ -18,12 +25,20 @@ public class GameManager : Singleton<GameManager> {
         DontDestroyOnLoad(this);
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-      
+
+        bSceneChange = false;
+        //  Anim = GetComponent<Animator>();
+        isFadeOut = false;
+        strSceneName = null;
+        FadeIn();
+        fAlpha = 0f;
+        fAlphaSpeed = 1f;
+
         // Init_Singleton();
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(Time.timeScale == 0)
             {
@@ -35,6 +50,49 @@ public class GameManager : Singleton<GameManager> {
             }
         }
     }
+
+    public IEnumerator FadeOut()  // 장면이 어두워진다
+    {
+        //Anim.SetBool("isFadeOut", true);
+        while (true)
+        {
+            fAlpha += Time.timeScale * fAlphaSpeed;
+
+            if (fAlpha > 1f)
+            {
+                bSceneChange = true;
+                break;
+            }
+            else
+                yield return null;
+
+        }
+        
+    }
+
+    private IEnumerator FadeIn()   // 장면이 밝아진다
+    {
+        while (true)
+        {
+            //  SetWaitForLoadingSeconds(1.5f);
+            // StartCoroutine("StartLoad", strSceneName);
+            fAlpha -= Time.timeScale * fAlphaSpeed;
+            if (fAlpha < 0f)
+            {
+                bSceneChange = true;
+                break;
+            }
+            else
+                yield return null;
+
+        }
+    }
+
+    private void Scene_change()
+    {
+
+    }
+
     public IEnumerator StartLoad(string strSceneName)
     {
         /*if ( "00 Logo" == Application.loadedLevelName )
@@ -52,6 +110,8 @@ public class GameManager : Singleton<GameManager> {
 
             async.allowSceneActivation = false; // 씬을 로딩후 자동으로 넘어가지 못하게 한다.
 
+            StartCoroutine("FadeOut"); 
+
             while (!async.isDone)
             {
                 time += Time.deltaTime;
@@ -60,7 +120,8 @@ public class GameManager : Singleton<GameManager> {
                 {
                     isLoadGame = false;
                     async.allowSceneActivation = true;  // 2초 후에 씬을 넘김 
-                    UIManager.isFadeOut = false;
+                    //UIManager.isFadeOut = false;
+                    bSceneChange = false;
                     time = 0f;
                 }
                 yield return new WaitForFixedUpdate();
