@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GetStage : Singleton<GetStage>
 {
 
-    private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
+    private string GetStageUrl = "http://219.255.61.105:8080/get_stage_list";
     private string AccessNumber = "";
     public string myStage = "";//클리어스테이지수
     public Login login;

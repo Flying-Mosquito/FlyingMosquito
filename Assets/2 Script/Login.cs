@@ -18,13 +18,13 @@ public class Login : Singleton<Login>
     //Public Variables
     public string CurrentMenu = "Login";
     //Private Variables
-    private string CheckDupUrl = "http://192.168.1.105:8080/check_duplicate";
-    private string CreateAccountUrl = "http://192.168.1.105:8080/make_account";
-    private string CheckLoginUrl = "http://192.168.1.105:8080/check_login";
-    private string TakeDataUrl = "http://192.168.1.105:8080/get_data";
-    private string GetStageUrl = "http://192.168.1.105:8080/get_stage_list";
-    private string EnterStageUrl = "http://192.168.1.105:8080/enter_stage";
-    private string EndStageUrl = "http://192.168.1.105:8080/end_stage";
+    private string CheckDupUrl = "http://219.255.61.105:8080/check_duplicate";
+    private string CreateAccountUrl = "http://219.255.61.105:8080/make_account";
+    private string CheckLoginUrl = "http://219.255.61.105:8080/check_login";
+    private string TakeDataUrl = "http://219.255.61.105:8080/get_data";
+    private string GetStageUrl = "http://219.255.61.105:8080/get_stage_list";
+    private string EnterStageUrl = "http://219.255.61.105:8080/enter_stage";
+    private string EndStageUrl = "http://219.255.61.105:8080/end_stage";
 
     // private string LoginUrl = "";
     private string ConfrimPass = "";
