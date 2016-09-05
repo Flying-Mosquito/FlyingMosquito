@@ -7,7 +7,7 @@ using System.Collections;
     public SleepHuman Sleep;
     public int[] stage = new int[2] { 0, 1 };
     public int[] CheckTimer = new int[2] { 0, 1 };
-    public float[] score = new float[12];
+    public float[] score = new float[13];
     PlayerCtrl playerctrl = null;
     public float Tscore;
     public float MyGold;
@@ -17,10 +17,10 @@ using System.Collections;
     {
         DontDestroyOnLoad(this);
        
-        stage = new int[12];
-        CheckTimer = new int[12];
-        score = new float[12];
-        for (int i = 0; i < 11; i++)
+        stage = new int[13];
+        CheckTimer = new int[13];
+        score = new float[13];
+        for (int i = 0; i < 12; i++)
         {
             stage[i] = 0;
         }
@@ -29,7 +29,7 @@ using System.Collections;
     }
     public void CheckS()
     {
-        for (int i = 1; i < 12; i++)
+        for (int i = 1; i < 13; i++)
         {
             CheckTimer[i] = 0;
 

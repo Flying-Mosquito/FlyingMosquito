@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class CheckStage : MonoBehaviour {
    
     
-    private int iStage = 12;
+    private int iStage = 13;
   
     SelectStage selectstage;
     public int stageNum;
 
-    public Transform[] Stage = new Transform[12];
+    public Transform[] Stage = new Transform[13];
     private int MAXINDEX = 3;
    public int[] Arr = new int[3] {0,1,2};
 
@@ -30,7 +30,7 @@ public class CheckStage : MonoBehaviour {
     {
         if (UI.Instance != null)
         {
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 12; i++)
             {
                 if (UI.Instance.stage[i] == 1)
                 {
@@ -39,7 +39,7 @@ public class CheckStage : MonoBehaviour {
                 }
             }
             //1성공 2닫힘
-            for (int i = 0; i <11; i++)
+            for (int i = 0; i <12; i++)
             {
                 if ((Arr[i] == 0 && Arr[i + 1] == 1) || (Arr[i] == 1 && Arr[i + 1] == 1))
                 {
