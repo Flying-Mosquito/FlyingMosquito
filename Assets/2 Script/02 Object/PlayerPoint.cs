@@ -50,7 +50,9 @@ public class PlayerPoint : MonoBehaviour
                 player.SetIsInStage(true);
                 player.SetHP(100);
                 TouchEventManager.Instance.SetPlayer(player);
+                GameManager.Instance.SetBackgroundAlphaColor(0f);
                 gameObject.SetActive(false);
+
 
             }
             else // ???

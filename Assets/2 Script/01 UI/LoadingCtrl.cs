@@ -5,8 +5,12 @@ using UnityEngine.UI;
 public class LoadingCtrl : MonoBehaviour
 {
     public Image LoadingImage;
-    public float fLoadingSpeed = 0.08f;
+    public float fLoadingSpeed = 0.015f;
 
+    void Start()
+    {
+        LoadingImage.fillAmount = 0f;
+    }
 
 
 	// Update is called once per frame
@@ -18,6 +22,7 @@ public class LoadingCtrl : MonoBehaviour
 
         if (LoadingImage.fillAmount == 1f)
             GameManager.Instance.isLoadingDone = true;
+        
 
 	}
 }

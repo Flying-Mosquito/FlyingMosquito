@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-//UICanvas에 넣어준다
+//UICanvas에 넣어준다   //필요없어
 public class UIManager : MonoBehaviour {
 
     public static bool isFadeOut;
@@ -17,9 +17,10 @@ public class UIManager : MonoBehaviour {
         Anim = GetComponent<Animator>();
         isFadeOut = false;
         strSceneName = null;
-        FadeIn();
+        //FadeIn();
     }
 	// Update is called once per frame
+    /*
 	void Update ()
     {
 
@@ -37,19 +38,19 @@ public class UIManager : MonoBehaviour {
             FadeIn();
         }
     }
-
+    */
     private void FadeOut()  // 장면이 어두워진다
     {
         Anim.SetBool("isFadeOut", true);
         GameManager.Instance.SetWaitForLoadingSeconds(1.5f);
         GameManager.Instance.StartCoroutine("StartLoad", strSceneName);
     }
-
+    /*
     private void FadeIn()   // 장면이 밝아진다
     {
         Anim.SetBool("isFadeOut", false);
     }
-
+    */
     private void Scene_change()
     {
 
