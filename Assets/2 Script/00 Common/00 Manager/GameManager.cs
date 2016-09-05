@@ -43,7 +43,6 @@ public class GameManager : Singleton<GameManager> {
     }
     void Update()
     {
-        print("알파 : " + fAlpha);
         if (isFadeIn)
         {
             FadeIn();
@@ -94,21 +93,17 @@ public class GameManager : Singleton<GameManager> {
     }
     private void FadeIn()   // 장면이 밝아진다
     {
-        print("알파 : " + fAlpha);
         if (alphaImage == null)
         {
-            print("알파이미지가 널이라 가져온다");
             alphaImage = GameObject.Find("BlackBackground").GetComponent<Image>();
         }
 
         //alphaImage.color = new Color(alphaImage.color.r, alphaImage.color.g, alphaImage.color.b, 1f);
-        print("FadeIn");
        // while (true)
         //{
             //  SetWaitForLoadingSeconds(1.5f);
             // StartCoroutine("StartLoad", strSceneName);
             fAlpha -= Time.fixedDeltaTime * fAlphaSpeed * 100;
-        print("변해야 하는 ㅁ알파 : " + fAlpha);
             alphaImage.color = new Color(alphaImage.color.r, alphaImage.color.g, alphaImage.color.b, fAlpha);
             if (fAlpha <= 0f)
             {
@@ -222,10 +217,6 @@ public class GameManager : Singleton<GameManager> {
                 yield return new WaitForFixedUpdate();
             }
         }
-    }
-    void LateUpdate()
-    {
-        print("레이트알파 : " + fAlpha);
     }
 
     public void SetWaitForLoadingSeconds(float _fTime)
