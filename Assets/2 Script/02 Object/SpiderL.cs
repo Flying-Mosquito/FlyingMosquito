@@ -70,19 +70,27 @@ public class SpiderL : MonoBehaviour
     public void CheckClick1()
     {
         check[0] =true;
+        b1.gameObject.SetActive(false);
     }
     public void CheckClick2()
     {
         check[1] = true;
+        b2.gameObject.SetActive(false);
     }
     public void CheckClick3()
     {
         check[2] = true;
+        b3.gameObject.SetActive(false);
     }
     void OnCollisionEnter(Collision coll)
     {
-      
-       
+
+        if (coll.gameObject.tag == "human")
+        {
+            this.transform.gameObject.SetActive(false);
+
+
+        }
         if (coll.gameObject.tag == "PLAYER")
         {
             if ((player.variable & Constants.BV_Stick) > 0)

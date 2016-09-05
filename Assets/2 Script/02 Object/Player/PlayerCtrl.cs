@@ -66,7 +66,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         variable = Constants.BV_bBoost | Constants.BV_IsCanSlow | Constants.BV_bStaminaRecovery;
 
 
-        fStamina = 300f+UI.Instance.plusSt*10;
+        fStamina = 200f;
         fStaminaMinus = 40f;
 
         fXAngle = 0f;
@@ -372,8 +372,8 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
                 fSpeed = fOwnSpeed + fBoostSpeed;
         
-                if (fStamina > 200)       // 수정필요
-                    fStamina = 200;
+                if (fStamina > 200 + UI.Instance.plusSt * 10)       // 수정필요
+                    fStamina = 200 + UI.Instance.plusSt * 10;
 
                 if (fStamina > 10f)      // 스테미나가 10이상이면 사용가능
                     variable |= Constants.BV_bBoost;//bCheckBoost = true;
