@@ -20,9 +20,6 @@ public class heckC : MonoBehaviour
         }
 
 
-        else if (coll.gameObject.tag == "PLAYER")
-        {
-            playerctrl.Damaged(30);
-        }
+     
     }
 }

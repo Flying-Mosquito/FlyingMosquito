@@ -66,7 +66,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         variable = Constants.BV_bBoost | Constants.BV_IsCanSlow | Constants.BV_bStaminaRecovery;
 
 
-        fStamina = 300f;
+        fStamina = 300f+UI.Instance.plusSt*10;
         fStaminaMinus = 40f;
 
         fXAngle = 0f;

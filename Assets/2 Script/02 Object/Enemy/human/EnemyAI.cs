@@ -77,8 +77,8 @@ public class EnemyAI : MonoBehaviour
         if ((playerctrl.state == Constants.ST_BLOOD) && Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(playerctrl.transform.position.x, 0, 0)) < 3)
         {
 
-            playerctrl.iBlood += 0.3f;
-            angrygauge += 0.1f;
+            playerctrl.iBlood += 0.1f;
+            angrygauge += 0.05f;
 
         }
         if (angrygauge > 10 && angrygauge < 90)
