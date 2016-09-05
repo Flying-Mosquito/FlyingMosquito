@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LoadingCtrl : MonoBehaviour
 {
     public Image LoadingImage;
-    public float fLoadingSpeed = 0.1f;
+    public float fLoadingSpeed = 0.08f;
 
 
 

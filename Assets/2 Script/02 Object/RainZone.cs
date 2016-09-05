@@ -43,13 +43,7 @@ public class RainZone : MonoBehaviour
 
     void Start()
     {
-        Random.seed = System.Environment.TickCount;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        Random.InitState(System.Environment.TickCount);
     }
 
     void OnTriggerEnter(Collider coll)
