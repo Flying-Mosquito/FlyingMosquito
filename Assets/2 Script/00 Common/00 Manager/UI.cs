@@ -32,7 +32,7 @@ using System.Collections;
         for (int i = 1; i < 13; i++)
         {
             CheckTimer[i] = 0;
-
+            
             if (Application.loadedLevelName == "Stage" + i.ToString())
             {
 
