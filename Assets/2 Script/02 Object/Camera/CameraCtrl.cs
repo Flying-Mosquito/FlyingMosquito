@@ -95,9 +95,10 @@ public class CameraCtrl : Singleton<CameraCtrl>
         {
             if (!(targetTr == null))
             {
-                print("target: " + targetTr);
+                //print("target: " + targetTr);
                 transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
                 transform.LookAt(targetTr.position);
+          
             }
         }
         else
@@ -110,30 +111,20 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
             }
 
-            transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + Vector3.up * fTargetHeight;
+            transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + player.transform.up * fTargetHeight; //Vector3.up * fTargetHeight;//수정
 
-            transform.LookAt(targetTr.position);
-            //  print("rotate.y: " + transform.eulerAngles.y);
+            Vector3 vLookatPosition = targetTr.position  + (player.transform.up * 0.2f);
+            // Transform vLookatPosition = targetTr;
+            // print("Dir : " + (vLookatPosition - transform.position).normalized);
 
-            if (preYAngle - transform.eulerAngles.y > 179f)
-            {
+            
+          //   transform.LookAt(vLookatPosition);
 
-                float _y = transform.eulerAngles.y + 180f;
-
-                transform.eulerAngles.Set(transform.eulerAngles.x, _y, transform.eulerAngles.z);
-                //  print("preYAngle: " + preYAngle + "eulrAngle.y : " + transform.eulerAngles.y + " _y  : " + _y);
-
-                // Time.timeScale = 0f;
-                preYAngle = _y;
-
-            }
-            else
-                preYAngle = transform.eulerAngles.y;
-
-            // transform.Rotate(-20, 0, 0);
-            // transform.rotation = targetTr.rotation;
-
-
+            //transform.rotation = Quaternion.LookRotation(vLookatPosition);
+            transform.rotation = Quaternion.LookRotation(
+                Vector3.ProjectOnPlane((targetTr.position-transform.position), targetTr.up)
+                , targetTr.up);
+    
             rayTarget = player.transform;    // 수정필요, rayTarget을 잡아주는 함수 
             if (moveState == eMoveState.TRIGGER)
             {

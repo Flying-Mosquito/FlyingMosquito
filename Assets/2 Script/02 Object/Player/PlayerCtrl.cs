@@ -417,18 +417,22 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 // tr.Rotate(Vector3.right * -fYAngle * Time.deltaTime * fRotSpeed, Space.Self);  // 위아래
                 // => _fY, _fX 구해서 localRotation으로 코드 변경 
 
-                float _fY = tr.eulerAngles.x + (-fYAngle * Time.deltaTime * fRotSpeed);
-                float _fX = tr.eulerAngles.y + (fXAngle * Time.deltaTime * fRotSpeed);
+                Vector3 angle = tr.eulerAngles;
+                angle.y = tr.eulerAngles.y + (fXAngle * Time.deltaTime * fRotSpeed);
+                angle.x = tr.eulerAngles.x + (-fYAngle * Time.deltaTime * fRotSpeed);
 
-                // print("fYAngle:" + fYAngle);
-                // print("tr.eulerAngles.x  : " + tr.eulerAngles.x);
-                if ((fYAngle >= 0) && (tr.eulerAngles.x >= 270f) && (_fY < 271f))
-                    _fY = 271f;
+                if (angle.x >= 360f)
+                    angle.x %= 360f;  // 360이하의 수로 만듦
+                if (angle.x > 180f)
+                    angle.x -= 360f;  // 180이 넘는 수는음수가 됨
 
-                if ((fYAngle <= 0) && (tr.eulerAngles.x <= 76f) && (_fY > 75f))
-                    _fY = 75f;
+                angle.x = Mathf.Clamp(angle.x, -90f, 90f);
+              
+                angle.z = 0f;
 
-                tr.localRotation = Quaternion.Euler(_fY, _fX, 0f);
+                tr.localRotation = Quaternion.Euler(angle);
+
+                //print("angle : " + tr.rotation.eulerAngles);
                 // state로 해도 될걸-수정
                 if ((variable & Constants.BV_IsMove) > 0)
                 {
