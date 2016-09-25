@@ -166,7 +166,7 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
         {
             case "OnTouchBegin":
                 {
-
+                    print("OnTouchBegin");
                     if (col = Physics2D.OverlapPoint(_pos))//Physics.Raycast(ray, out hit, 30000f))//, 1 << LayerMask.NameToLayer("UI")))
                     {
 

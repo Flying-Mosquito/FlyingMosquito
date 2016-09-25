@@ -15,7 +15,7 @@ public class StatusUICtrl : MonoBehaviour {
 
     public void SetPlayerHP(float _fHp)
     {
-        print("데미지를받다 ! 현재 hp : " + _fHp);
+        print("UICtrl - 데미지를받다 ! 현재 hp : " + _fHp);
         hpImage.fillAmount = _fHp / MAXHP;
     }
 

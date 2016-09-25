@@ -48,7 +48,7 @@ public class StageChangeArrowCtrl : MonoBehaviour {
         {   
             if (player.state == Constants.ST_IDLE)
             {
-                player.MoveHorizontal(vDestPos);
+                //player.MoveHorizontal(vDestPos);
 
                 if (player.transform.position == vDestPos)
                     bMove = false;

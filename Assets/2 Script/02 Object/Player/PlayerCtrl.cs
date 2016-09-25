@@ -131,10 +131,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         //print("state : " + state);
         //  print("isMovable = " + isMovable);
         //print("Update velocity : " + rigidBody.velocity);
-        /*
-                
-                if (Player_dest != null)
-                    print("Player_dest : " + Player_dest.tag);
+        
+                /*
+                if (dest_script != null)
+                    print("Player_dest : " + dest_script.tag);
                 else
                     print("NULL");
                     */
@@ -304,10 +304,17 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 {
                     if (dest_script.isPlop) // 목표 빗방울이 비활성화 상태라면 빗방울이 이미 다른 오브젝트에 충돌해서 사라졌다는 소리.빗방울이 없어지게 되면 vDir은 이전에 받은 값을 유지한다.(빗방울이 사라져서 없어진 방향 )
                     {
-                        //   print("목표는 없다");
+                        print("셋 낫클링");
+                        print("Dest_Script.isPlop :" + dest_script.isPlop);
+                        if (dest_script.transform == Player_Target.transform)
+                            print("Player_Target == dest_script");
+                        else
+                            print("Player_Target과 dest_script가 다르다니 이게 무슨 소리오!");
+
                         Player_Target = null;
                         dest_script = null;
 
+                       
                         SetState_NotCling();
                     }
                 }
@@ -575,7 +582,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
     private void SetParent(Transform collTr)
     {
-        //        print("setParent");
+                print("setParent");
         ClingObj.transform.parent = collTr;
         tr.transform.parent = ClingObj.transform;
     }
@@ -588,13 +595,9 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         variable &= ~(Constants.BV_Stick);
 
         rigidBody.isKinematic = false;
-        //   Time.timeScale = 0f;
-
-        //ClingObj.transform.localScale = Vector3.one;
-
     }
 
-    public void Equip(GameObject _item)  // 외부에서 불러주게 됨 
+    public void Equip(GameObject _item)  // 외부에서 불러주게 됨. 물건잡기
     {
         if (Player_Target == _item)
         {
@@ -623,11 +626,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
     private IEnumerator ChangeSlowVal()
     {
-        //  if (true == isCanSlow)  // 키입력으로 인해 이미 변수상태가 변경된 상태라면 코루틴 꺼줌
-        //   yield return null;
-        // 1초 후 시간을 원래대로 바꿔주고, 쿨타임은 2초 
-        //  print("1초 후 시간을 원래대로");
-        yield return new WaitForSeconds(0.3f); // 변수 지정해줘야함
+        yield return new WaitForSeconds(0.3f);
         Time.timeScale = 1f;
         //  print("시간이 돌아왔다, 쿨타임 5초 ");
 
@@ -679,14 +678,12 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
         // 빗방울같은 경우, 목표로 한 빗방울이사라진다면? ( 빗방울은 사라질 때 데미지를 호출한다 ) 
 
-
         if (iHP < 0)
             state = Constants.ST_DEATH;
     }
 
     void OnCollisionEnter(Collision coll)
     {
-
         if ((variable & Constants.BV_bCling) > 0)//bCling)  // 붙으려고 하는 상태면 
         {
             if (Player_Target != null)
@@ -731,7 +728,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 Damaged(30);                     // 여기에서 스턴효과도 함께 준다 
         }
 
-
         if (coll.gameObject.tag == "human")
         {
             print("human");
@@ -765,16 +761,12 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     {
         variable &= ~(Constants.BV_IsMove);
         rigidBody.velocity = Vector3.zero;
-
     }
-
     public void boostdown()
     {
-
         state = Constants.ST_BOOST;
         variable |= Constants.BV_IsBoost;
         variable |= Constants.BV_IsMove;
-
     }
     public void boostup()
     {
@@ -792,9 +784,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
     public void ClingBtDown()
     {
-        //  print("버튼당운");
-        //variable &= ~(Constants.BV_IsMove);
-        //if(state != Constants.ST_HOLD)
         if (Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 1f))      //붙음
         {
             variable |= Constants.BV_bCling;
@@ -814,21 +803,13 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
 
         // 붙지 않은상태면 붙으려고  하는 상태인지 체크
-        if ((Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 10f)))//CollisionManager.Instance.Get_MouseCollisionObj(100f)) != null)
-        // if (CollisionManager.Instance.Check_RayHit(tr.position, tr.forward, "WALL", 3f))  // 벽에 붙을지 체크 
+        if ((Player_Target = CollisionManager.Instance.Get_RaycastCollisionObj(tr.position, tr.forward, 10f)))
         {
             variable |= Constants.BV_bCling;//bCling = true;
                                             //  if((variable & Constants.BV_IsCling) > 0)
                                             //    variable &= ~(Constants.BV_IsMove);
-
-
-
-
-
             //state = Constants.ST_CLING;//|= Constants.ST_CLING;
-
         }
-
     }
 
     public void ClingBtUp()
@@ -844,10 +825,9 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                 else
                 {
                     print("이쪽");
+                    print("MakePArentNull - 5");
                     SetParentNull();
                 }
-
-
             }
             /*tr.transform.parent = null;
             //  tr.transform.localScale = new Vector3(1, 1, 1);  // ?? 이거 꼭 필요한가
@@ -856,18 +836,14 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             variable &= ~(Constants.BV_bCling);//bCling = false;
             variable &= ~(Constants.BV_IsCling);//isCling = false;
             variable &= ~(Constants.BV_bBlood);
-            // state = Constants.ST_FLYING;
-
         }
-
-
     }
 
     public void SetHP(int _iHP)
     {
         iHP = _iHP;
     }
-
+    /*
     public void MoveHorizontal(Vector3 _vDest)
     {
         rigidBody.MovePosition(Vector3.Lerp(tr.position, _vDest, 0.2f));
@@ -876,16 +852,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         {
             tr.position = _vDest;
         }
-        //print("( tr.position.x  > (_vDest.x - float.Epsilon) )"  + (tr.position.x > (_vDest.x - float.Epsilon)));
-        // print(" ( tr.position.x  < (_vDest.x + float.Epsilon) )" + (tr.position.x < (_vDest.x + float.Epsilon)));
-
-        //rigidBody.velocity = (tr.right * _fSpeed);
-        // print("pos  : " + tr.position);
     }
-
+    */
     private void Animate()
     {
-
         switch (state)
         {
             case Constants.ST_FLYING:
@@ -896,8 +866,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
                     // print("anim speed : " + anim.speed);
                     break;
                 }
-
-
             case Constants.ST_IDLE:
                 {
                     anim.SetInteger("state", 1);
@@ -912,7 +880,6 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             case Constants.ST_STUN:
                 {
                     anim.SetInteger("state", 3);
-
                     break;
                 }
             case Constants.ST_BLOOD:

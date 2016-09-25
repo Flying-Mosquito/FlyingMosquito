@@ -103,7 +103,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
         }
         else
         {
-            if (player.state != Constants.ST_CLING)        // 붙어있지 않을 때의 카메라 효과(위치)
+            if (player.state != Constants.ST_CLING)        // 붙어있지 않을 때의 카메라 효과
             {
                 isLookFar = false;
                 if (fTargetDist != fNormalDist)
@@ -113,19 +113,15 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
             transform.position = targetTr.position + (-targetTr.forward * fTargetDist) + player.transform.up * fTargetHeight; //Vector3.up * fTargetHeight;//수정
 
-            Vector3 vLookatPosition = targetTr.position  + (player.transform.up * 0.2f);
-            // Transform vLookatPosition = targetTr;
-            // print("Dir : " + (vLookatPosition - transform.position).normalized);
-
-            
-          //   transform.LookAt(vLookatPosition);
-
-            //transform.rotation = Quaternion.LookRotation(vLookatPosition);
+           // Vector3 vLookatPosition = targetTr.position  + (player.transform.up * 0.2f);
+        
             transform.rotation = Quaternion.LookRotation(
                 Vector3.ProjectOnPlane((targetTr.position-transform.position), targetTr.up)
                 , targetTr.up);
     
             rayTarget = player.transform;    // 수정필요, rayTarget을 잡아주는 함수 
+
+
             if (moveState == eMoveState.TRIGGER)
             {
                 if (player.state == Constants.ST_CLING)
@@ -271,12 +267,9 @@ public class CameraCtrl : Singleton<CameraCtrl>
                         objStruct._objShader = renderer.material.shader;
                         print("스킨드메쉬렌더러 : " + objStruct._obj.name);
                     }
-
-                    else
-                    {
-                        print("브레이크");
-                        break;
-                    }
+                   // else
+                     //   break;
+                    
                 }
                 newRayHitObjList.Add(objStruct);
 

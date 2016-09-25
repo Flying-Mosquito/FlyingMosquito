@@ -31,6 +31,10 @@ public class RainDrop : MonoBehaviour
         //vGravity = Vector3.zero;
 
     }
+    void OnEnable()
+    {
+        isPlop = false;
+    }
 
     void FixedUpdate()
     {
@@ -49,7 +53,7 @@ public class RainDrop : MonoBehaviour
         if (coll.gameObject != null)    // 순서상 플레이어가 타겟을 먼저 해지해야 하기 때문에 , 코루틴을 써줌 
         {
             // rigidBody.velocity = Vector3.zero;
-            if ("PLAYER" == coll.gameObject.tag)        // 플레이어와 부딪히면 힘을 받지 않음 
+            if (coll.gameObject.CompareTag("PLAYER"))// "PLAYER" == coll.gameObject.tag)        // 플레이어와 부딪히면 힘을 받지 않음 
             {
                 if(rigidBody != null)
                     rigidBody.velocity = Vector3.zero;
