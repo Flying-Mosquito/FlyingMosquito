@@ -30,10 +30,10 @@ public class TimeManager : Singleton<TimeManager>
 
         isMenuOpen = _isMenuOpen;
 
-        if (_isMenuOpen)
+        if (isMenuOpen)
         {
             fPreTimeScale = Time.timeScale;
-
+            print("셋옵션- 타임스케일영 : " + isMenuOpen);
             Time.timeScale = 0f;
 
         }
@@ -54,7 +54,10 @@ public class TimeManager : Singleton<TimeManager>
                 objList[i].MyFixedUpdate();
         }
         else
+        {
+            print("타임스케일영");
             Time.timeScale = 0f;
+        }
 
     }
 

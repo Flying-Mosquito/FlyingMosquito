@@ -20,6 +20,7 @@ public class Option : MonoBehaviour {
     {
         if (!TimeManager.Instance.isMenuOpen)
         {
+            print("오픈메뉴");
             option_back.SetActive(true);
             //TimeManager.Instance.SetOption(true);
             TimeManager.Instance.StartCoroutine("SetOption", true);

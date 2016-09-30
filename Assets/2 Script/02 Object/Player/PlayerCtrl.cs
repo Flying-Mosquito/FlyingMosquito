@@ -17,7 +17,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     private RainDrop dest_script;
     private Rigidbody rigidBody;
     public  Animator anim;
-    private StatusUICtrl statusUI;
+  //  private StatusUICtrl statusUI;
 
     private Vector3 movement; // 수정- 없어도 될듯 하다 , 물론 코드 바꿔야 함 
     private Vector3 vDir;
@@ -27,7 +27,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     public ulong state;
     public ulong variable;
 
-    public  float iHP { get; private set; }
+    public  float fHP { get; private set; }
     public  float fStamina;                             // 스테미나 총량
     public  float fXAngle { get; private set; }         // 좌우   회전값
     public  float fYAngle { get; private set; }         // 위아래 회전값
@@ -59,7 +59,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         fx_boost = GetComponentInChildren<ParticleSystem>().gameObject;
         fx_boost.SetActive(false);
         anim = GetComponent<Animator>();
-        statusUI = GetComponent<StatusUICtrl>();
+        //statusUI = GetComponent<StatusUICtrl>();
 
         vDir = Vector3.zero;
         state = Constants.ST_IDLE;//ST_CLING;
@@ -561,8 +561,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
             // Player에게는 RigidBody하나, Collision하나 있으니 그것을 제외하고
             for (int i = 0; i < colls.Length; ++i)
                 colls[i].enabled = true;
+
             if (!rBody)
-                Time.timeScale = 0f;
+                return;//                Time.timeScale = 0f;
+
             rBody.isKinematic = false;
             //tr.GetComponent<Collider>().enabled = true;
             //tr.GetComponent<Rigidbody>().isKinematic = false;
@@ -654,10 +656,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     public void Damaged(int iDamage)    //데미지를 입으면 스턴 효과도 함께 온다 
     {
         // 데미지를 입으면 HP가 감소하고, 속도가 0이 된다.
-        iHP -= iDamage;
+        fHP -= iDamage;
         fOwnSpeed = 0f;
         fBoostSpeed = 0f;
-        statusUI.SetPlayerHP(iHP);
+        //statusUI.SetPlayerHPBar(iHP);
         StartCoroutine("StartConfused", 0.5f);
 
         if ((variable & Constants.BV_bCling) > 0) // 어떤 부모에 붙은 상태라면 해제
@@ -678,7 +680,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
         // 빗방울같은 경우, 목표로 한 빗방울이사라진다면? ( 빗방울은 사라질 때 데미지를 호출한다 ) 
 
-        if (iHP < 0)
+        if (fHP < 0)
             state = Constants.ST_DEATH;
     }
 
@@ -841,7 +843,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
     public void SetHP(int _iHP)
     {
-        iHP = _iHP;
+        fHP = _iHP;
     }
     /*
     public void MoveHorizontal(Vector3 _vDest)

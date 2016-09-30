@@ -33,21 +33,21 @@ public class CharacterState : MonoBehaviour
     }
     public void gamestart()
     {
-        playerctrl.SetHP(100);
-        playerctrl.iBlood = 0;
-        
-        
-       
-       timer.isEnable = true;
+        // playerctrl.SetHP(100);
+        // playerctrl.iBlood = 0;
+
+
+       // print("이름은 : " + transform.gameObject.tag);
+    //   timer.isEnable = true;
         //PlayerCtrl.Instance.SetStateIdle(false);
-        TimeManager.Instance.StartCoroutine("SetOption", false);
-        playerctrl.SetIsInStage(true);
+        //TimeManager.Instance.StartCoroutine("SetOption", false);
+        //playerctrl.SetIsInStage(true);
 
 
-         FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
-        ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
-        clingbt.SetPlayer(playerctrl);
-        flybt.SetPlayer(playerctrl);
+        // FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+        //ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
+        //clingbt.SetPlayer(playerctrl);
+        //flybt.SetPlayer(playerctrl);
 
     }
 }

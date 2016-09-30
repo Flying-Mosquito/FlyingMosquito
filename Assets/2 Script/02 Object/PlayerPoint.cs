@@ -28,6 +28,17 @@ public class PlayerPoint : MonoBehaviour
         CameraCtrl.Instance.SetPlayer(_player);
 
         player = _player.GetComponent<PlayerCtrl>();
+        player.SetHP(100);
+        player.iBlood = 0;
+        TimeManager.Instance.StartCoroutine("SetOption", false);    // 이건 나중에 퀘스트보드에서 해줘야함
+        player.SetIsInStage(true);
+
+        //버튼에 플레이어 넣어줌 
+        FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+        ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
+        clingbt.SetPlayer(player);
+        flybt.SetPlayer(player);
+
     }
 
     void Start ()
@@ -36,7 +47,9 @@ public class PlayerPoint : MonoBehaviour
             CameraCtrl.Instance.SetStateToCollider(true);
         else
             CameraCtrl.Instance.SetStateToCollider(false);
-        TimeManager.Instance.StartCoroutine("SetOption",true);
+
+
+//        TimeManager.Instance.StartCoroutine("SetOption",true);
 
     }
 

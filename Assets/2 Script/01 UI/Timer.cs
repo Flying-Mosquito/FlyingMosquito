@@ -47,7 +47,7 @@ public class Timer :MonoBehaviour
             UI.Instance.CheckS();
 
 
-            if (playerctrl.iHP < 5 || totaltime < 1)
+            if (playerctrl.fHP < 5 || totaltime < 1)
             {
                 gameover.gameObject.SetActive(true);
 
