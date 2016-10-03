@@ -24,8 +24,9 @@ public class TimeManager : Singleton<TimeManager>
         isMenuOpen = false;
     }
 
-    public IEnumerator SetOption(bool _isMenuOpen)//void SetOption(bool _isMenuOpen)
+    public IEnumerator SetTimeStop(bool _isMenuOpen)//void SetOption(bool _isMenuOpen)
     {
+        print("셋타임스탑");
         yield return new WaitForEndOfFrame();
 
         isMenuOpen = _isMenuOpen;

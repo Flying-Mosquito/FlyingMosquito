@@ -40,7 +40,7 @@ public class Option : MonoBehaviour {
     }
     public void Click()
     {
-        playerctrl.iBlood = 0;
+        playerctrl.fBlood = 0;
         playerctrl.SetParentNull();
         playerctrl.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         //TimeManager.Instance.SetOption(false);

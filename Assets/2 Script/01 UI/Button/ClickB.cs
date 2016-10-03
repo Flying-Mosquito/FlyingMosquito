@@ -30,7 +30,7 @@ public class ClickB : BaseButton//MonoBehaviour
         //isOnTouch = true;
         if (player != null)
         {
-            player.iBlood = 0;
+            player.fBlood = 0;
             player.SetParentNull();
             player.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
          
@@ -62,7 +62,7 @@ public class ClickB : BaseButton//MonoBehaviour
         if (player != null)
             if (player != null)
             {
-                player.iBlood = 0;
+                player.fBlood = 0;
                 player.SetParentNull();
                 player.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 

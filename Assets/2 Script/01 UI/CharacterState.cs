@@ -29,7 +29,7 @@ public class CharacterState : MonoBehaviour
        
 
         StaminaBar.size = playerctrl.fStamina/ 100f;
-        bloodBar.value = playerctrl.iBlood / 200;
+        bloodBar.value = playerctrl.fBlood / 200;
     }
     public void gamestart()
     {

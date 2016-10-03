@@ -42,7 +42,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     private float MAXBOOST;                             // Boost 사용시의 최대 가속도값   
     private float fOwnSpeed;                            // 일반속도 값                  
     private float fRotSpeed;
-    public  float iBlood = 0; // 흡혈량 ( 미구현 )  ??? 
+    public  float fBlood = 0; // 흡혈량 ( 미구현 )  ??? 
 
     public override void Awake()
     {
@@ -738,7 +738,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         }
 
         if (coll.gameObject.tag == "Arrive")
-            iBlood = 200;
+            fBlood = 200;
     }
 
     void OnCollisionStay(Collision coll)

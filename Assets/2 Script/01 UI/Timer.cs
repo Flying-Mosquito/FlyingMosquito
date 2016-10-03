@@ -62,7 +62,7 @@ public class Timer :MonoBehaviour
 
             for (int i = 1; i < 12  ; i++)
             {
-                if (playerctrl.iBlood > 190 && UI.Instance.CheckTimer[i] == 1)
+                if (playerctrl.fBlood > 190 && UI.Instance.CheckTimer[i] == 1)
                 {
                    
 

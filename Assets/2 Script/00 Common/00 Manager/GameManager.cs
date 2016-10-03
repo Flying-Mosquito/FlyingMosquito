@@ -192,7 +192,8 @@ public class GameManager : Singleton<GameManager> {
           
         }
         */
-
+        //Application.loadedLevel;
+ 
         if (isLoadGame == false)
         {
             isLoadGame = true;
@@ -215,6 +216,43 @@ public class GameManager : Singleton<GameManager> {
                     time = 0f;
                 }
                 yield return new WaitForFixedUpdate();
+            }
+        }
+    }
+
+    public IEnumerator StartReload()
+    {
+        /*if ( "00 Logo" == Application.loadedLevelName )
+        {
+          
+        }
+        */
+        //Application.loadedLevel;
+        string strSceneName = SceneManager.GetActiveScene().name;
+
+        if (isLoadGame == false)
+        {
+            isLoadGame = true;
+
+            AsyncOperation async = SceneManager.LoadSceneAsync(strSceneName);//Application.LoadLevelAsync(strSceneName);
+
+            print("-----------! StartReload");
+            async.allowSceneActivation = false; // 씬을 로딩후 자동으로 넘어가지 못하게 한다.
+
+            while (!async.isDone)
+            {
+                time += Time.deltaTime;
+
+                if (time >= waitForLoadingSeconds)  // waitForLoadingSeconds는 현재 2으로 설정해 놓았다.
+                {
+                    isLoadGame = false;
+                    async.allowSceneActivation = true;  // 2초 후에 씬을 넘김 
+                    //UIManager.isFadeOut = false;
+                    bSceneChange = false;
+                    time = 0f;
+                }
+                print("Time : " + time);
+                yield return null;//new WaitForFixedUpdate();
             }
         }
     }

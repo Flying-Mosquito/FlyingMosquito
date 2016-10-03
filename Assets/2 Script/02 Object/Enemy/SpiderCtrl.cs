@@ -39,7 +39,7 @@ public class SpiderCtrl : MonoBehaviour
         {
             if (sline1.gameObject.activeInHierarchy == false && sline2.gameObject.activeInHierarchy == false)
             {
-                player.iBlood = 200;
+                player.fBlood = 200;
             }
         }
             //if (Vector3.Distance(new Vector3(this.transform.position.x, 0, 0), new Vector3(player.transform.position.x, 0, 0)) < 5)

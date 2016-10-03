@@ -34,15 +34,15 @@ public class ChameleonCtrl : MonoBehaviour {
         }
         if (Application.loadedLevelName == "Stage5" && iFoodCount == 1)
         {
-            player.iBlood = 200;
+            player.fBlood = 200;
         }
         if (Application.loadedLevelName == "Stage10" && iFoodCount == 1)
         {
-            player.iBlood = 200;
+            player.fBlood = 200;
         }
         if (Application.loadedLevelName == "Stage8" && iFoodCount == 2)
         {
-            player.iBlood = 200;
+            player.fBlood = 200;
         }
     }
 
