@@ -16,6 +16,7 @@ public class UICtrl : TimeAffectedObj {
     public float fLimitTime;
 
     public GameObject GameOverPannel;
+    public GameObject OptionPannel;
   //  public bool bStartTimer;
 
 
@@ -92,7 +93,17 @@ public class UICtrl : TimeAffectedObj {
         GameManager.Instance.StartCoroutine("StartLoad", "02 map");
     }
 
-    public void PressReplay()
+    public void PressOption()
+    {
+        print("PressOption");
+        OptionPannel.SetActive(true);
+    }
+    public void PressCancel(Transform _tr)
+    {
+        print("PressCancel");
+        _tr.parent.gameObject.SetActive(false);
+    }
+    public void PressRetry()
     {
         // GameManager.Instance.StartCoroutine("StartReload");
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
