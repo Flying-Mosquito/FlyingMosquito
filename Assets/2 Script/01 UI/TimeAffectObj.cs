@@ -6,13 +6,13 @@ public class TimeAffectObj : MonoBehaviour {
 
     void OnEnable()
     {
-        //print("OnEnable");
+        print("OnEnable");
         TimeManager.Instance.StartCoroutine("SetTimeStop",true);
     }
 
     void OnDisable()
     {
-        //print("OnDisable");
+        print("OnDisable");
         TimeManager.Instance.StartCoroutine("SetTimeStop",false);
     }
 	
