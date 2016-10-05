@@ -30,8 +30,9 @@ public class PlayerPoint : MonoBehaviour
         player = _player.GetComponent<PlayerCtrl>();
         player.SetHP(100);
         player.fBlood = 0;
-        TimeManager.Instance.StartCoroutine("SetTimeStop", false);    // 이건 나중에 퀘스트보드에서 해줘야함
+        //TimeManager.Instance.StartCoroutine("SetTimeStop", false);    // 이건 나중에 퀘스트보드에서 해줘야함
         player.SetIsInStage(true);
+
 
         //버튼에 플레이어 넣어줌 
         FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();

@@ -80,7 +80,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     void Update()
     {
 
-        if (TimeManager.Instance.isMenuOpen)
+        if (TimeManager.Instance.iOpenPannelNum !=0 )//isMenuOpen)
             return;
         CameraEffct();
     }
@@ -88,7 +88,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     void LateUpdate()
     {
 
-        if (TimeManager.Instance.isMenuOpen)
+        if (TimeManager.Instance.iOpenPannelNum != 0)//isMenuOpen)
             return;
 
         if (player == null)

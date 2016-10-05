@@ -18,7 +18,7 @@ public class Option : MonoBehaviour {
 	
     public void OpenMenu()
     {
-        if (!TimeManager.Instance.isMenuOpen)
+       // if (!TimeManager.Instance.isMenuOpen)
         {
             print("오픈메뉴");
             option_back.SetActive(true);

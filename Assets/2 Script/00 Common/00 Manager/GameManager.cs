@@ -236,7 +236,6 @@ public class GameManager : Singleton<GameManager> {
 
             AsyncOperation async = SceneManager.LoadSceneAsync(strSceneName);//Application.LoadLevelAsync(strSceneName);
 
-            print("-----------! StartReload");
             async.allowSceneActivation = false; // 씬을 로딩후 자동으로 넘어가지 못하게 한다.
 
             while (!async.isDone)
@@ -251,7 +250,6 @@ public class GameManager : Singleton<GameManager> {
                     bSceneChange = false;
                     time = 0f;
                 }
-                print("Time : " + time);
                 yield return null;//new WaitForFixedUpdate();
             }
         }

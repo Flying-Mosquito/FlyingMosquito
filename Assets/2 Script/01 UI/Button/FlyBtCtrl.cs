@@ -104,8 +104,10 @@ public class FlyBtCtrl : BaseButton//, IPointerDownHandler, IDragHandler, IPoint
     public override void OnTouchBegin(Vector2 _pos)
     {
         isMouseDown = true;
+        print("플라이버튼 눌림---------------------");
         if (player != null)
         {
+            print("플레이어 널이 아님");
             if (startPosition == Vector3.zero)
             {
                 startPosition = tr.position;

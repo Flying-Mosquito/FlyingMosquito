@@ -5,12 +5,14 @@ using System.Collections.Generic;
 public class TimeManager : Singleton<TimeManager>
 {
     public List<TimeAffectedObj> objList;
-    public bool isMenuOpen = false;
+   // public bool isMenuOpen = false;
     public float fPreTimeScale = 1f;
+    public int iOpenPannelNum;
 
     void Awake()
     {
         DontDestroyOnLoad(this);
+        iOpenPannelNum = 0;
     }
 
     public void AddObj(TimeAffectedObj _obj)
@@ -21,50 +23,71 @@ public class TimeManager : Singleton<TimeManager>
     public void DeleteAllObj()
     {
         objList.Clear();
-        isMenuOpen = false;
+        //isMenuOpen = false;
+        print("DeleteAllObj");
+        //iOpenPannelNum = 0;
+        //Time.timeScale = fPreTimeScale;
+        Time.timeScale = 1f; // 정상시간으로 되돌려줌
     }
 
     public IEnumerator SetTimeStop(bool _isMenuOpen)//void SetOption(bool _isMenuOpen)
     {
-        print("셋타임스탑");
         yield return new WaitForEndOfFrame();
 
-        isMenuOpen = _isMenuOpen;
+        //isMenuOpen = _isMenuOpen;
 
-        if (isMenuOpen)
+        if (_isMenuOpen) //시간이 멈춰야 함
         {
-            fPreTimeScale = Time.timeScale;
-            print("셋옵션- 타임스케일영 : " + isMenuOpen);
-            Time.timeScale = 0f;
+            if (iOpenPannelNum == 0)
+            {
+                fPreTimeScale = Time.timeScale;
+                Time.timeScale = 0f;
+            }
+           // else
+             //   Time.timeScale = 0f;
+            ++(iOpenPannelNum);
 
+            //  ++iOpenPannelNum;
         }
-        else
+        else   //예전시간 그대로 가야함
         {
-            Time.timeScale = fPreTimeScale;  // = 1f;
+            --iOpenPannelNum;
+            if (iOpenPannelNum <= 0)
+            {
+                if (iOpenPannelNum < 0) // 이렇게 하면 안되는데...
+                {
+                    print("0보다 작으시단다");
+                    iOpenPannelNum = 0;
+                }
+               // print("타임스케일 원래대로, preTimescale : " + fPreTimeScale);
+                Time.timeScale = fPreTimeScale;  // = 1f;
+            }
         }
             
+       // print("")
     }
 
 
 
     void FixedUpdate()
     {
-        if (!isMenuOpen)
+        if (iOpenPannelNum == 0)
         {
             for (int i = 0; i < objList.Count; ++i)
                 objList[i].MyFixedUpdate();
         }
         else
         {
-            print("타임스케일영");
-            Time.timeScale = 0f;
+            //print("타임스케일영, num : " + iOpenPannelNum);
+         //   fPreTimeScale = Time.timeScale;
+          //  Time.timeScale = 0f;
         }
 
     }
 
 	void Update ()
     {
-        if (!isMenuOpen)
+        if (iOpenPannelNum == 0)
         {
             for (int i = 0; i < objList.Count; ++i)
                 objList[i].MyUpdate();
@@ -73,7 +96,7 @@ public class TimeManager : Singleton<TimeManager>
 
     void LateUpdate()
     {
-        if (!isMenuOpen)
+        if (iOpenPannelNum == 0)
         {
             for (int i = 0; i < objList.Count; ++i)
                 objList[i].MyLateUpdate();

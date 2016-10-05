@@ -108,8 +108,9 @@ public class UICtrl : TimeAffectedObj {
         // GameManager.Instance.StartCoroutine("StartReload");
         //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 
-        TimeManager.Instance.StartCoroutine("SetTimeStop", false);
         TimeManager.Instance.DeleteAllObj();
+        TimeManager.Instance.StartCoroutine("SetTimeStop", false);
+        
         SoundManager.Instance.ClearSoundList();
         GameManager.Instance.StartCoroutine("StartReload");
 
