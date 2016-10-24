@@ -12,6 +12,8 @@ public class UICtrl : TimeAffectedObj {
     public Image hpImage;
     public Image staminaImage;
     public Image bloodImage;
+
+
     public Text LimitTimeText;
     public float fLimitTime;
 
@@ -32,7 +34,7 @@ public class UICtrl : TimeAffectedObj {
         staminaImage = GameObject.Find("StaminaBar").GetComponent<Image>();
         bloodImage = GameObject.Find("BloodBar").GetComponent<Image>();
 
-        fLimitTime = 5f;
+        fLimitTime = 20f;
         LimitTimeText = GameObject.Find("LimitTime").GetComponent<Text>();
         LimitTimeText.text = fLimitTime.ToString();
 
