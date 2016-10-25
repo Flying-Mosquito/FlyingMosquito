@@ -72,22 +72,54 @@ public class Login : Singleton<Login>
 
     void LoginGUI()
     {
-        GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 2) + 200, (Screen.height / 2) + 250), "Login");
 
-        GUI.Label(new Rect(390 - control * 2, 200 - control, 220, 25), "ID");
+        //GUI.Box(new Rect(280 - control * 2, 120 - control, (Screen.width / 2) + 200, (Screen.height / 2) + 250), "Login");
+        float fLeft = Screen.width / 10f;
+        float ftop = Screen.height / 10f;
+        float fRight = Screen.width - (Screen.width / 10f * 2f);
+        float fBottom = Screen.height - (Screen.height / 10f * 2f);
+
+        GUI.Box(new Rect(fLeft
+                        , ftop
+                        , fRight
+                        , fBottom )
+                        , "Login");
+
+        //GUI.Label(new Rect(390 - control * 2, 200 - control, 220, 25), "ID");
+        GUI.Label(new Rect(Screen.width/2 - Screen.width/5
+                            , Screen.height/2 - Screen.height/5
+                            ,( Screen.width / 2 - Screen.width / 5) + 50
+                            , (Screen.height / 2 - Screen.height / 5) +5 )
+                            , "ID");
         Id = GUI.TextField(new Rect(390 - control * 2, 225 - control, 220, 25), Id);
 
-        GUI.Label(new Rect(390 - control * 2, 250 - control, 220, 25), "Password");
+        GUI.Label(new Rect(Screen.width / 2 - Screen.width / 5
+                                  , Screen.height / 2 + Screen.height / 15
+                                  , (Screen.width / 2 - Screen.width / 5) + 50
+                                  , (Screen.height / 2 + Screen.height / 15) + 5)
+                                  , "Password");
+
         Password = GUI.TextField(new Rect(390 - control * 2, 275 - control, 220, 25), Password);
 
 
-        if (GUI.Button(new Rect(360 - control * 2, 360 - control, 120, 25), "Create Account"))
+        //if (GUI.Button(new Rect(360 - control * 2, 360 - control, 120, 25), "Create Account"))
+        if (GUI.Button(new Rect(Screen.width/2f - 150f//fLeft + (fRight / 5f)
+                                ,fBottom - (fBottom/ 8f)
+                                , 120
+                                , 25)
+                                , "Create Account"))
         {
             CurrentMenu = "CreateAccount";
         }
 
 
-        if (GUI.Button(new Rect(520 - control * 2, 360 - control, 120, 25), "Log in"))
+        // if (GUI.Button(new Rect(520 - control * 2, 360 - control, 120, 25), "Log in"))
+        //  if (GUI.Button(new Rect(520 - control * 2, 360 - control, 120, 25), "Log in"))
+        if (GUI.Button(new Rect(Screen.width / 2f + 30f//fRight - (fRight / 5f)
+                               , fBottom - (fBottom / 8f)
+                               , 120
+                               , 25)
+                               , "Login"))
         {
             WWWForm form = new WWWForm();
             form.AddField("user_id", Id);
