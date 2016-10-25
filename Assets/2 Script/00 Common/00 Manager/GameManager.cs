@@ -129,7 +129,6 @@ public class GameManager : Singleton<GameManager> {
 
             async.allowSceneActivation = false; // 씬을 로딩후 자동으로 넘어가지 못하게 한다.
 
-            print("1번");
             StartCoroutine("FadeOut");
 
             while (!async.isDone)
@@ -154,7 +153,6 @@ public class GameManager : Singleton<GameManager> {
 
             async = SceneManager.LoadSceneAsync(strSceneName);
             async.allowSceneActivation = false;
-            print("넘어옴1");
 
             while (!async.isDone)
             {
@@ -168,19 +166,15 @@ public class GameManager : Singleton<GameManager> {
                     //if (alphaImage == null)
                     //  alphaImage = alphaImage = GameObject.Find("BlackBackground").GetComponent<Image>();
                     // alphaImage.color = new Color(alphaImage.color.r, alphaImage.color.g, alphaImage.color.b, 1f);
-                    print("넘어옴2");
                 }
                 yield return new WaitForFixedUpdate();
             }
 
-            print("넘어옴3");
             if (alphaImage == null)
                 alphaImage = alphaImage = GameObject.Find("BlackBackground").GetComponent<Image>();
             alphaImage.color = new Color(alphaImage.color.r, alphaImage.color.g, alphaImage.color.b, 1f);
 
-            print("넘어옴4");
             isFadeIn = true;
-            print("fadeIn 은 트루");
             //StartCoroutine("FadeIn");
         }
         isLoadingDone = false;

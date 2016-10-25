@@ -87,6 +87,7 @@ public class TimeManager : Singleton<TimeManager>
 
 	void Update ()
     {
+        print("TimeScale: " + Time.timeScale);
         if (iOpenPannelNum == 0)
         {
             for (int i = 0; i < objList.Count; ++i)

@@ -19,8 +19,6 @@ public class WorldStageManager : Singleton<WorldStageManager> {
         for (int i = 0; i < iTotalWorldNum; ++i)                 // World생성 후, 스테이지들을 닫힌 상태로 초기화
         {
             worldmapList.Add(new mapStruct(i));
-
-            print("i는 : " + i);
            // mapStruct worldStruct = new mapStruct();
             //worldStruct.worldNum = i;
             //worldStruct.stageList = new List<StageStarInfo>();

@@ -33,7 +33,6 @@ public class StageIconCtrl : MonoBehaviour {
         stageText.text = (iStageNum+1).ToString();
 
         iStarNum = WorldStageManager.Instance.worldmapList[iWorldNum].stageList[iStageNum].iStarNum;
-        print("iWorldNum :  " + iWorldNum + ", iStageNum : " + iStageNum + ", imageChoice  = " + iStarNum);
  
         if (iStarNum == -1)
         {
