@@ -1,70 +1,39 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
-// 플레이어에게 넣어준다
-public class UICtrl : TimeAffectedObj {
-
-    private float MAXHP;
-    private float MAXSTAMINA;
-    private float MAXBLOOD;
-    public Image hpImage;
-    public Image staminaImage;
-    public Image bloodImage;
-
-
+// MyUI 에 넣어줌 
+public class StageUICtrl : TimeAffectedObj
+{
     public Text LimitTimeText;
     public float fLimitTime;
 
     public GameObject GameOverPannel;
     public GameObject OptionPannel;
-  //  public bool bStartTimer;
 
+    public GameObject DestinyObj;
 
-    public PlayerCtrl player;
-    public override void Awake()
+    void Start ()
     {
-        base.Awake();
-    }
-    void Start()
-    {
-        player = GameObject.FindObjectOfType<PlayerCtrl>();
-        hpImage = GameObject.Find("Heart").GetComponent<Image>();
-        staminaImage = GameObject.Find("StaminaBar").GetComponent<Image>();
-        bloodImage = GameObject.Find("BloodBar").GetComponent<Image>();
-
         fLimitTime = 20f;
         LimitTimeText = GameObject.Find("LimitTime").GetComponent<Text>();
         LimitTimeText.text = fLimitTime.ToString();
-
-        MAXHP = 100f;
-        MAXSTAMINA = 100f;
-        MAXBLOOD = 100f;
-        //bStartTimer = false;
     }
 
     public override void MyUpdate()
     {
-        ShowPlayerHPBar();
-        ShowPlayerStaminaBar();
-        ShowPlayerBloodBar();
-        //System.Text.StringBuilder
-        
-            ShowLimitTimer();
+        ShowLimitTimer();
     }
-    public void ShowPlayerHPBar()
+
+ 
+    void OnCollisionEnter(Collision _coll)
     {
-        hpImage.fillAmount = player.fHP / MAXHP;
+        if(_coll.gameObject == DestinyObj)
+        {
+            
+        }
     }
-    public void ShowPlayerStaminaBar()
-    {
-        staminaImage.fillAmount = player.fStamina / MAXSTAMINA;
-    }
-    public void ShowPlayerBloodBar()
-    {
-        bloodImage.fillAmount = player.fBlood / MAXBLOOD;
-    }
+
     public void SetTimer(int _time)
     {
         fLimitTime = _time;
@@ -74,9 +43,9 @@ public class UICtrl : TimeAffectedObj {
         if (fLimitTime < 0f)
             return;
 
-            fLimitTime -= Time.deltaTime;
+        fLimitTime -= Time.deltaTime;
 
-      
+
         if (fLimitTime < 0f)   // 게임오버라던가 그런거 띄우는처리 해줘야함 
             GameOverPannel.SetActive(true);
 
@@ -84,7 +53,6 @@ public class UICtrl : TimeAffectedObj {
 
         LimitTimeText.text = string.Format("{0:D3}", toIntTime);
     }
-
     public void PressMainMap()
     {
         //GameManager.Instance.StartCoroutine("StartSceneLoadWithLoading", "02 map");
@@ -100,7 +68,7 @@ public class UICtrl : TimeAffectedObj {
         print("PressOption");
         OptionPannel.SetActive(true);
     }
-    public void PressCancel(Transform _tr)
+    public void PressCancel(Transform _tr) // 부모의 Active상태 false로 만듦
     {
         print("PressCancel");
         _tr.parent.gameObject.SetActive(false);
@@ -112,10 +80,11 @@ public class UICtrl : TimeAffectedObj {
 
         TimeManager.Instance.DeleteAllObj();
         TimeManager.Instance.StartCoroutine("SetTimeStop", false);
-        
+
         SoundManager.Instance.ClearSoundList();
         GameManager.Instance.StartCoroutine("StartReload");
 
     }
 
 }
+
