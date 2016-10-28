@@ -6,7 +6,7 @@ using System.Collections;
 public class StageUICtrl : TimeAffectedObj
 {
     public Text LimitTimeText;
-    public float fLimitTime;
+    public float fLimitTime = 60;
 
     public GameObject GameOverPanel;
     public GameObject OptionPanel;
@@ -20,7 +20,7 @@ public class StageUICtrl : TimeAffectedObj
     void Start()
     {
         iDestinyCount = 0;
-        fLimitTime = 20f;
+        //fLimitTime = 20f;
         LimitTimeText = GameObject.Find("LimitTime").GetComponent<Text>();
         LimitTimeText.text = fLimitTime.ToString();
     }
@@ -99,8 +99,6 @@ public class StageUICtrl : TimeAffectedObj
 
         SoundManager.Instance.ClearSoundList();
         //점수설정 추가해야함 
-
-
         GameManager.Instance.StartCoroutine("StartLoad", "Stage" + iNextStageNum.ToString());
 
     }
@@ -114,7 +112,18 @@ public class StageUICtrl : TimeAffectedObj
         print("PressCancel");
         _tr.parent.gameObject.SetActive(false);
     }
+    /*
+    public void PressMulti()
+    {
+        print("PressMulti");
+        TimeManager.Instance.DeleteAllObj();
+        TimeManager.Instance.StartCoroutine("SetTimeStop", false);
 
+        SoundManager.Instance.ClearSoundList();
+        GameManager.Instance.StartCoroutine("StartLoad", "MultiStage0");
 
+    }
+
+    */
 }
 

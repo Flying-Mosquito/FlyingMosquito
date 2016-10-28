@@ -87,19 +87,31 @@ public class Login : Singleton<Login>
 
         //GUI.Label(new Rect(390 - control * 2, 200 - control, 220, 25), "ID");
         GUI.Label(new Rect(Screen.width/2 - Screen.width/5
-                            , Screen.height/2 - Screen.height/5
-                            ,( Screen.width / 2 - Screen.width / 5) + 50
-                            , (Screen.height / 2 - Screen.height / 5) +5 )
-                            , "ID");
-        Id = GUI.TextField(new Rect(390 - control * 2, 225 - control, 220, 25), Id);
+                                , Screen.height/2 - Screen.height/5
+                                ,( Screen.width / 2 - Screen.width / 5) + 50
+                                , (Screen.height / 2 - Screen.height / 5) +5 )
+                                , "ID");
+        Id = GUI.TextField(new Rect(Screen.width / 2 - Screen.width / 5
+                                , (Screen.height / 2 - Screen.height / 5) + 20
+                                , (Screen.width / 2 - Screen.width / 5) + 50
+                                , 20)
+                                , Id);
 
         GUI.Label(new Rect(Screen.width / 2 - Screen.width / 5
-                                  , Screen.height / 2 + Screen.height / 15
-                                  , (Screen.width / 2 - Screen.width / 5) + 50
-                                  , (Screen.height / 2 + Screen.height / 15) + 5)
-                                  , "Password");
+                                , Screen.height / 2 
+                                , (Screen.width / 2 - Screen.width / 5) + 50
+                                , (Screen.height / 2) + 5)
+                                , "Password");
 
-        Password = GUI.TextField(new Rect(390 - control * 2, 275 - control, 220, 25), Password);
+        Password = GUI.TextField(new Rect(Screen.width / 2 - Screen.width / 5
+                                , (Screen.height / 2 ) + 20
+                                , (Screen.width / 2 - Screen.width / 5) + 50
+                                , 20)
+                                , Password);
+
+
+
+
 
 
         //if (GUI.Button(new Rect(360 - control * 2, 360 - control, 120, 25), "Create Account"))

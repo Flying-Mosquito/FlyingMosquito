@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 public class StageIconCtrl : MonoBehaviour {
+    public enum eIcon { StageIcon, EtcIcon }
+    public eIcon iconType;
 
     public Image image;
     public Text stageText;
@@ -23,6 +25,9 @@ public class StageIconCtrl : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        if (iconType == eIcon.EtcIcon)    //함수만 사용할것이다 
+            return;
+
         iStarNum = 0;
         image = GetComponent<Image>();
         stageText = GetComponentInChildren<Text>();
@@ -58,6 +63,10 @@ public class StageIconCtrl : MonoBehaviour {
     {
         // 임시적으로 하긴 했는데, world가 늘어나면 바뀌어야함 
         GameManager.Instance.StartCoroutine("StartSceneLoadWithLoading", "Stage" + (iStageNum+1).ToString());
+    }
+    public void EnterMulti()
+    {
+        GameManager.Instance.StartCoroutine("StartSceneLoadWithLoading", "MultiStage0");
     }
 
     public void SetStageStar()
