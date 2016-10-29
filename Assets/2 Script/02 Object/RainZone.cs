@@ -43,7 +43,7 @@ public class RainZone : MonoBehaviour
 
     void Start()
     {
-        Random.InitState(System.Environment.TickCount);
+        //Random.InitState(System.Environment.TickCount);
     }
 
     void OnTriggerEnter(Collider coll)
