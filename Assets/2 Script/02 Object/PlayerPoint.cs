@@ -11,6 +11,8 @@ public class PlayerPoint : MonoBehaviour
 
     public bool isCamStateCollider;
 
+    //public int iPlayerNum = -1; // 플레이어로 넘겨줄 iPlayerNum변수 
+
     void Awake()
     {
      //   CameraCtrl.Instance.GetComponent<CameraEffect>().SetParentCamp();
@@ -19,6 +21,13 @@ public class PlayerPoint : MonoBehaviour
         CreatePlayer();
         
         //PlayerCtrl.Instance.SetTransform(transform.position, transform.rotation);
+    }
+
+    public void SetPlayerNum(int _iPlayerNum)
+    {
+       // print("_PlayerPoint -  :" + _iPlayerNum);
+       // iPlayerNum = _iPlayerNum;
+        player.SetPlayerNum(_iPlayerNum);
     }
    
     void CreatePlayer()
@@ -30,6 +39,8 @@ public class PlayerPoint : MonoBehaviour
         player = _player.GetComponent<PlayerCtrl>();
         player.SetHP(100);
         player.fBlood = 0;
+
+
         //TimeManager.Instance.StartCoroutine("SetTimeStop", false);    // 이건 나중에 퀘스트보드에서 해줘야함
         player.SetIsInStage(true);
 
@@ -63,35 +74,34 @@ public class PlayerPoint : MonoBehaviour
             {
                 player.SetIsInStage(true);
                 player.SetHP(100);
+                //player.CheckServerConnect(false, Constants.SERVCONNECT_NUM);
                 TouchEventManager.Instance.SetPlayer(player);
                 GameManager.Instance.SetBackgroundAlphaColor(0f);
                 gameObject.SetActive(false);
 
 
             }
-            else // ???
-            {
-                GameObject _obj = null;
-                if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))
-                {
-                    //   PlayerCtrl.Instance.SetStateIdle(false);
+            //else // ???
+            //{
+            //    GameObject _obj = null;
+            //    if(_obj = CollisionManager.Instance.Get_MouseCollisionObj(3000f, "RAINDROP"))
+            //    {
+            //        //   PlayerCtrl.Instance.SetStateIdle(false);
                   
-                    player.SetIsInStage(true);
-                    gameObject.SetActive(false);
-                    TouchEventManager.Instance.SetPlayer(player);
-                    //UI.Instance.SetPlayer(player);
-                    FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
-                    ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
-                    clingbt.SetPlayer(null);
-                    flybt.SetPlayer(null);
-                    //Timer.Instance.enabled = false;
+            //        player.SetIsInStage(true);
+            //        gameObject.SetActive(false);
+            //        TouchEventManager.Instance.SetPlayer(player);
+            //        //UI.Instance.SetPlayer(player);
+            //        FlyBtCtrl flybt = GameObject.FindObjectOfType<FlyBtCtrl>();
+            //        ClingBtCtrl clingbt = GameObject.FindObjectOfType<ClingBtCtrl>();
+            //        clingbt.SetPlayer(null);
+            //        flybt.SetPlayer(null);
+            //        //Timer.Instance.enabled = false;
 
-                }
-            }
+            //    }
+            //}
             
         }
-
-
 
     }
 

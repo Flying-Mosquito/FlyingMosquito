@@ -7,6 +7,8 @@ using UnityEngine.UI;
 // 2. 기본 가속도? 
 public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 {
+    public int iPlayerNum = -1; // 서버와 연결에 사용하는 번호
+
     private Transform tr;
     public  Transform targetPlus;
     public  Transform equipPoint;
@@ -79,6 +81,7 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
         MAXBOOST = 10f;
 
     }
+
     public override void MyFixedUpdate()//void FixedUpdate()
     {
         prePosition = tr.position;
@@ -141,7 +144,19 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
 
 
+    public void SetPlayerNum(int _iPlayerNum)
+    {
+        if(iPlayerNum != -1)
+            variable |= Constants.BV_IsConnectServ;
+        else
+            variable &= ~(Constants.BV_IsConnectServ);
 
+        iPlayerNum = _iPlayerNum;
+        print("Player - iPlayerNum : " + iPlayerNum);
+       // iPlayerNum = _iPlayerNum;
+       // Constants.SERVCONNECT_NUM = _iPlayerNum;
+
+    }
     private void blooding()
     {
         if ((variable & Constants.BV_bBlood) > 0)
@@ -163,6 +178,14 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
     private void KeyInput()     // StateCheck 로 이름을 바꾸자..
     {
+        //print("iPlayerNum : " + iPlayerNum);
+        print("Constants.ServConnect_num : " + Constants.SERVCONNECT_NUM);
+        if ( iPlayerNum != Constants.SERVCONNECT_NUM)   // 스테이지 시작할때 -1로 바꿔주는 코드 필요함
+        {
+            print("같지않아");
+            return;
+        }
+
         if (state != Constants.ST_STUN)// && state != Constants.ST_CLING)
         {
 #if UNITY_ANDROID

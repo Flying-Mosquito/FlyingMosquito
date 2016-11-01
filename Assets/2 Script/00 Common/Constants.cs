@@ -3,7 +3,7 @@
 
 static class Constants
 {
-
+    public static int SERVCONNECT_NUM = 1;   // 0~3
 
     // State
     public const ulong ST_IDLE = 0x01;
@@ -36,6 +36,7 @@ static class Constants
     public const ulong BV_IsMove = 0x800;
     public const ulong BV_IsInStage = 0x1000;
     public const ulong BV_IsHold = 0x2000;  // 플레이어가 물체를 잡고있는지
+    public const ulong BV_IsConnectServ = 0x4000; // 서버 접속여부
 
     //public const ulong BV_InRainzone = 0x20;  // 바깥에서 변경해 줘야 하는 함수여서 여기에 안적음 
 }

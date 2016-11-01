@@ -77,6 +77,9 @@ public class ConnectMultiServ : MonoBehaviour
 
         // 내 클라이언트 번호 (접속 순서대로 0 , 1, 2, 3 의 숫자를 받음)
         myNum = System.Convert.ToInt16(ReceiveString);
+
+        Constants.SERVCONNECT_NUM = myNum;
+
     }
 
     void Update()

@@ -12,8 +12,7 @@ public class PlayerUICtrl : TimeAffectedObj {
     public Image hpImage;
     public Image staminaImage;
     public Image bloodImage;
-
-
+ 
     //public Text LimitTimeText;
     //public float fLimitTime;
 

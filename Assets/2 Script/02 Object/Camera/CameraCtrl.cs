@@ -232,7 +232,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
                 if (preRayHitObjList.Count != 0) // 이미 투명해진 물체가 있는 상황이라면 
                 {
-                    print("이미 투명해진 물체가 있어요");
+                    //print("이미 투명해진 물체가 있어요");
                   //  for (int j = 0; j < preRayHitObjList.Count; ++j)
                    // {
                         Shader tempShader = null;
@@ -281,7 +281,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
                         }
                         else
                         {
-                            print("ObjStruct추가4");
+                          //  print("ObjStruct추가4");
                             objStruct._objShader = tempShader;
                         }
 
@@ -324,18 +324,18 @@ public class CameraCtrl : Singleton<CameraCtrl>
         // newRayHitObjList에 들어가 있는 Obj들의 셰이더를 투명하게 바꿈 
         for (int i = 0; i < newRayHitObjList.Count; ++i)
         {
-            print("투명해진 물체가 없네요. 투명하게 해줄게요");
+           // print("투명해진 물체가 없네요. 투명하게 해줄게요");
             Renderer renderer = newRayHitObjList[i]._obj.GetComponent<MeshRenderer>();//newRayHitObjList[i]._obj.GetComponentInChildren<SkinnedMeshRenderer>();//GetComponent<SkinnedMeshRenderer>();
 
             if (renderer == null)
             {
-                print("메쉬렌더러가 없어서 스킨드메쉬 렌더러를 가져와요");
+              //  print("메쉬렌더러가 없어서 스킨드메쉬 렌더러를 가져와요");
                 renderer = newRayHitObjList[i]._obj.GetComponentInChildren<SkinnedMeshRenderer>();
             }
 
             if (renderer != null)
             {
-                print("이제 투명하게 만들거에요");
+                //print("이제 투명하게 만들거에요");
                 renderer.material.shader = Shader.Find("Transparent/VertexLit");
                 // renderer.material.shader = Shader.Find("Mobile/Particles/Multiply");// Transparent/VertexLit");
 
@@ -359,21 +359,15 @@ public class CameraCtrl : Singleton<CameraCtrl>
         // preRayHitObjList와 newRayHitObjList를 비교하여, Ray가 닿지 않은 Obj라면 셰이더 상태를 원래대로 돌려 놓는다.
         for (int i = 0; i < preRayHitObjList.Count; ++i)
         {
-            print("PreRayHitObjList.Count!!!!!!!!: " + preRayHitObjList.Count);
-            print("preRayHitObjList[i]._obj.name : " + preRayHitObjList[i]._obj.name);
-            print("newRayHitObjList : " + newRayHitObjList.Count);
+            //print("PreRayHitObjList.Count!!!!!!!!: " + preRayHitObjList.Count);
+            //print("preRayHitObjList[i]._obj.name : " + preRayHitObjList[i]._obj.name);
+            //print("newRayHitObjList : " + newRayHitObjList.Count);
             //print("newRayHitObjList 0 .obj. name : " + newRayHitObjList[0]._obj.name);
 
             ObjStruct myObj = newRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); });
-            if (myObj!= null)
-            {
-                
-                
-            }
-            else
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : myObj = null ");
-            print("newRayHitObjList.Count  : " + newRayHitObjList.Count);
-            print("preRayHitObjList.Count  : " + preRayHitObjList.Count);
+  
+//            print("newRayHitObjList.Count  : " + newRayHitObjList.Count);
+  //          print("preRayHitObjList.Count  : " + preRayHitObjList.Count);
 
            // ObjStruct myTempObj = null;
             if ((newRayHitObjList.Count == 0) 

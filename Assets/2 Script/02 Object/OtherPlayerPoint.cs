@@ -6,6 +6,7 @@ public class OtherPlayerPoint : MonoBehaviour {
     public enum ePointState { eMenu, eStage }
     public ePointState state;
     public GameObject PlayerPrefeb;
+    private PlayerCtrl player = null;
 
     public bool isCamStateCollider;
 
@@ -18,11 +19,18 @@ public class OtherPlayerPoint : MonoBehaviour {
 
         //PlayerCtrl.Instance.SetTransform(transform.position, transform.rotation);
     }
+    public void SetPlayerNum(int _iPlayerNum)
+    {
+        // print("_PlayerPoint -  :" + _iPlayerNum);
+        // iPlayerNum = _iPlayerNum;
+        player.SetPlayerNum(_iPlayerNum);
+    }
 
     void CreatePlayer()
     {
         // 플레이어 만들면서 카메라도 셋팅 
         GameObject _player = Instantiate(PlayerPrefeb, transform.position, transform.rotation) as GameObject;
+        player = _player.GetComponent<PlayerCtrl>();
      //   CameraCtrl.Instance.SetPlayer(_player);
     }
     // Update is called once per frame
