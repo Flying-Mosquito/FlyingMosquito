@@ -60,7 +60,6 @@ public class TouchEventManager : Singleton<TouchEventManager>//MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.P))
             {
-                print("피키");
                 player.ClingBtDown();
             }
             if (Input.GetKeyUp(KeyCode.P))

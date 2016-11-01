@@ -18,7 +18,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
    // private CamPivot ParentCamp = null;
     DepthOfField dof;
     Component fx_speedLight;
-    private List<ObjStruct> preRayHitObjList = new List<ObjStruct>();      //이전에 충돌한 gameObject를 가지고 있는 List
+    public List<ObjStruct> preRayHitObjList = new List<ObjStruct>();      //이전에 충돌한 gameObject를 가지고 있는 List
                                                                            //private GameObject Camera;
                                                                            //private List<string> preRayHitObj
 
@@ -55,7 +55,7 @@ public class CameraCtrl : Singleton<CameraCtrl>
     public void SetPlayer(GameObject _player)
     {
         player = _player.GetComponent<PlayerCtrl>();
-        targetTr = GameObject.Find("CamPivot").transform;
+        targetTr = player.GetComponentInChildren<CamPivot>().transform;//GameObject.Find("CamPivot").transform;
        // ParentCamp = player.GetComponentInChildren<CamPivot>();
     }
     public void SetTarget(GameObject _obj)
@@ -232,38 +232,73 @@ public class CameraCtrl : Singleton<CameraCtrl>
 
                 if (preRayHitObjList.Count != 0) // 이미 투명해진 물체가 있는 상황이라면 
                 {
+                    print("이미 투명해진 물체가 있어요");
+                  //  for (int j = 0; j < preRayHitObjList.Count; ++j)
+                   // {
+                        Shader tempShader = null;
+                        //for ( int k = 0; k < preRayHitObjList.Count; ++k)
+                        //{
+                        //    if(preRayHitObjList[k]._obj.name == RayHit[i].collider.gameObject.name)
+                        //    {
+                        //        tempShader = preRayHitObjList[k]._objShader;
+                        //        if (renderer = RayHit[i].collider.gameObject.GetComponent<MeshRenderer>())//GetComponent<MeshRenderer>())  // MeshRenerer가 없는 경우가 있다. 그 경우에는 투명하게 할 필요가 없으므로 break.
+                        //            objStruct._objShader = renderer.material.shader;
+                        //        else if (renderer = RayHit[i].collider.gameObject.GetComponentInChildren<SkinnedMeshRenderer>())//GetComponent<SkinnedMeshRenderer>())
+                        //            objStruct._objShader = renderer.material.shader;
+                        //    }
 
-                    for (int j = 0; j < preRayHitObjList.Count; ++j)
-                    {
-                        Shader tempShader;
+                        //    if ((k == preRayHitObjList.Count - 1) && (tempShader == null ))
+                        //    {
+                        //        objStruct._objShader = tempShader;
+                        //    }
+                        //}
 
-                        if (!(tempShader = preRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == RayHit[i].collider.gameObject.name); })._objShader)) // preRayHitObjList에 있는 이름과 RayHit에 있는 이름과 비교해서 있는 이름인지 확인
+                      //  print("preRayHitObjList : " + preRayHitObjList[j]._objShader);
+
+                    // print("preRayHitObjList[j]._objShader.name : " + preRayHitObjList[j]._obj.name);
+                    //ObjStruct myObj = preRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == RayHit[i].collider.gameObject.name); });
+                    //Shader myShader = myObj._objShader;
+
+                    if (!(tempShader = preRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == RayHit[i].collider.gameObject.name); })._objShader)) // preRayHitObjList에 있는 이름과 RayHit에 있는 이름과 비교해서 있는 이름인지 확인
                         {   // 이전에 투명해졌던 객체가 아니라면 shader정보를 받아오고, 이미 투명해졌던 객체라면 shader정보를 받아오지 않는다.
+
                             if (renderer = RayHit[i].collider.gameObject.GetComponent<MeshRenderer>())//GetComponent<MeshRenderer>())  // MeshRenerer가 없는 경우가 있다. 그 경우에는 투명하게 할 필요가 없으므로 break.
+                            {
+                                print("ObjStruct추가1");
                                 objStruct._objShader = renderer.material.shader;
+                            }
                             else if (renderer = RayHit[i].collider.gameObject.GetComponentInChildren<SkinnedMeshRenderer>())//GetComponent<SkinnedMeshRenderer>())
+                            {
+                                print("ObjStruct추가2");
                                 objStruct._objShader = renderer.material.shader;
-                            else
-                                break;
+                            }
+                            //else
+                            //{
+                            //    print("ObjStruct추가3");
+                            //    break;
+                            //}
 
                         }
                         else
                         {
+                            print("ObjStruct추가4");
                             objStruct._objShader = tempShader;
                         }
 
-                    }
+                   // }
                 }
                 else
                 {
+                    print("투명해진 물체가 없네요.");
                     if (renderer = RayHit[i].collider.gameObject.GetComponent<MeshRenderer>())//GetComponent<MeshRenderer>())  // MeshRenerer가 없는 경우가 있다. 그 경우에는 투명하게 할 필요가 없으므로 break.
                     {
-
+                        print("ObjStruct추가5");
                         objStruct._objShader = renderer.material.shader;
                         print("메쉬렌더러 : " + objStruct._objShader.name);
                     }
                     else if (renderer = RayHit[i].collider.gameObject.GetComponentInChildren<SkinnedMeshRenderer>())
                     {
+                        print("ObjStruct추가6");
                         objStruct._objShader = renderer.material.shader;
                         print("스킨드메쉬렌더러 : " + objStruct._obj.name);
                     }
@@ -289,15 +324,18 @@ public class CameraCtrl : Singleton<CameraCtrl>
         // newRayHitObjList에 들어가 있는 Obj들의 셰이더를 투명하게 바꿈 
         for (int i = 0; i < newRayHitObjList.Count; ++i)
         {
+            print("투명해진 물체가 없네요. 투명하게 해줄게요");
             Renderer renderer = newRayHitObjList[i]._obj.GetComponent<MeshRenderer>();//newRayHitObjList[i]._obj.GetComponentInChildren<SkinnedMeshRenderer>();//GetComponent<SkinnedMeshRenderer>();
 
             if (renderer == null)
             {
+                print("메쉬렌더러가 없어서 스킨드메쉬 렌더러를 가져와요");
                 renderer = newRayHitObjList[i]._obj.GetComponentInChildren<SkinnedMeshRenderer>();
             }
 
             if (renderer != null)
             {
+                print("이제 투명하게 만들거에요");
                 renderer.material.shader = Shader.Find("Transparent/VertexLit");
                 // renderer.material.shader = Shader.Find("Mobile/Particles/Multiply");// Transparent/VertexLit");
 
@@ -321,8 +359,29 @@ public class CameraCtrl : Singleton<CameraCtrl>
         // preRayHitObjList와 newRayHitObjList를 비교하여, Ray가 닿지 않은 Obj라면 셰이더 상태를 원래대로 돌려 놓는다.
         for (int i = 0; i < preRayHitObjList.Count; ++i)
         {
-            if (!newRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); })._obj) //preRayHitObjList[i]);
+            print("PreRayHitObjList.Count!!!!!!!!: " + preRayHitObjList.Count);
+            print("preRayHitObjList[i]._obj.name : " + preRayHitObjList[i]._obj.name);
+            print("newRayHitObjList : " + newRayHitObjList.Count);
+            //print("newRayHitObjList 0 .obj. name : " + newRayHitObjList[0]._obj.name);
+
+            ObjStruct myObj = newRayHitObjList.Find(delegate (ObjStruct _objStruct) { return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); });
+            if (myObj!= null)
             {
+                
+                
+            }
+            else
+                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! : myObj = null ");
+            print("newRayHitObjList.Count  : " + newRayHitObjList.Count);
+            print("preRayHitObjList.Count  : " + preRayHitObjList.Count);
+
+           // ObjStruct myTempObj = null;
+            if ((newRayHitObjList.Count == 0) 
+                ||!(/*myTempObj = */newRayHitObjList.Find(delegate (ObjStruct _objStruct) {  return (_objStruct._obj.name == preRayHitObjList[i]._obj.name); })._obj) ) 
+                 //preRayHitObjList[i]);
+            {
+                //if (myTempObj == null)
+                //    continue;  
                 // string nameShader = "Mobile/Unlit (Supports Lightmap)";
                 //string nameShader = "Standard";
                 //MeshRenderer renderer = preRayHitObjList[i]._obj.GetComponent<MeshRenderer>();
