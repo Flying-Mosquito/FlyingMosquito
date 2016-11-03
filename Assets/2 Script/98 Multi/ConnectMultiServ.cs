@@ -92,9 +92,9 @@ public class ConnectMultiServ : MonoBehaviour
         dtPk.x = playerVec.x;
         dtPk.y = playerVec.y;
         dtPk.z = playerVec.z;
-        dtPk.rX = player.transform.rotation.x;
-        dtPk.rY = player.transform.rotation.y;
-        dtPk.rZ = player.transform.rotation.z;
+		dtPk.rX = player.transform.rotation.eulerAngles.x;
+        dtPk.rY = player.transform.rotation.eulerAngles.y;
+        dtPk.rZ = player.transform.rotation.eulerAngles.z;
         SendString = dtPk.x.ToString() + '/' + dtPk.y.ToString() + '/' + dtPk.z.ToString() + '/' + dtPk.rX.ToString() + '/' + dtPk.rY.ToString() + '/' + dtPk.rZ.ToString();
         StartCoroutine("CallServ");
     }
@@ -106,7 +106,10 @@ public class ConnectMultiServ : MonoBehaviour
 
 	public void SetOtherPlayer(GameObject _otherPlayer, int _iPlayerNum)
 	{
-		otherPlayer [_iPlayerNum] = _otherPlayer;
+		if (_iPlayerNum > Constants.SERVCONNECT_NUM)
+			otherPlayer [_iPlayerNum - Constants.SERVCONNECT_NUM] = _otherPlayer;
+		else
+			otherPlayer [_iPlayerNum] = _otherPlayer;
 	}
 
     void SendVec()
@@ -153,6 +156,9 @@ public class ConnectMultiServ : MonoBehaviour
 		// 클라번호 이식
         switch (tmp[0])
         {
+		case 'a':
+			clntNum = 5;
+			break;
 		case 'b':
 			if (Constants.SERVCONNECT_NUM == 1) {
 				clntNum = 0;
@@ -180,18 +186,15 @@ public class ConnectMultiServ : MonoBehaviour
         }
 
 		//  전달받은 다른 유저 정보를 실제 오브젝트에 대입시킴
-		tmpX = usr.rX - otherPlayer [clntNum].transform.rotation.x;
-		tmpY = usr.rY - otherPlayer [clntNum].transform.rotation.y;
-		tmpZ = usr.rZ - otherPlayer [clntNum].transform.rotation.z;
-		Vector3 tmpV = new Vector3 (tmpX, tmpY, tmpZ);
-		otherPlayer [clntNum].transform.Translate (usr.x, usr.y, usr.z);
-		otherPlayer [clntNum].transform.Rotate (tmpV);
-
+		if (clntNum != 5) {
+			otherPlayer [clntNum].transform.position = new Vector3 (usr.x, usr.y, usr.z);
+			otherPlayer [clntNum].transform.rotation = Quaternion.Euler (usr.rX, usr.rY, usr.rZ);
+		}
     }
 
     IEnumerator CallServ()
     {
-        yield return new WaitForSeconds(0.3F);
+        yield return new WaitForSeconds(0.03F);
         SendVec();
         Recv();
     }
