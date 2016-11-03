@@ -6,6 +6,7 @@ public class OtherPlayerPoint : MonoBehaviour {
     public enum ePointState { eMenu, eStage }
     public ePointState state;
     public GameObject PlayerPrefeb;
+	public int iPlayerN;
     private PlayerCtrl player = null;
 
     public bool isCamStateCollider;
@@ -24,6 +25,7 @@ public class OtherPlayerPoint : MonoBehaviour {
         // print("_PlayerPoint -  :" + _iPlayerNum);
         // iPlayerNum = _iPlayerNum;
         player.SetPlayerNum(_iPlayerNum);
+		iPlayerN = _iPlayerNum;
     }
 
     void CreatePlayer()
@@ -31,6 +33,9 @@ public class OtherPlayerPoint : MonoBehaviour {
         // 플레이어 만들면서 카메라도 셋팅 
         GameObject _player = Instantiate(PlayerPrefeb, transform.position, transform.rotation) as GameObject;
         player = _player.GetComponent<PlayerCtrl>();
+
+		// 멀티서버 스크립트 내부변수에 연결 (여기가 안된듯?)
+		GameObject.Find ("ConnectManager").GetComponent<ConnectMultiServ> ().SetOtherPlayer (_player, iPlayerN);
      //   CameraCtrl.Instance.SetPlayer(_player);
     }
     // Update is called once per frame

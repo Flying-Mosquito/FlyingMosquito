@@ -146,8 +146,10 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
 
     public void SetPlayerNum(int _iPlayerNum)
     {
-        if(iPlayerNum != -1)
-            variable |= Constants.BV_IsConnectServ;
+		if (iPlayerNum != -1) {
+			variable |= Constants.BV_IsConnectServ;
+			GameObject.Find ("ConnectManager").GetComponent<ConnectMultiServ> ().SetPlayer (this);
+		}
         else
             variable &= ~(Constants.BV_IsConnectServ);
 

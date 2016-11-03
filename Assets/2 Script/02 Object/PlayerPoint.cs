@@ -36,6 +36,9 @@ public class PlayerPoint : MonoBehaviour
         GameObject _player = Instantiate(PlayerPrefeb, transform.position, transform.rotation) as GameObject;
         CameraCtrl.Instance.SetPlayer(_player);
 
+		// 게임오브젝트를 멀티서버 스크립트 내부 변수에 연결 (여긴 잘 된듯)
+		GameObject.Find ("ConnectManager").GetComponent<ConnectMultiServ> ().SetPlayer (_player);
+
         player = _player.GetComponent<PlayerCtrl>();
         player.SetHP(100);
         player.fBlood = 0;

@@ -8,7 +8,7 @@ public class ConnectMultiServ : MonoBehaviour
 {
     private Socket mClientSocket;
 
-    public string ipAddress = "127.0.0.1";	// 서버 IP
+    public string ipAddress = "192.168.1.109";	// 서버 IP
     public const int lPort = 2738;	        // 로비서버로 접속 포트
 
     private int SendDataLength;	            // 전송 데이터 길이(byte)
@@ -28,6 +28,9 @@ public class ConnectMultiServ : MonoBehaviour
     public int myNum;
     public int clntNum;
     public string tmpString;
+	public GameObject player;
+	public GameObject[] otherPlayer = new GameObject[3];
+	public float tmpX,tmpY,tmpZ;
 
     public struct Data
     {
@@ -85,16 +88,26 @@ public class ConnectMultiServ : MonoBehaviour
     void Update()
     {
         // 플레이어 정보 전달(내 좌표, 회전률 송신)
-        playerVec = GameObject.FindWithTag("PLAYER").transform.position;
+		playerVec = player.transform.position;
         dtPk.x = playerVec.x;
         dtPk.y = playerVec.y;
         dtPk.z = playerVec.z;
-        dtPk.rX = GameObject.FindWithTag("PLAYER").transform.rotation.x;
-        dtPk.rY = GameObject.FindWithTag("PLAYER").transform.rotation.y;
-        dtPk.rZ = GameObject.FindWithTag("PLAYER").transform.rotation.z;
+        dtPk.rX = player.transform.rotation.x;
+        dtPk.rY = player.transform.rotation.y;
+        dtPk.rZ = player.transform.rotation.z;
         SendString = dtPk.x.ToString() + '/' + dtPk.y.ToString() + '/' + dtPk.z.ToString() + '/' + dtPk.rX.ToString() + '/' + dtPk.rY.ToString() + '/' + dtPk.rZ.ToString();
         StartCoroutine("CallServ");
     }
+
+	public void SetPlayer(GameObject _player)
+	{
+		player = _player;
+	}
+
+	public void SetOtherPlayer(GameObject _otherPlayer, int _iPlayerNum)
+	{
+		otherPlayer [_iPlayerNum] = _otherPlayer;
+	}
 
     void SendVec()
     {
@@ -136,20 +149,44 @@ public class ConnectMultiServ : MonoBehaviour
         usr.rZ = System.Convert.ToSingle(result[5]);
         // 클라정보, 자신은 a, 나머지는 b c d
         string tmp = result[6];
+
+		// 클라번호 이식
         switch (tmp[0])
         {
-            case 'b':
-                clntNum = 1;
+		case 'b':
+			if (Constants.SERVCONNECT_NUM == 1) {
+				clntNum = 0;
+			} 
+			else {
+				clntNum = 1;
+			}
                 break;
-            case 'c':
-                clntNum = 2;
+		case 'c':
+			if (Constants.SERVCONNECT_NUM < 2) {
+				clntNum = 2;
+			} else {
+				clntNum = 1;
+			}
                 break;
-            case 'd':
-                clntNum = 3;
+		case 'd':
+			if (Constants.SERVCONNECT_NUM == 3) {
+				clntNum = 2;
+			} else {
+				clntNum = 3;
+			}
                 break;
             default:
                 break;
         }
+
+		//  전달받은 다른 유저 정보를 실제 오브젝트에 대입시킴
+		tmpX = usr.rX - otherPlayer [clntNum].transform.rotation.x;
+		tmpY = usr.rY - otherPlayer [clntNum].transform.rotation.y;
+		tmpZ = usr.rZ - otherPlayer [clntNum].transform.rotation.z;
+		Vector3 tmpV = new Vector3 (tmpX, tmpY, tmpZ);
+		otherPlayer [clntNum].transform.Translate (usr.x, usr.y, usr.z);
+		otherPlayer [clntNum].transform.Rotate (tmpV);
+
     }
 
     IEnumerator CallServ()
