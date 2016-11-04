@@ -37,7 +37,7 @@ public class PlayerPoint : MonoBehaviour
         CameraCtrl.Instance.SetPlayer(_player);
 
 		// 게임오브젝트를 멀티서버 스크립트 내부 변수에 연결 (여긴 잘 된듯)   // 이것때문에 유저 혼자하는 스테이지에선 게임이 안돌아가 
-		//GameObject.Find ("ConnectManager").GetComponent<ConnectMultiServ> ().SetPlayer (_player);
+		GameObject.Find ("ConnectManager").GetComponent<ConnectMultiServ> ().SetPlayer (_player);
 
         player = _player.GetComponent<PlayerCtrl>();
         player.SetHP(100);
