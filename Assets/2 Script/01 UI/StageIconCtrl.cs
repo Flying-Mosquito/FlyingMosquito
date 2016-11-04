@@ -62,7 +62,11 @@ public class StageIconCtrl : MonoBehaviour {
     public void EnterStage()
     {
         // 임시적으로 하긴 했는데, world가 늘어나면 바뀌어야함 
-        GameManager.Instance.StartCoroutine("StartSceneLoadWithLoading", "Stage" + (iStageNum+1).ToString());
+        if (iStarNum != -1)
+        {
+            Constants.SERVCONNECT_NUM = -1;
+            GameManager.Instance.StartCoroutine("StartSceneLoadWithLoading", "Stage" + (iStageNum + 1).ToString());
+        }
     }
     public void EnterMulti()
     {

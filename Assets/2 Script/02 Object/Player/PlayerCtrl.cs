@@ -179,11 +179,8 @@ public class PlayerCtrl : TimeAffectedObj//MonoBehaviour
     }
     private void KeyInput()     // StateCheck 로 이름을 바꾸자..
     {
-        //print("iPlayerNum : " + iPlayerNum);
-        print("Constants.ServConnect_num : " + Constants.SERVCONNECT_NUM);
         if ( iPlayerNum != Constants.SERVCONNECT_NUM)   // 스테이지 시작할때 -1로 바꿔주는 코드 필요함
         {
-            print("같지않아");
             return;
         }
 
