@@ -8,7 +8,7 @@ public class ConnectMultiServ : MonoBehaviour
 {
     private Socket mClientSocket;
 
-    public string ipAddress = "192.168.1.109";	// 서버 IP
+    public string ipAddress = "172.20.10.3";	// 서버 IP
     public const int lPort = 2738;	        // 로비서버로 접속 포트
 
     private int SendDataLength;	            // 전송 데이터 길이(byte)
@@ -45,25 +45,14 @@ public class ConnectMultiServ : MonoBehaviour
     {
         DontDestroyOnLoad(this);
 
-        print("serv");
         mClientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, 10000);
         mClientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 10000);
 
-        // 소켓 연결
-        try
-        {
             IPAddress ipAddr = System.Net.IPAddress.Parse(ipAddress);
             IPEndPoint ipEndPoint = new System.Net.IPEndPoint(ipAddr, lPort);
             mClientSocket.Connect(ipEndPoint);
-
-        }
-        catch (SocketException SCE)
-        {
-            Debug.Log("Socket connect error : " + SCE.ToString());
-            return;
-        }
-
+        Debug.Log(Constants.SERVCONNECT_NUM);
         // 내 접속 번호 받기위한 곳
 
         StringBuilder sb = new StringBuilder();
@@ -76,7 +65,6 @@ public class ConnectMultiServ : MonoBehaviour
         mClientSocket.Receive(Receivebyte);
         ReceiveString = Encoding.Default.GetString(Receivebyte);
         ReceiveDataLength = Encoding.Default.GetByteCount(ReceiveString.ToString());
-        Debug.Log("Receive Data: " + ReceiveString + "(" + ReceiveDataLength + ")");
 
         // 내 클라이언트 번호 (접속 순서대로 0 , 1, 2, 3 의 숫자를 받음)
         myNum = System.Convert.ToInt16(ReceiveString);
@@ -115,32 +103,19 @@ public class ConnectMultiServ : MonoBehaviour
     void SendVec()
     {
         // 좌표 송신
-        try
-        {
             SendDataLength = Encoding.Default.GetByteCount(SendString);
             Sendbyte = Encoding.Default.GetBytes(SendString);
             mClientSocket.Send(Sendbyte, Sendbyte.Length, 0);
-        }
-        catch (SocketException err)
-        {
-            Debug.Log("Socket Send or Receive Error : " + err.ToString());
-        }
+
     }
 
     void Recv()
     {
-        try
-        {
             // Receive
             mClientSocket.Receive(Receivebyte);
             ReceiveString = Encoding.Default.GetString(Receivebyte);
             ReceiveDataLength = Encoding.Default.GetByteCount(ReceiveString.ToString());
-            Debug.Log("Receive Data: " + ReceiveString + " (" + ReceiveDataLength + ")");
-        }
-        catch (SocketException err)
-        {
-            Debug.Log("Socket Send or Receive Error : " + err.ToString());
-        }
+
         // 리턴객체 변환, 7개로 쪼갬
         string[] result = ReceiveString.Split('/');
         // 0 ~ 2 : xyz, 3 ~ 5 : Rotate xyz, 6 : 클라 번호(내가 아닌 다른 클라들의 번호, b, c , d 로 옴)
@@ -194,7 +169,7 @@ public class ConnectMultiServ : MonoBehaviour
 
     IEnumerator CallServ()
     {
-        yield return new WaitForSeconds(0.03F);
+        yield return new WaitForSeconds(0.3F);
         SendVec();
         Recv();
     }
